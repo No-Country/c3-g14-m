@@ -9,6 +9,8 @@ Stacks: JavaScript, BootsTrap, Java, MySQL, HTML, CSS
 
 
 Integrantes del equipo:
+
+- Brian Cuenca (Team Leader)
 - Daniel Videla
 - Cristian Quevedo
 - Julian Rosales 
