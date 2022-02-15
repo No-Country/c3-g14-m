@@ -5,11 +5,19 @@
  */
 package com.clinica.sgt.entidades;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 /**
  *
  * @author Cristian
  */
-public class Usuario {
+public class Usuario implements UserDetails{
     private Integer id;
     private String dni;
     private String mail;
@@ -92,7 +100,43 @@ public class Usuario {
     public void setUserType(UserType userType) {
         this.userType = userType;
     }
+
     
+    //Overrides referidos a la seguridad 
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> roles = new ArrayList<>();
+        roles.add(new SimpleGrantedAuthority(userType.toString()));
+        return roles;
+    }
+
+    @Override
+    public String getUsername() {
+        return mail;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+    
+
     
     
 }
