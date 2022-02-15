@@ -12,18 +12,20 @@ public class WebAuthorization extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // Restricciones al acceso dependiendo el rol del usuario
-        http.authorizeRequests()
+        http.csrf().disable()
+        .authorizeRequests()
         .antMatchers("/login").permitAll()
-        .antMatchers("/admin/register/professionals").hasAuthority("ADMIN") //REVISAR SI NO FUNCIONA hasAuthority probar con hasRole
-        .antMatchers("/admin/bookings").hasAuthority("ADMIN");
+        .antMatchers("/admin/**").hasAuthority("ADMIN") //REVISAR SI NO FUNCIONA hasAuthority probar con hasRole
+        //.antMatchers("/admin/bookings").hasAuthority("ADMIN");
+
         //LUEGO AGREGAR LOS PROXIMOS ENDPOINTS
 
         http.formLogin()
         .usernameParameter("email")
         .passwordParameter("password")
-        .loginPage("/login");
-
-        http.logout().logoutUrl("/logout");
+        .loginPage("/login")
+        .and()
+        .logout().logoutUrl("/logout").permitAll();
         
 
     }
