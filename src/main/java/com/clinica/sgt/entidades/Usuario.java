@@ -6,6 +6,8 @@
 package com.clinica.sgt.entidades;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import org.hibernate.annotations.GenericGenerator;   
@@ -33,6 +35,7 @@ public class Usuario implements UserDetails{
     private String telefono;
     private Genero genero;
     private Boolean alta;
+    @Enumerated(EnumType.STRING)
     private UserType userType;
 
     public Usuario(String dni, String mail, String password,

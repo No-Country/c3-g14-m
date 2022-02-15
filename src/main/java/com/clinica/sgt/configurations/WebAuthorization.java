@@ -14,8 +14,8 @@ public class WebAuthorization extends WebSecurityConfigurerAdapter{
         // Restricciones al acceso dependiendo el rol del usuario
         http.authorizeRequests()
         .antMatchers("/login").permitAll()
-        .antMatchers("/admin/register/professionals").hasRole("ADMIN") //REVISAR SI NO FUNCIONA hasRole probar con hasAuthority
-        .antMatchers("/admin/bookings").hasRole("ADMIN");
+        .antMatchers("/admin/register/professionals").hasAuthority("ADMIN") //REVISAR SI NO FUNCIONA hasAuthority probar con hasRole
+        .antMatchers("/admin/bookings").hasAuthority("ADMIN");
         //LUEGO AGREGAR LOS PROXIMOS ENDPOINTS
 
         http.formLogin()
