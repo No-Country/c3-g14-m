@@ -5,24 +5,15 @@
  */
 package com.clinica.sgt.entidades;
 
-<<<<<<< HEAD
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import org.hibernate.annotations.GenericGenerator;
-
-@Entity
-public class Usuario {
-
-    @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String id;
-=======
+import org.hibernate.annotations.GenericGenerator;   
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -31,9 +22,12 @@ import org.springframework.security.core.userdetails.UserDetails;
  *
  * @author Cristian
  */
+@Entity
 public class Usuario implements UserDetails{
-    private Integer id;
->>>>>>> 205e41a4dd688e620dc883ee307739760178529f
+    @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    private String id;
     private String dni;
     private String mail;
     private String password;
@@ -41,6 +35,7 @@ public class Usuario implements UserDetails{
     private String telefono;
     private Genero genero;
     private Boolean alta;
+    @Enumerated(EnumType.STRING)
     private UserType userType;
 
     public Usuario(String dni, String mail, String password,
@@ -119,7 +114,6 @@ public class Usuario implements UserDetails{
         this.userType = userType;
     }
 
-<<<<<<< HEAD
     public Boolean isAlta() {
         return alta;
     }
@@ -128,7 +122,6 @@ public class Usuario implements UserDetails{
         this.alta = alta;
     }
 
-=======
     
     //Overrides referidos a la seguridad 
 
@@ -166,6 +159,5 @@ public class Usuario implements UserDetails{
     
 
     
->>>>>>> 205e41a4dd688e620dc883ee307739760178529f
     
 }
