@@ -5,35 +5,44 @@
  */
 package com.clinica.sgt.entidades;
 
-/**
- *
- * @author Cristian
- */
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
 public class Usuario {
-    private Integer id;
+
+    @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    private String id;
     private String dni;
     private String mail;
     private String password;
     private String nombreCompleto;
     private String telefono;
     private Genero genero;
+    private Boolean alta;
     private UserType userType;
 
-    public Usuario(String dni, String mail, String password, 
-            String nombreCompleto, String telefono, Genero genero, UserType userType) {
+    public Usuario(String dni, String mail, String password,
+            String nombreCompleto, String telefono, Genero genero, Boolean alta,
+            UserType userType) {
         this.dni = dni;
         this.mail = mail;
         this.password = password;
         this.nombreCompleto = nombreCompleto;
         this.telefono = telefono;
         this.genero = genero;
+        this.alta = alta;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -92,7 +101,14 @@ public class Usuario {
     public void setUserType(UserType userType) {
         this.userType = userType;
     }
-    
-    
+
+    public Boolean isAlta() {
+        return alta;
+    }
+
+    public void setAlta(Boolean alta) {
+        this.alta = alta;
+    }
+
     
 }

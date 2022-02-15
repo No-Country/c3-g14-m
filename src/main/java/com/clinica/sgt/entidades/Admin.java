@@ -5,21 +5,20 @@
  */
 package com.clinica.sgt.entidades;
 
-/**
- *
- * @author Cristian
- */
-public class Admin extends Usuario{
-   
-   private String especialidad;
+import javax.persistence.Entity;
+
+@Entity
+public class Admin extends Usuario {
+
+    private String especialidad;
 
     public Admin(String especialidad, String dni, String mail, String password,
-            String nombreCompleto, String telefono, Genero genero, UserType userType) {
-        super(dni, mail, password, nombreCompleto, telefono, genero, userType);
+             String nombreCompleto, String telefono, Genero genero, Boolean alta,
+            UserType userType) {
+        super(dni, mail, password, nombreCompleto, telefono, genero, alta, userType);
         this.especialidad = especialidad;
     }
 
-   
     public String getEspecialidad() {
         return especialidad;
     }
@@ -27,6 +26,6 @@ public class Admin extends Usuario{
     public void setEspecialidad(String especialidad) {
         this.especialidad = especialidad;
     }
-   
-   
+
+    
 }

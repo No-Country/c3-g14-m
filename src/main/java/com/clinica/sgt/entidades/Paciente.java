@@ -5,15 +5,17 @@
  */
 package com.clinica.sgt.entidades;
 
-/**
- *
- * @author Cristian
- */
-public class Paciente extends Usuario{
+import javax.persistence.Entity;
+
+@Entity
+public class Paciente extends Usuario {
+
     private String historiaClinica;
 
-    public Paciente(String historiaClinica, String dni, String mail, String password, String nombreCompleto, String telefono, Genero genero, UserType userType) {
-        super(dni, mail, password, nombreCompleto, telefono, genero, userType);
+    public Paciente(String historiaClinica, String dni, String mail,
+            String password, String nombreCompleto, String telefono,
+            Genero genero, Boolean alta, UserType userType) {
+        super(dni, mail, password, nombreCompleto, telefono, genero, alta, userType);
         this.historiaClinica = historiaClinica;
     }
 
@@ -25,4 +27,6 @@ public class Paciente extends Usuario{
         this.historiaClinica = historiaClinica;
     }
     
+    
+
 }
