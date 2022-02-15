@@ -1,6 +1,6 @@
 Sistema de Gestion de Turnos Online     
 
- ********** CLINICA SGT ***********
+ ************ CLINICA SGT ***********
 
 Equipo:
 - Brian Cuenca (Team Leader)
