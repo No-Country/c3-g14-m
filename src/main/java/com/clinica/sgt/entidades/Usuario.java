@@ -5,6 +5,7 @@
  */
 package com.clinica.sgt.entidades;
 
+<<<<<<< HEAD
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -17,6 +18,22 @@ public class Usuario {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
+=======
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+/**
+ *
+ * @author Cristian
+ */
+public class Usuario implements UserDetails{
+    private Integer id;
+>>>>>>> 205e41a4dd688e620dc883ee307739760178529f
     private String dni;
     private String mail;
     private String password;
@@ -102,6 +119,7 @@ public class Usuario {
         this.userType = userType;
     }
 
+<<<<<<< HEAD
     public Boolean isAlta() {
         return alta;
     }
@@ -110,5 +128,44 @@ public class Usuario {
         this.alta = alta;
     }
 
+=======
+    
+    //Overrides referidos a la seguridad 
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> roles = new ArrayList<>();
+        roles.add(new SimpleGrantedAuthority(userType.toString()));
+        return roles;
+    }
+
+    @Override
+    public String getUsername() {
+        return mail;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+    
+
+    
+>>>>>>> 205e41a4dd688e620dc883ee307739760178529f
     
 }
