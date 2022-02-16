@@ -8,27 +8,51 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/registro")
+
 public class adminController {
-	
-	
-	@GetMapping
-    
 
-    @PostMapping("/login")
-    public String login(@RequestParam(required = false) String error, ModelMap model) {
-        if (error != null) {
-            model.put("error", "Email o contraseña incorrectos.");
-        }
+	@PostMapping("/login")
+    public String login(@RequestParam String email, @RequestParam String password, ModelMap model) {
         
-        return "login.html";
-    }
-
-    
-    @GetMapping("/inicio")
-    public String inicio(ModelMap model) {
+        try {
+    		
+		       // AGREGAR SERVICIO LUEGO
 		
-    	return "index.html";
+       return "login.html";
+ 
+	   } catch(/*error*/) {
+		
+		      // AGREGAR ERROR 
+		
+	   return null;
+	}
         
-    }
+  }
+
+	@PostMapping("/registro")
+	public String registro(@RequestParam String email, @RequestParam String nombreCompleto,
+			@RequestParam String password, @RequestParam String dni, @RequestParam String telefono,
+			@RequestParam String genero, ModelMap model) {
+
+		try {
+
+			// AGREGAR SERVICIO LUEGO
+
+			return null;
+
+		} catch (exception e) {
+
+			// AGREGAR ERROR
+
+			return null;
+		}
+
+	}
+
+	@GetMapping("/inicio")
+	public String inicio(ModelMap model) {
+
+		return "inicio.html";
+
+	}
 }
