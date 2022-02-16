@@ -13,6 +13,7 @@ public class WebAuthorization extends WebSecurityConfigurerAdapter{
     protected void configure(HttpSecurity http) throws Exception {
         // Restricciones al acceso dependiendo el rol del usuario
         http.authorizeRequests()
+        .antMatchers("/index").permitAll()
         .antMatchers("/login").permitAll()
         .antMatchers("/admin/register/professionals").hasRole("ADMIN") //REVISAR SI NO FUNCIONA hasRole probar con hasAuthority
         .antMatchers("/admin/bookings").hasRole("ADMIN");
