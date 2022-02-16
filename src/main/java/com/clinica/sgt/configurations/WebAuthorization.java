@@ -1,4 +1,4 @@
-/*package com.clinica.sgt.configurations;
+package com.clinica.sgt.configurations;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,6 +13,7 @@ public class WebAuthorization extends WebSecurityConfigurerAdapter{
     protected void configure(HttpSecurity http) throws Exception {
         // Restricciones al acceso dependiendo el rol del usuario
         http.authorizeRequests()
+        .antMatchers("/index").permitAll()
         .antMatchers("/login").permitAll()
         .antMatchers("/admin/register/professionals").hasRole("ADMIN") //REVISAR SI NO FUNCIONA hasRole probar con hasAuthority
         .antMatchers("/admin/bookings").hasRole("ADMIN");
@@ -30,4 +31,4 @@ public class WebAuthorization extends WebSecurityConfigurerAdapter{
     
     
 
-}*/
+}
