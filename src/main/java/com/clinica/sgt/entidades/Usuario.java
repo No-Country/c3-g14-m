@@ -45,6 +45,10 @@ public class Usuario implements UserDetails{
         this.alta = alta;
     }
 
+    public Usuario() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public String getId() {
         return id;
     }
