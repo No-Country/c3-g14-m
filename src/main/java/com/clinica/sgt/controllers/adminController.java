@@ -40,7 +40,7 @@ public class adminController {
 
 			return null;
 
-		} catch (exception e) {
+		} catch (Exception e) {
 
 			// AGREGAR ERROR
 
