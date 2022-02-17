@@ -20,7 +20,7 @@ public class adminController {
 		
        return "login.html";
  
-	   } catch(/*error*/) {
+	   } catch(Exception e/*error*/) {
 		
 		      // AGREGAR ERROR 
 		
