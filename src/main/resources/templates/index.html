@@ -1,12 +1,89 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>HOLAAAAAAAAAAAAAAAAAAAAAAA MUNDO EQUIPO G14 A LO GRANDE</h1>
-</body>
+<html lang="es-AR" xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Ingresar</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,600' rel='stylesheet' type='text/css'><link rel="stylesheet" href="./css/style.css">
+        <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+    </head>
+    <body>
+        <!-- partial:index.partial.html -->
+        <div id="back">
+            <canvas id="canvas" class="canvas-back"></canvas>
+            <div class="backRight">
+                
+            </div>
+            <div class="backLeft">
+
+            </div>
+        </div>
+
+        <div id="slideBox">
+            <div class="topLayer">
+                <div class="left">
+                    <div class="content">
+                        <div class="cartel">
+                            <h1>SGT </h1>
+                            <p>Sistema de gestion de turnos </p>
+                        </div>
+                        <h2>Registrarse</h2>
+                        <form id="form-signup" th:action="@{/registro}" method="post" onsubmit="return false;">
+                            <div class="form-element form-stack">
+                                <label for="email" class="form-label">Email</label>
+                                <input id="email" type="email" name="email">
+                            </div>
+                            <div class="form-element form-stack">
+                                <label for="username-signup" class="form-label">Nombre y Apellido</label>
+                                <input id="username-signup" type="text" name="username">
+                            </div>
+                            <div class="form-element form-stack">
+                                <label for="username-signup" class="form-label">DNI</label>
+                                <input id="username-signup" type="number" name="dni">
+                            </div>
+                            <div class="form-element form-stack">
+                                <label for="username-signup" class="form-label">Telefono</label>
+                                <input id="username-signup" type="phone" name="phone">
+                            </div>
+
+                            <div class="form-element form-submit">
+                                <button id="signUp" class="signup" type="submit" name="signup">Registrarse</button>
+                                <button id="goLeft" class="signup off">Ingresar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="content">
+                        <div class="cartel1">
+                            <h1>SGT </h1>
+                            <p>Sistema de gestion de turnos </p>
+                        </div>
+
+                        <h2>Ingresar</h2>
+                        <form id="form-login" method="post" onsubmit="return false;">
+                            <div class="form-element form-stack">
+                                <label for="email" class="form-label">Email</label>
+                                <input id="email" type="email" name="email">
+                            </div>
+                            <div class="form-element form-stack">
+                                <label for="password-login" class="form-label">Contraseña</label>
+                                <input id="password-login" type="password" name="password">
+                            </div>
+                            <div class="form-element form-submit">
+                                <button id="logIn" class="login" type="submit" name="login" >Ingresar</button>
+                                <button id="goRight" class="login off" name="signup">Registro</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- partial -->
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js'></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.11.3/paper-full.min.js'></script><script  src="./js/script.js"></script>
+
+    </body>
 </html>
