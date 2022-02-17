@@ -5,13 +5,20 @@
  */
 package com.clinica.sgt.entidades;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-public class Usuario {
+public class Usuario implements UserDetails{
 
     @Id
     @GeneratedValue(generator = "uuid")
@@ -110,5 +117,37 @@ public class Usuario {
         this.alta = alta;
     }
 
-    
+     //Overrides referidos a la seguridad 
+
+     @Override
+     public Collection<? extends GrantedAuthority> getAuthorities() {
+         List<GrantedAuthority> roles = new ArrayList<>();
+         roles.add(new SimpleGrantedAuthority(userType.toString()));
+         return roles;
+     }
+ 
+     @Override
+     public String getUsername() {
+         return mail;
+     }
+ 
+     @Override
+     public boolean isAccountNonExpired() {
+         return true;
+     }
+ 
+     @Override
+     public boolean isAccountNonLocked() {
+         return true;
+     }
+ 
+     @Override
+     public boolean isCredentialsNonExpired() {
+         return true;
+     }
+ 
+     @Override
+     public boolean isEnabled() {
+         return true;
+     }
 }
