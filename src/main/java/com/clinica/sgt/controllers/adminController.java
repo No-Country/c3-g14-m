@@ -1,5 +1,11 @@
 package com.clinica.sgt.controllers;
 
+import com.clinica.sgt.entidades.Genero;
+import com.clinica.sgt.entidades.UserType;
+import com.clinica.sgt.entidades.Usuario;
+import com.clinica.sgt.servicios.UsuarioServicio;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,40 +17,42 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 public class adminController {
 
-	@PostMapping("/login")
-    public String login(@RequestParam String email, @RequestParam String password, ModelMap model) {
+	@Autowired
+	UsuarioServicio usuarioServicio;
+
+	// @PostMapping("/login")
+    // public String login(@RequestParam String email, @RequestParam String password, ModelMap model) {
         
-        try {
+    //     try {
     		
-		       // AGREGAR SERVICIO LUEGO
+	// 	    Usuario u1 = usuarioServicio.loguearUsuario(email, password);
 		
-       return "login.html";
+    //    		return "login.html";
  
-	   } catch(Exception e/*error*/) {
+	//    } catch(Exception e/*error*/) {
 		
-		      // AGREGAR ERROR 
+	// 	      // AGREGAR ERROR 
 		
-	   return null;
-	}
+	//    return null;
+	// }
         
-  }
+//   }
 
 	@PostMapping("/registro")
 	public String registro(@RequestParam String email, @RequestParam String nombreCompleto,
 			@RequestParam String password, @RequestParam String dni, @RequestParam String telefono,
-			@RequestParam String genero, ModelMap model) {
+			@RequestParam Genero genero, ModelMap model) {
 
 		try {
 
-			// AGREGAR SERVICIO LUEGO
-
-			return null;
+			usuarioServicio.crearUsuario(dni, email, password, nombreCompleto, telefono, genero, true, UserType.GUEST);
+			return "exito.html";
 
 		} catch (Exception e) {
 
-			// AGREGAR ERROR
+			e.getMessage();
 
-			return null;
+			return "error.html";
 		}
 
 	}

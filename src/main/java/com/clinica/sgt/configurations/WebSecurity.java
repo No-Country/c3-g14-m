@@ -42,7 +42,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter{
         http.formLogin()
         .usernameParameter("email")
         .passwordParameter("password")
-        .loginPage("/login");
+        .loginPage("/index");
 
         http.logout().logoutUrl("/logout");
         
