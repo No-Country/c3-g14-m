@@ -32,6 +32,7 @@ public class Usuario implements UserDetails{
     private Genero genero;
     private Boolean alta;
     private UserType userType;
+    
 
     public Usuario(String dni, String mail, String password,
             String nombreCompleto, String telefono, Genero genero, Boolean alta,
@@ -48,6 +49,7 @@ public class Usuario implements UserDetails{
     public Usuario() {
         }
 
+    
     public String getId() {
         return id;
     }
@@ -153,4 +155,6 @@ public class Usuario implements UserDetails{
      public boolean isEnabled() {
          return true;
      }
+
+   
 }

@@ -12,10 +12,7 @@ public class Paciente extends Usuario {
 
     private String historiaClinica;
 
-    public Paciente(String historiaClinica, String dni, String mail,
-            String password, String nombreCompleto, String telefono,
-            Genero genero, Boolean alta, UserType userType) {
-        super(dni, mail, password, nombreCompleto, telefono, genero, alta, userType);
+    public Paciente(String historiaClinica) {
         this.historiaClinica = historiaClinica;
     }
 
@@ -26,7 +23,8 @@ public class Paciente extends Usuario {
     public void setHistoriaClinica(String historiaClinica) {
         this.historiaClinica = historiaClinica;
     }
-    
+
+ 
     
 
 }
