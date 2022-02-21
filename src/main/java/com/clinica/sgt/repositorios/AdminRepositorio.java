@@ -25,4 +25,7 @@ public interface AdminRepositorio extends JpaRepository<Admin,String>{
     
     @Query("SELECT a FROM Admin a WHERE a.id = :id")
     public Admin buscarPorID(@Param("id")String id);
+
+    @Query("SELECT a FROM Admin a WHERE a.dni = :dni")
+    public Admin buscarPorDNI(@Param("dni")String dni);
 }
