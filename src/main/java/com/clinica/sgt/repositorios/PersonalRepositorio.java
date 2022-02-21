@@ -13,15 +13,15 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AdminRepositorio extends JpaRepository<Personal,String>{
-    // @Query("SELECT a FROM Personal a WHERE a.alta = 1 ORDER BY a.nombre ASC")
-    // public List<Admin> mostrarAdministradoresActivos();
+public interface PersonalRepositorio extends JpaRepository<Personal,String>{
+     @Query("SELECT p FROM Personal p WHERE p.alta = 1 ORDER BY p.nombre ASC")
+     public List<Personal> mostrarPersonalActivo();
     
-    // @Query("SELECT a FROM Personal a ORDER BY a.nombre ASC")
-    // public List<Admin> mostrarTodosAdministradores();
+    @Query("SELECT p FROM Personal p ORDER BY p.nombre ASC")
+    public List<Personal> mostrarTodoPersonal();
     
-    // @Query("SELECT a FROM Personal a WHERE a.nombre = :nombre")
-    // public List<Admin> findByUsername(@Param("nombre")String nombre);
+    @Query("SELECT p FROM Personal p WHERE p.nombre = :nombre")
+    public List<Personal> findByUsername(@Param("nombre")String nombre);
     
     @Query("SELECT a FROM Admin a WHERE a.id = :id")
     public Personal buscarPorID(@Param("id")String id);

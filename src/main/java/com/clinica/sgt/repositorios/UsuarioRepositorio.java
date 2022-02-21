@@ -9,11 +9,11 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UsuarioRepositorio extends JpaRepository<Usuario,String>{
-    // @Query("SELECT u FROM Usuario u WHERE u.alta = 1 ORDER BY u.nombre ASC")
-    // public List<Usuario> mostrarUsuariosActivos();
+    @Query("SELECT u FROM Usuario u WHERE u.alta = 1 ORDER BY u.nombre ASC")
+    public List<Usuario> mostrarUsuariosActivos();
     
-    // @Query("SELECT u FROM Usuario u ORDER BY u.nombre ASC")
-    // public List<Usuario> mostrarTodosUsuarios();
+    @Query("SELECT u FROM Usuario u ORDER BY u.nombre ASC")
+    public List<Usuario> mostrarTodosUsuarios();
     
     @Query("SELECT u FROM Usuario u WHERE u.mail = :nombre")
     public Usuario findByUsername(@Param("nombre")String nombre);
