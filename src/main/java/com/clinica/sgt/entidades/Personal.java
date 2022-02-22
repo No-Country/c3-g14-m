@@ -5,28 +5,43 @@
  */
 package com.clinica.sgt.entidades;
 
+import java.time.LocalTime;
+
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class Personal extends Usuario {
 
-    @ManyToOne
-    private Profesion profesion;
+    private LocalTime inicioLaboral; // Inicio del horario laboral de cada profesional
+    private LocalTime finLaboral; //Fin del horario laboral de cada profesional
 
     public Personal() {
     }
 
-    public Personal(Profesion profesion) {
-        this.profesion = profesion;
+    public Personal(LocalTime inicioLaboral, LocalTime finLaboral, String dni, String mail,
+            String password, String nombreCompleto, String telefono,
+            Genero genero, Boolean alta, UserType userType) {
+        super(dni, mail, password, nombreCompleto, telefono, genero, alta, userType);
+        this.inicioLaboral = inicioLaboral;
+        this.finLaboral = finLaboral;
+
     }
 
-    public Profesion getProfesion() {
-        return profesion;
+
+    public LocalTime getInicioLaboral() {
+        return inicioLaboral;
     }
 
-    public void setProfesion(Profesion profesion) {
-        this.profesion = profesion;
+    public void setInicioLaboral(LocalTime inicioLaboral) {
+        this.inicioLaboral = inicioLaboral;
+    }
+
+    public LocalTime getFinLaboral() {
+        return finLaboral;
+    }
+
+    public void setFinLaboral(LocalTime finLaboral) {
+        this.finLaboral = finLaboral;
     }
 
     

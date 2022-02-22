@@ -22,11 +22,11 @@ public class UsuarioServicio {
     //****************************CREACION******************
     @Transactional
     public void crearUsuario(String dni, String mail, String password,
-            String nombreCompleto, String telefono, Genero genero, Boolean alta,
+            String nombre, String telefono, Genero genero, Boolean alta,
             UserType userType) {
 
         Usuario usuario = new Usuario();
-        usuario.setNombreCompleto(nombreCompleto);
+        usuario.setNombre(nombre);
         usuario.setDni(dni);
         usuario.setMail(mail);
         usuario.setPassword(dni);
@@ -40,11 +40,11 @@ public class UsuarioServicio {
     //******************UPDATE***********************
     @Transactional
     public void modificarUsuario(String idUsuario,String dni, String mail, String password,
-            String nombreCompleto, String telefono, Genero genero, Boolean alta,
+            String nombre, String telefono, Genero genero, Boolean alta,
             UserType userType) {
         Usuario usuario = usuarioRepositorio.buscarPorID(idUsuario);
         
-        usuario.setNombreCompleto(nombreCompleto);
+        usuario.setNombre(nombre);
         usuario.setDni(dni);
         usuario.setMail(mail);
         usuario.setPassword(password);
@@ -57,7 +57,6 @@ public class UsuarioServicio {
     }
     
      //************************BUSQUEDA O CONSULTA*******************
-    @Transactional
     public Usuario buscarUsuarioDNI(String dni){
        Usuario existeUsuario = usuarioRepositorio.buscarPorDNI(dni);
        if(existeUsuario !=null){
@@ -66,7 +65,6 @@ public class UsuarioServicio {
        return null;
     }
     
-    @Transactional
     public Usuario buscarUsuarioID(String idUsuario){
        Usuario existeUsuario = usuarioRepositorio.buscarPorID(idUsuario);
        if(existeUsuario !=null){

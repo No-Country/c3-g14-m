@@ -27,7 +27,7 @@ public class Usuario implements UserDetails{
     private String dni;
     private String mail;
     private String password;
-    private String nombreCompleto;
+    private String nombre;
     private String telefono;
     private Genero genero;
     private Boolean alta;
@@ -35,12 +35,12 @@ public class Usuario implements UserDetails{
     
 
     public Usuario(String dni, String mail, String password,
-            String nombreCompleto, String telefono, Genero genero, Boolean alta,
+            String nombre, String telefono, Genero genero, Boolean alta,
             UserType userType) {
         this.dni = dni;
         this.mail = mail;
         this.password = password;
-        this.nombreCompleto = nombreCompleto;
+        this.nombre = nombre;
         this.telefono = telefono;
         this.genero = genero;
         this.alta = alta;
@@ -82,12 +82,12 @@ public class Usuario implements UserDetails{
         this.password = password;
     }
 
-    public String getNombreCompleto() {
-        return nombreCompleto;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNombreCompleto(String nombreCompleto) {
-        this.nombreCompleto = nombreCompleto;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getTelefono() {
