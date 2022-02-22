@@ -86,7 +86,7 @@ public class Usuario implements UserDetails{
         return nombre;
     }
 
-    public void setNombre(String nombreCompleto) {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 

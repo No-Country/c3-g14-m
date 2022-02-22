@@ -57,7 +57,6 @@ public class UsuarioServicio {
     }
     
      //************************BUSQUEDA O CONSULTA*******************
-    @Transactional
     public Usuario buscarUsuarioDNI(String dni){
        Usuario existeUsuario = usuarioRepositorio.buscarPorDNI(dni);
        if(existeUsuario !=null){
@@ -66,7 +65,6 @@ public class UsuarioServicio {
        return null;
     }
     
-    @Transactional
     public Usuario buscarUsuarioID(String idUsuario){
        Usuario existeUsuario = usuarioRepositorio.buscarPorID(idUsuario);
        if(existeUsuario !=null){
