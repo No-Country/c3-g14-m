@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import com.clinica.sgt.entidades.Genero;
 import com.clinica.sgt.entidades.Turno;
 import com.clinica.sgt.entidades.UserType;
-import com.clinica.sgt.entidades.Usuario;
-import com.clinica.sgt.repositorios.TurnoRepositorio;
 import com.clinica.sgt.servicios.TurnoServicio;
 import com.clinica.sgt.servicios.UsuarioServicio;
 
@@ -20,7 +18,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 @Controller
