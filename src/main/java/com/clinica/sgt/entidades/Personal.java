@@ -6,29 +6,28 @@
 package com.clinica.sgt.entidades;
 
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class Personal extends Usuario {
 
-    @ManyToOne
-    private Profesion profesion;
+    private String horarioDisponible;
 
     public Personal() {
     }
 
-    public Personal(Profesion profesion) {
-        this.profesion = profesion;
+    public Personal(String horarioDisponible, String dni, String mail,
+            String password, String nombreCompleto, String telefono,
+            Genero genero, Boolean alta, UserType userType) {
+        super(dni, mail, password, nombreCompleto, telefono, genero, alta, userType);
+        this.horarioDisponible = horarioDisponible;
     }
 
-    public Profesion getProfesion() {
-        return profesion;
+    public String getHorarioDisponible() {
+        return horarioDisponible;
     }
 
-    public void setProfesion(Profesion profesion) {
-        this.profesion = profesion;
+    public void setHorarioDisponible(String horarioDisponible) {
+        this.horarioDisponible = horarioDisponible;
     }
 
-    
-    
 }
