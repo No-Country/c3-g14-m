@@ -15,6 +15,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableWebSecurity
 public class WebSecurity extends WebSecurityConfigurerAdapter{
 
+		// PARA EVITAR PROBLEMAS CON THYMELEAF Y QUE NO SE APLIQUE LA SEGURIDAD A LOS RESOURCES
+		String[] resources = new String[] { "/include/**", "/css/**", "/icons/**", "/img/**", "/js/**" 
+		};
+
     @Autowired
     UserDetailsServiceImpl userDetailsService;
     
