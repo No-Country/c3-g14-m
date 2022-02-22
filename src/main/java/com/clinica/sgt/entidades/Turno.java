@@ -22,7 +22,7 @@ public class Turno {
     @ManyToOne
     private Paciente paciente;
     @ManyToOne
-    private Admin profesional;
+    private Personal personal;
     private boolean alta;
 
     public String getId() {
@@ -49,11 +49,11 @@ public class Turno {
     public void setPaciente(Paciente paciente) {
         this.paciente = paciente;
     }
-    public Admin getProfesional() {
-        return profesional;
+    public Personal getPersonal() {
+        return personal;
     }
-    public void setProfesional(Admin profesional) {
-        this.profesional = profesional;
+    public void setPersonal(Personal personal) {
+        this.personal = personal;
     }
     public boolean isAlta() {
         return alta;
@@ -63,7 +63,7 @@ public class Turno {
     }
     @Override
     public String toString() {
-        return "Turno [dia=" + dia + ", hora=" + hora + ", paciente=" + paciente.getNombreCompleto() + ", profesional=" + profesional.getNombreCompleto() + "]";
+        return "Turno [dia=" + dia + ", hora=" + hora + ", paciente=" + paciente.getNombreCompleto() + ", profesional=" + personal.getNombreCompleto() + "]";
     }
 
     

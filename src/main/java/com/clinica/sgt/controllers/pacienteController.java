@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-import com.clinica.sgt.entidades.Admin;
+import com.clinica.sgt.entidades.Personal;
 import com.clinica.sgt.entidades.Turno;
 import com.clinica.sgt.servicios.TurnoServicio;
 
@@ -37,7 +37,7 @@ public class pacienteController {
 	}
 	
 	@PostMapping("/agregar-turno/{dni}") //El dni del paciente se ingresa sin pedirselo, se utiliza sus datos de registro
-	public String agregarTurno(ModelMap modelo, @RequestParam LocalDate dia, @RequestParam LocalTime hora, @PathVariable String dni, @RequestParam Admin profesional) { 
+	public String agregarTurno(ModelMap modelo, @RequestParam LocalDate dia, @RequestParam LocalTime hora, @PathVariable String dni, @RequestParam Personal profesional) { 
         //Revisar si el parametro ingresado para profesional es entidad o String
 		try{
 			turnoServicio.agregarTurno(dia, hora, dni, profesional.getDni());

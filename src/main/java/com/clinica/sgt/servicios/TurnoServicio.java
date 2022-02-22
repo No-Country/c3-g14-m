@@ -5,7 +5,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 import com.clinica.sgt.entidades.Turno;
-import com.clinica.sgt.repositorios.AdminRepositorio;
+import com.clinica.sgt.repositorios.PersonalRepositorio;
 import com.clinica.sgt.repositorios.TurnoRepositorio;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class TurnoServicio {
     TurnoRepositorio turnoRepo;
 
     @Autowired
-    AdminRepositorio adminRepo;
+    PersonalRepositorio personalRepo;
 
     @Autowired
     PacienteServicio pacienteServicio;
@@ -32,7 +32,7 @@ public class TurnoServicio {
         if(pacienteServicio.buscarPacientePorDNI(dniPaciente) == null){
             throw new Exception("El paciente no se encuentra en la base de datos, revise los datos ingresados");
         }
-        if(adminRepo.buscarPorDNI(dniProfesional) == null){
+        if(personalRepo.buscarPorDNI(dniProfesional) == null){
             throw new Exception("El profesional no se encuentra en la base de datos, revise los datos ingresados");
         }
 
@@ -56,7 +56,7 @@ public class TurnoServicio {
         turno.setDia(dia);
         turno.setHora(hora);
         turno.setPaciente(pacienteServicio.buscarPacientePorDNI(dniPaciente));
-        turno.setProfesional(adminRepo.buscarPorDNI(dniProfesional));
+        turno.setPersonal(personalRepo.buscarPorDNI(dniProfesional));
         turno.setAlta(true);
 
         turnoRepo.save(turno);
@@ -75,7 +75,7 @@ public class TurnoServicio {
         turno.setDia(dia);
         turno.setHora(hora);
         turno.setPaciente(pacienteServicio.buscarPacientePorDNI(dniPaciente));
-        turno.setProfesional(adminRepo.buscarPorDNI(dniProfesional));
+        turno.setPersonal(personalRepo.buscarPorDNI(dniProfesional));
         turno.setAlta(true);
 
         turnoRepo.save(turno);
