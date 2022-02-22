@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
+import com.clinica.sgt.entidades.Personal;
 import com.clinica.sgt.entidades.Turno;
 import com.clinica.sgt.repositorios.PersonalRepositorio;
 import com.clinica.sgt.repositorios.TurnoRepositorio;
@@ -11,6 +12,10 @@ import com.clinica.sgt.repositorios.TurnoRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import de.jollyday.HolidayCalendar;
+import de.jollyday.HolidayManager;
+import de.jollyday.ManagerParameters;
 
 @Service
 public class TurnoServicio {
@@ -23,7 +28,10 @@ public class TurnoServicio {
 
     @Autowired
     PacienteServicio pacienteServicio;
-
+    
+    private HolidayManager feriados = HolidayManager.getInstance(ManagerParameters.create(HolidayCalendar.ARGENTINA));
+    
+    //Validaciones
     public void validarDatos(LocalDate dia, LocalTime hora, String dniPaciente, String dniProfesional) throws Exception{
 
         if(dia == null || hora == null){
@@ -44,12 +52,31 @@ public class TurnoServicio {
         }
     }
 
+    public void validarHorario(LocalDate dia, LocalTime hora, String dniProfesional) throws Exception{
+
+        if(dia.getDayOfWeek().toString().equalsIgnoreCase("SUNDAY") 
+            || dia.getDayOfWeek().toString().equalsIgnoreCase("SATURDAY")
+            || feriados.isHoliday(dia)){
+            throw new Exception("Feriado o dia no laboral");
+        }
+
+        Personal profesional = personalRepo.buscarPorDNI(dniProfesional);
+
+        if(hora.isBefore(profesional.getInicioLaboral()) || hora.isAfter(profesional.getFinLaboral())){
+            throw new Exception("El turno no esta en el horario laboral del profesional");
+        }
+        
+              
+
+    }
+
     // Creacion
     @Transactional
     public void agregarTurno(LocalDate dia, LocalTime hora, String dniPaciente, String dniProfesional) throws Exception{
 
         validarDatos(dia, hora, dniPaciente, dniProfesional);
         validarFechaDisponible(dia, hora, dniProfesional);
+        validarHorario(dia, hora, dniProfesional);
 
         Turno turno = new Turno();
 
@@ -71,6 +98,7 @@ public class TurnoServicio {
         Turno turno = turnoRepo.buscarPorID(id);
 
         validarDatos(dia, hora, dniPaciente, dniProfesional);
+        validarHorario(dia, hora, dniProfesional);
 
         turno.setDia(dia);
         turno.setHora(hora);
