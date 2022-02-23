@@ -3,6 +3,7 @@ package com.clinica.sgt.servicios;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+
 import com.clinica.sgt.entidades.Personal;
 import com.clinica.sgt.entidades.Turno;
 import com.clinica.sgt.repositorios.PersonalRepositorio;
@@ -75,7 +76,7 @@ public class TurnoServicio {
     public void agregarTurno(LocalDate dia, LocalTime hora, String dniPaciente, String dniProfesional) throws Exception{
 
         validarDatos(dia, hora, dniPaciente, dniProfesional);
-        validarFechaDisponible(dia, hora, dniProfesional);
+        // validarFechaDisponible(dia, hora, dniProfesional);
         validarHorario(dia, hora, dniProfesional);
 
         Turno turno = new Turno();
@@ -126,12 +127,14 @@ public class TurnoServicio {
     public Turno buscarPorID(String idTurno){
         return turnoRepo.buscarPorID(idTurno);
     }
+
     public List<Turno> buscarPorDia(LocalDate dia, String dniProfesional){
         return turnoRepo.buscarPorDia(dia, dniProfesional);
     }
     public Turno buscarPorHoraYDia(LocalDate dia, LocalTime hora, String dniProfesional){
         return turnoRepo.buscarPorHoraYDia(hora, dia, dniProfesional);
     }
+
     public List<Turno> buscarTurnosPaciente(String dni){
         return turnoRepo.buscarTurnoPaciente(dni);
     }
