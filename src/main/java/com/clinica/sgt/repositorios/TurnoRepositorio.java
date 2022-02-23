@@ -20,11 +20,11 @@ public interface TurnoRepositorio extends JpaRepository<Turno, String>{
     @Query("SELECT t FROM Turno t WHERE t.personal.dni = :dni")
     public List<Turno> buscarTurnoProfesional(@Param("dni") String dni);
 
-    // @Query("SELECT t FROM Turno t WHERE t.hora = :hora , t.dia = :dia AND t.profesional.dni = :dniProfesional")
-    // public Turno buscarPorHoraYDia(@Param("hora") LocalTime hora,@Param("dia") LocalDate dia, @Param("dniProfesional") String dniProfesional);
+    @Query("SELECT t FROM Turno t WHERE (t.hora = :hora) AND (t.dia = :dia) AND (t.personal.dni = :dniPersonal)")
+    public Turno buscarPorHoraYDia(@Param("hora") LocalTime hora,@Param("dia") LocalDate dia, @Param("dniPersonal") String dniPersonal);
 
-    // @Query("SELECT t FROM Turno t WHERE t.dia = :dia AND t.profesional.dni = :dniProfesional")
-    // public List<Turno> buscarPorDia(@Param("dia") LocalDate dia, @Param("dniProfesional") String dniProfesional);
+    @Query("SELECT t FROM Turno t WHERE t.dia = :dia AND t.personal.dni = :dniPersonal")
+    public List<Turno> buscarPorDia(@Param("dia") LocalDate dia, @Param("dniPersonal") String dniPersonal);
 
     @Query("SELECT t FROM Turno t WHERE t.id = :id")
     public Turno buscarPorID(@Param("id") String id);

@@ -2,7 +2,6 @@ package com.clinica.sgt.controllers;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.clinica.sgt.entidades.Genero;
@@ -31,23 +30,6 @@ public class adminController {
 	@Autowired
 	TurnoServicio turnoServicio;
 
-	// @PostMapping("/login")
-    // public String login(@RequestParam String email, @RequestParam String password, ModelMap model) {
-        
-    //     try {
-    		
-	// 	    Usuario u1 = usuarioServicio.loguearUsuario(email, password);
-		
-    //    		return "login.html";
- 
-	//    } catch(Exception e/*error*/) {
-		
-	// 	      // AGREGAR ERROR 
-		
-	//    return null;
-	// }
-        
-//   }
 
 	@PostMapping("/registro") 	
 	public String registro(@RequestParam String email, @RequestParam String nombreCompleto,
