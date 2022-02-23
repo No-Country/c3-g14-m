@@ -2,7 +2,6 @@ package com.clinica.sgt.servicios;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 
 import com.clinica.sgt.entidades.Personal;
 import com.clinica.sgt.entidades.Turno;
@@ -16,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import de.jollyday.HolidayCalendar;
 import de.jollyday.HolidayManager;
 import de.jollyday.ManagerParameters;
+import java.util.List;
 
 @Service
 public class TurnoServicio {
@@ -126,16 +126,16 @@ public class TurnoServicio {
     public Turno buscarPorID(String idTurno){
         return turnoRepo.buscarPorID(idTurno);
     }
-    public ArrayList<Turno> buscarPorDia(LocalDate dia, String dniProfesional){
+    public List<Turno> buscarPorDia(LocalDate dia, String dniProfesional){
         return turnoRepo.buscarPorDia(dia, dniProfesional);
     }
     public Turno buscarPorHoraYDia(LocalDate dia, LocalTime hora, String dniProfesional){
         return turnoRepo.buscarPorHoraYDia(hora, dia, dniProfesional);
     }
-    public ArrayList<Turno> buscarTurnosPaciente(String dni){
+    public List<Turno> buscarTurnosPaciente(String dni){
         return turnoRepo.buscarTurnoPaciente(dni);
     }
-    public ArrayList<Turno> buscarTurnosProfesional(String dni){
+    public List<Turno> buscarTurnosProfesional(String dni){
         return turnoRepo.buscarTurnoProfesional(dni);
     }
 }
