@@ -2,13 +2,12 @@
 //
 //import java.time.LocalDate;
 //import java.time.LocalTime;
-//import java.util.ArrayList;
+//import java.util.List;
 //
 //import com.clinica.sgt.entidades.Genero;
 //import com.clinica.sgt.entidades.Turno;
 //import com.clinica.sgt.entidades.UserType;
-//import com.clinica.sgt.servicios.TurnoServicio;
-//import com.clinica.sgt.servicios.UsuarioServicio;
+//
 //
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.stereotype.Controller;
@@ -24,8 +23,9 @@
 //@RequestMapping("/admin")
 //public class adminController {
 //
+//
 //	@Autowired
-//	UsuarioServicio usuarioServicio;
+//	TurnoServicio turnoServicio;
 //
 //
 //	@PostMapping("/registro") 	
@@ -57,7 +57,7 @@
 //
 //	@GetMapping("/turnos/{dni}") 
 //	public String listarTurnos(ModelMap modelo, @PathVariable String dni){
-//		ArrayList<Turno> turnos = turnoServicio.buscarTurnosProfesional(dni);
+//		List<Turno> turnos = turnoServicio.buscarTurnosProfesional(dni);
 //		modelo.put("turnos", turnos);
 //		return "turnos.html";
 //	}
@@ -111,3 +111,4 @@
 //	}
 //	
 //}
+

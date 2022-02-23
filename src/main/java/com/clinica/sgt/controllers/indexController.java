@@ -1,11 +1,20 @@
 package com.clinica.sgt.controllers;
 
+import com.clinica.sgt.servicios.UsuarioServicio;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/")
 public class indexController {
+
+	@Autowired
+	UsuarioServicio usuarioServicio;
 
 	@GetMapping("/")
     public String index() {      
@@ -13,21 +22,17 @@ public class indexController {
    
 	}
 	
-	// @PostMapping("/login")
-    // public String login(@RequestParam String email, @RequestParam String password, ModelMap model) {
+	@PostMapping("/login")
+    public String login(@RequestParam String email, @RequestParam String password, ModelMap modelo) {
         
-    //     try {
+        try {
     		
-	// 	    Usuario u1 = usuarioServicio.loguearUsuario(email, password);
-		
-    //    		return "login.html";
+       		return "exito.html";
  
-	//    } catch(Exception e/*error*/) {
-		
-	// 	      // AGREGAR ERROR 
-		
-	//    return null;
-	// }
+	   } catch(Exception e/*error*/) {
+			e.printStackTrace();
+		    return "error.html";
+	}
         
-//   }
+  }
 }
