@@ -12,9 +12,18 @@ public class Paciente extends Usuario {
 
     private String historiaClinica;
 
-    public Paciente(String historiaClinica) {
+    public Paciente() {
+    }
+
+    public Paciente(String historiaClinica, String id, String dni, String mail,
+            String password, String nombre, String telefono, Genero genero,
+            Boolean alta, UserType userType) {
+        super(id, dni, mail, password, nombre, telefono, genero, alta, userType);
         this.historiaClinica = historiaClinica;
     }
+
+    
+    
 
     public String getHistoriaClinica() {
         return historiaClinica;

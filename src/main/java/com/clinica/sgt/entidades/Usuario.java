@@ -32,11 +32,15 @@ public class Usuario implements UserDetails{
     private Genero genero;
     private Boolean alta;
     private UserType userType;
-    
+   
 
-    public Usuario(String dni, String mail, String password,
+    public Usuario() {
+        }
+
+    public Usuario(String id, String dni, String mail, String password,
             String nombre, String telefono, Genero genero, Boolean alta,
             UserType userType) {
+        this.id = id;
         this.dni = dni;
         this.mail = mail;
         this.password = password;
@@ -44,11 +48,10 @@ public class Usuario implements UserDetails{
         this.telefono = telefono;
         this.genero = genero;
         this.alta = alta;
+        this.userType = userType;
     }
 
-    public Usuario() {
-        }
-
+    
     
     public String getId() {
         return id;

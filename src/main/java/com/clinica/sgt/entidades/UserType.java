@@ -10,5 +10,5 @@ package com.clinica.sgt.entidades;
  * @author Cristian
  */
 public enum UserType{
-    ADMIN, GUEST, PROFESSIONAL;
+    ADMIN, PACIENTE, PROFESIONAL;
 }
