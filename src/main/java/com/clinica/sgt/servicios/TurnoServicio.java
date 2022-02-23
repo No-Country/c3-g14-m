@@ -3,6 +3,7 @@ package com.clinica.sgt.servicios;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.clinica.sgt.entidades.Personal;
 import com.clinica.sgt.entidades.Turno;
@@ -46,11 +47,11 @@ public class TurnoServicio {
 
     }
 
-    public void validarFechaDisponible(LocalDate dia, LocalTime hora, String dniProfesional) throws Exception{
-        if(turnoRepo.buscarPorHoraYDia(hora, dia, dniProfesional) != null){
-            throw new Exception("La hora en el dia especificado esta ocupado");
-        }
-    }
+    // public void validarFechaDisponible(LocalDate dia, LocalTime hora, String dniProfesional) throws Exception{
+    //     if(turnoRepo.buscarPorHoraYDia(hora, dia, dniProfesional) != null){
+    //         throw new Exception("La hora en el dia especificado esta ocupado");
+    //     }
+    // }
 
     public void validarHorario(LocalDate dia, LocalTime hora, String dniProfesional) throws Exception{
 
@@ -75,7 +76,7 @@ public class TurnoServicio {
     public void agregarTurno(LocalDate dia, LocalTime hora, String dniPaciente, String dniProfesional) throws Exception{
 
         validarDatos(dia, hora, dniPaciente, dniProfesional);
-        validarFechaDisponible(dia, hora, dniProfesional);
+        // validarFechaDisponible(dia, hora, dniProfesional);
         validarHorario(dia, hora, dniProfesional);
 
         Turno turno = new Turno();
@@ -126,16 +127,16 @@ public class TurnoServicio {
     public Turno buscarPorID(String idTurno){
         return turnoRepo.buscarPorID(idTurno);
     }
-    public ArrayList<Turno> buscarPorDia(LocalDate dia, String dniProfesional){
-        return turnoRepo.buscarPorDia(dia, dniProfesional);
-    }
-    public Turno buscarPorHoraYDia(LocalDate dia, LocalTime hora, String dniProfesional){
-        return turnoRepo.buscarPorHoraYDia(hora, dia, dniProfesional);
-    }
-    public ArrayList<Turno> buscarTurnosPaciente(String dni){
+    // public List<Turno> buscarPorDia(LocalDate dia, String dniProfesional){
+    //     return turnoRepo.buscarPorDia(dia, dniProfesional);
+    // }
+    // public Turno buscarPorHoraYDia(LocalDate dia, LocalTime hora, String dniProfesional){
+    //     return turnoRepo.buscarPorHoraYDia(hora, dia, dniProfesional);
+    // }
+    public List<Turno> buscarTurnosPaciente(String dni){
         return turnoRepo.buscarTurnoPaciente(dni);
     }
-    public ArrayList<Turno> buscarTurnosProfesional(String dni){
+    public List<Turno> buscarTurnosProfesional(String dni){
         return turnoRepo.buscarTurnoProfesional(dni);
     }
 }

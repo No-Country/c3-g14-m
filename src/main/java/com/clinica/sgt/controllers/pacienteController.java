@@ -3,6 +3,7 @@ package com.clinica.sgt.controllers;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.clinica.sgt.entidades.Personal;
 import com.clinica.sgt.entidades.Turno;
@@ -26,7 +27,7 @@ public class pacienteController {
 
     @GetMapping("/turnos/{dni}") 
 	public String listarTurnos(ModelMap modelo, @PathVariable String dni){
-		ArrayList<Turno> turnos = turnoServicio.buscarTurnosPaciente(dni);
+		List<Turno> turnos = turnoServicio.buscarTurnosPaciente(dni);
 		modelo.put("turnos", turnos);
 		return "turnos.html";
 	}
