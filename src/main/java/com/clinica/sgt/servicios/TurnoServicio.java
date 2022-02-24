@@ -2,7 +2,6 @@ package com.clinica.sgt.servicios;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
 
 import com.clinica.sgt.entidades.Personal;
 import com.clinica.sgt.entidades.Turno;
@@ -16,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import de.jollyday.HolidayCalendar;
 import de.jollyday.HolidayManager;
 import de.jollyday.ManagerParameters;
+import java.util.List;
 
 @Service
 public class TurnoServicio {
@@ -46,11 +46,11 @@ public class TurnoServicio {
 
     }
 
-    public void validarFechaDisponible(LocalDate dia, LocalTime hora, String dniProfesional) throws Exception{
-        if(turnoRepo.buscarPorHoraYDia(hora, dia, dniProfesional) != null){
-            throw new Exception("La hora en el dia especificado esta ocupado");
-        }
-    }
+//    public void validarFechaDisponible(LocalDate dia, LocalTime hora, String dniProfesional) throws Exception{
+//        if(turnoRepo.buscarPorHoraYDia(hora, dia, dniProfesional) != null){
+//            throw new Exception("La hora en el dia especificado esta ocupado");
+//        }
+//    }
 
     public void validarHorario(LocalDate dia, LocalTime hora, String dniProfesional) throws Exception{
 
@@ -71,6 +71,7 @@ public class TurnoServicio {
     }
 
     // Creacion
+
     @Transactional
     public void agregarTurno(LocalDate dia, LocalTime hora, String dniPaciente, String dniProfesional) throws Exception{
 
@@ -90,6 +91,7 @@ public class TurnoServicio {
 
 
     }
+
 
     //Modificacion
     @Transactional
@@ -126,12 +128,15 @@ public class TurnoServicio {
     public Turno buscarPorID(String idTurno){
         return turnoRepo.buscarPorID(idTurno);
     }
-    // public List<Turno> buscarPorDia(LocalDate dia, String dniProfesional){
-    //     return turnoRepo.buscarPorDia(dia, dniProfesional);
-    // }
-    // public Turno buscarPorHoraYDia(LocalDate dia, LocalTime hora, String dniProfesional){
-    //     return turnoRepo.buscarPorHoraYDia(hora, dia, dniProfesional);
-    // }
+
+    public List<Turno> buscarPorDia(LocalDate dia, String dniProfesional){
+        return turnoRepo.buscarPorDia(dia, dniProfesional);
+    }
+    public Turno buscarPorHoraYDia(LocalDate dia, LocalTime hora, String dniProfesional){
+        return turnoRepo.buscarPorHoraYDia(hora, dia, dniProfesional);
+    }
+
+
     public List<Turno> buscarTurnosPaciente(String dni){
         return turnoRepo.buscarTurnoPaciente(dni);
     }
