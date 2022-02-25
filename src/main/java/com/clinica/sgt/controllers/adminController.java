@@ -55,7 +55,7 @@ public class adminController {
 	@GetMapping("/inicio")
 	public String inicio(ModelMap model) {
 
-		return "inicio.html";
+		return "exito.html";
 
 	}
 
