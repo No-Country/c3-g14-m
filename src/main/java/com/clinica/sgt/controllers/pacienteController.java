@@ -1,3 +1,4 @@
+
 package com.clinica.sgt.controllers;
 
 import java.time.LocalDate;
@@ -60,5 +61,6 @@ public class pacienteController {
             return "error.html";
         }
     }
-
 }
+
+
