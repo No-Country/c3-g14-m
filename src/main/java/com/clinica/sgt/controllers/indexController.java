@@ -23,17 +23,17 @@ public class indexController {
    
 	}
 	
-	@PostMapping("/login")
-    public String login(@RequestParam String email, @RequestParam String password, ModelMap modelo) {
+	// @PostMapping("/login")
+    // public String login(@RequestParam String email, @RequestParam String password, ModelMap modelo) {
         
-        try {
+    //     try {
     		
-       		return "exito.html";
+    //    		return "exito.html";
  
-	   } catch(Exception e/*error*/) {
-			e.printStackTrace();
-		    return "error.html";
-	}
+	//    } catch(Exception e/*error*/) {
+	// 		e.printStackTrace();
+	// 	    return "error.html";
+	// }
         
-  }
+//   }
 }

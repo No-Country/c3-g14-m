@@ -46,11 +46,11 @@ public class TurnoServicio {
 
     }
 
-//    public void validarFechaDisponible(LocalDate dia, LocalTime hora, String dniProfesional) throws Exception{
-//        if(turnoRepo.buscarPorHoraYDia(hora, dia, dniProfesional) != null){
-//            throw new Exception("La hora en el dia especificado esta ocupado");
-//        }
-//    }
+   public void validarFechaDisponible(LocalDate dia, LocalTime hora, String dniProfesional) throws Exception{
+       if(turnoRepo.buscarPorHoraYDia(hora, dia, dniProfesional) != null){
+           throw new Exception("La hora en el dia especificado esta ocupado");
+       }
+   }
 
     public void validarHorario(LocalDate dia, LocalTime hora, String dniProfesional) throws Exception{
 

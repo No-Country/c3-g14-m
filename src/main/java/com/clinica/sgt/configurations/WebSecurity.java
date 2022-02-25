@@ -30,24 +30,28 @@ public class WebSecurity extends WebSecurityConfigurerAdapter{
     
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("admin@mail.com")
-        .password(passwordEncoder().encode("1234")).roles("ADMIN");
+        auth.inMemoryAuthentication()
+        .withUser("admin@mail.com")
+        .password(passwordEncoder().encode("1234"))
+        .roles("ADMIN");
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder()); //Para mayor seguridad se encripta la password
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // Restricciones al acceso dependiendo el rol del usuario
-        http.authorizeRequests()
-        .antMatchers("/admin/**").hasRole("ADMIN") //REVISAR SI NO FUNCIONA hasRole probar con hasAuthority
-        .antMatchers("/index").permitAll()
-        .antMatchers("/login").permitAll();
+        http
+        .authorizeRequests()
+        .antMatchers("/admin/**").hasRole("ADMIN")
+        .antMatchers("/index").permitAll(); //REVISAR SI NO FUNCIONA hasRole probar con hasAuthority
         //LUEGO AGREGAR LOS PROXIMOS ENDPOINTS
 
         http.formLogin()
         .usernameParameter("email")
         .passwordParameter("password")
-        .loginPage("/index");
+        .loginPage("/login")
+        .defaultSuccessUrl("/admin/inicio")
+        .and().csrf().disable();
 
         http.logout().logoutUrl("/logout");
         
