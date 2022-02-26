@@ -1,14 +1,19 @@
+
 package com.clinica.sgt.controllers;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
+import com.clinica.sgt.entidades.Genero;
 import com.clinica.sgt.entidades.Personal;
 import com.clinica.sgt.entidades.Turno;
+import com.clinica.sgt.entidades.UserType;
+import com.clinica.sgt.servicios.PacienteServicio;
 import com.clinica.sgt.servicios.TurnoServicio;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +28,9 @@ public class pacienteController {
 
     @Autowired
     TurnoServicio turnoServicio;
+
+	@Autowired
+	PacienteServicio pacienteServicio;
 
     @GetMapping("/turnos/{dni}") 
 	public String listarTurnos(ModelMap modelo, @PathVariable String dni){
@@ -61,4 +69,25 @@ public class pacienteController {
         }
     }
 
+	@PostMapping("/registro") 	
+	public String registro(@RequestParam @Nullable String historiaClinica, @RequestParam String email, @RequestParam String nombreCompleto,
+			@RequestParam String password, @RequestParam String dni, @RequestParam String telefono,
+			@RequestParam Genero genero, ModelMap modelo) {
+
+		try {
+
+			pacienteServicio.crearPaciente(historiaClinica, dni, email, password, nombreCompleto, telefono, genero, true, UserType.PACIENTE);;
+			return "exito.html";
+
+		} catch (Exception e) {
+
+			e.getMessage();
+           modelo.put("error", e.getMessage());
+
+			return "error.html";
+		}
+
+	}
 }
+
+

@@ -1,7 +1,8 @@
 package com.clinica.sgt.controllers;
 
-import com.clinica.sgt.servicios.UsuarioServicio;
 
+
+import com.clinica.sgt.servicios.PacienteServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class indexController {
 
 	@Autowired
-	UsuarioServicio usuarioServicio;
+	PacienteServicio pacienteServicio;
 
 	@GetMapping("/")
     public String index() {      
@@ -22,17 +23,17 @@ public class indexController {
    
 	}
 	
-	@PostMapping("/login")
-    public String login(@RequestParam String email, @RequestParam String password, ModelMap modelo) {
+	// @PostMapping("/login")
+    // public String login(@RequestParam String email, @RequestParam String password, ModelMap modelo) {
         
-        try {
+    //     try {
     		
-       		return "exito.html";
+    //    		return "exito.html";
  
-	   } catch(Exception e/*error*/) {
-			e.printStackTrace();
-		    return "error.html";
-	}
+	//    } catch(Exception e/*error*/) {
+	// 		e.printStackTrace();
+	// 	    return "error.html";
+	// }
         
-  }
+//   }
 }

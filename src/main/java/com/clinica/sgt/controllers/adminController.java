@@ -7,8 +7,8 @@ import java.util.List;
 import com.clinica.sgt.entidades.Genero;
 import com.clinica.sgt.entidades.Turno;
 import com.clinica.sgt.entidades.UserType;
+import com.clinica.sgt.servicios.PersonalServicio;
 import com.clinica.sgt.servicios.TurnoServicio;
-import com.clinica.sgt.servicios.UsuarioServicio;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,27 +24,28 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/admin")
 public class adminController {
 
-	@Autowired
-	UsuarioServicio usuarioServicio;
 
 	@Autowired
 	TurnoServicio turnoServicio;
 
+	@Autowired
+	PersonalServicio personalServicio;
+
 
 	@PostMapping("/registro") 	
-	public String registro(@RequestParam String email, @RequestParam String nombreCompleto,
+	public String registro(@RequestParam LocalTime inicioLaboral, @RequestParam LocalTime finLaboral, @RequestParam String email, @RequestParam String nombreCompleto,
 			@RequestParam String password, @RequestParam String dni, @RequestParam String telefono,
-			@RequestParam Genero genero, ModelMap modelo) {
+			@RequestParam Genero genero, @RequestParam UserType userType, ModelMap modelo) {
 
 		try {
 
-			usuarioServicio.crearUsuario(dni, email, password, nombreCompleto, telefono, genero, true, UserType.GUEST);
+			personalServicio.crearPersonal(inicioLaboral, finLaboral, dni, email, password, nombreCompleto, telefono, genero, true, userType);
 			return "exito.html";
 
 		} catch (Exception e) {
 
 			e.getMessage();
-            modelo.put("error", e.getMessage());
+           modelo.put("error", e.getMessage());
 
 			return "error.html";
 		}
@@ -54,7 +55,7 @@ public class adminController {
 	@GetMapping("/inicio")
 	public String inicio(ModelMap model) {
 
-		return "inicio.html";
+		return "exito.html";
 
 	}
 
@@ -77,7 +78,7 @@ public class adminController {
 			return "exito.html";
 		}catch(Exception e){
 			e.getMessage();
-            modelo.put("error", e.getMessage());
+           modelo.put("error", e.getMessage());
 			return "error.html";
 		}
 	}
@@ -96,7 +97,7 @@ public class adminController {
 			return "exito.html";
 		}catch(Exception e){
 			e.getMessage();
-            modelo.put("error", e.getMessage());
+           modelo.put("error", e.getMessage());
 			return "error.html";
 		}
 	}
@@ -108,9 +109,10 @@ public class adminController {
 			return "exito.html";
 		}catch(Exception e){
 			e.getMessage();
-            modelo.put("error", e.getMessage());
+           modelo.put("error", e.getMessage());
 			return "error.html";
 		}
 	}
 	
 }
+

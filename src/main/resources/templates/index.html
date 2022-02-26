@@ -30,7 +30,7 @@
                             <p>Sistema de gestion de turnos </p>
                         </div>
                         <h2>Registrarse</h2>
-                        <form id="form-signup" th:action="@{/registro}" method="post" onsubmit="return false;">
+                        <form id="form-signup" th:action="@{/paciente/registro}" method="post" onsubmit="return false;">
                             <div class="form-element form-stack">
                                 <label for="email" class="form-label">Email</label>
                                 <input id="email" type="email" name="email">
@@ -85,7 +85,12 @@
                                 <button id="logIn" class="login" type="submit" name="login" >Ingresar</button>
                                 <button id="goRight" class="login off" name="signup">Registro</button>
                             </div>
-                        </form>
+                        </form> -->
+
+                        <p>
+                        <a th:href="@{/login}"><button id="logIn"class="login" name="login" >Ingresar</button></a>
+                        <button id="goRight" class="login off" name="signup">Registro</button>
+                        </p>
                     </div>
                 </div>
             </div>
