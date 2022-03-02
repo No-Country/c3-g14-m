@@ -206,7 +206,7 @@ input {
   font-size: 0.72em;
 }
 
-button {
+button, input[name="izq"] {
   padding: 0.8em 1.2em;
   margin: 0 10px 0 0;
   width: auto;
@@ -222,41 +222,41 @@ button {
   outline: 0;
   transition: all 0.25s;
 }
-button.signup {
+button.signup, input[name="izq"] {
   background: #5fa26f;
 }
-button.login {
+button.login, input[name="izq"] {
   background: #03A9F4;
 }
-button.off {
+button.off{
   background: none;
   box-shadow: none;
   margin: 0;
 }
-button.off.signup {
+button.off.signup{
   color: #28452f;
 }
-button.off.login {
+button.off.login{
   color: #03A9F4;
 }
 
-button:focus, button:active, button:hover {
+button:focus, button:active, button:hover, input[name="izq"] {
   box-shadow: 0 4px 7px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
 }
-button:focus.signup, button:active.signup, button:hover.signup {
+button:focus.signup, button:active.signup, button:hover.signup{
   background: #44744f;
 }
-button:focus.login, button:active.login, button:hover.login {
+button:focus.login, button:active.login, button:hover.login{
   background: #165a72;
 }
-button:focus.off, button:active.off, button:hover.off {
+button:focus.off, button:active.off, button:hover.off{
   box-shadow: none;
 }
-button:focus.off.signup, button:active.off.signup, button:hover.off.signup {
+button:focus.off.signup, button:active.off.signup, button:hover.off.signup{
   color: #03A9F4;
   background: #212121;
 }
-button:focus.off.login, button:active.off.login, button:hover.off.login {
+button:focus.off.login, button:active.off.login, button:hover.off.login{
   color: #44744f;
   background: #e3e3e3;
 }

@@ -42,7 +42,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter{
         // Restricciones al acceso dependiendo el rol del usuario
         http
         .authorizeRequests()
-        .antMatchers("/admin/**").hasRole("ADMIN")
+        .antMatchers("/admin/**").hasAnyRole("ADMIN")
         .antMatchers("/index").permitAll(); //REVISAR SI NO FUNCIONA hasRole probar con hasAuthority
         //LUEGO AGREGAR LOS PROXIMOS ENDPOINTS
 
@@ -50,8 +50,9 @@ public class WebSecurity extends WebSecurityConfigurerAdapter{
         .usernameParameter("email")
         .passwordParameter("password")
         .loginPage("/login")
-        .defaultSuccessUrl("/admin/inicio")
-        .and().csrf().disable();
+        .defaultSuccessUrl("/admin/inicio") //Luego cambiarlo, revisar rol y enviar a inicio correspondiente
+        .and()
+        .csrf().disable();
 
         http.logout().logoutUrl("/logout");
         

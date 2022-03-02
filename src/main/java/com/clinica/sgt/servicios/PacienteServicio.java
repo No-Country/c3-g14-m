@@ -14,6 +14,12 @@ public class PacienteServicio{
     
     @Autowired
     PacienteRepositorio pacienteRepositorio;
+
+    public void validar( String dni, String mail,
+    String password, String nombre, String telefono, Genero genero,
+    Boolean alta, UserType userType){
+        
+    }
     
     //****************************CREACION******************
     @Transactional
