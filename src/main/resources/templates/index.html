@@ -30,14 +30,14 @@
                             <p>Sistema de gestion de turnos </p>
                         </div>
                         <h2>Registrarse</h2>
-                        <form id="form-signup" th:action="@{/paciente/registro}" method="post" onsubmit="return false;">
+                        <form id="form-signup" th:action="@{/paciente/registro}" method="post" >
                             <div class="form-element form-stack">
                                 <label for="email" class="form-label">Email</label>
                                 <input id="email" type="email" name="email">
                             </div>
                             <div class="form-element form-stack">
                                 <label for="username-signup" class="form-label">Nombre y Apellido</label>
-                                <input id="username-signup" type="text" name="username">
+                                <input id="username-signup" type="text" name="nombreCompleto">
                             </div>
                             <div class="form-element form-stack">
                                 <label for="username-signup" class="form-label">DNI</label>
@@ -45,23 +45,25 @@
                             </div>
                             <div class="form-element form-stack">
                                 <label for="username-signup" class="form-label">Telefono</label>
-                                <input id="username-signup" type="phone" name="phone">
+                                <input id="username-signup" type="phone" name="telefono">
                             </div>
                             <div class="form-element form-stack">
                                 <select class="form-select $form-select-grey " type="text" name="genero" >
                                     <option selected>Genero</option>
-                                    <option value="1">Hombre</option>
-                                    <option value="2">Mujer</option>
-                                    <option value="3">Otro</option>
+                                    <option value="MASCULINO">Masculino</option>
+                                    <option value="FEMENINO">Femenino</option>
+                                    <option value="OTRO">Otro</option>
                                 </select>
                             </div>
 
                             <div class="form-element form-submit">
-                                <button id="signUp" class="signup" type="submit" name="signup">Registrarse</button>
-                                <button id="goLeft" class="signup off">Ingresar</button>
+                                <button id="signUp" class="signup" style="width: auto;" type="submit" name="signup">Registrar</button>
+                                <button id="goLeft" class="signup off" type="button" onsubmit="return false">Ingresar</button>
+                                <!-- <input type="button" class="signUp off" id="goLeft" name="izq" value="Ingresar" > -->
                             </div>
 
                         </form>
+                        <!-- <button id="goLeft" class="signup off" style="width: fit-content; " onsubmit="return false">Ingresar</button> -->
                     </div>
                 </div>
                 <div class="right">
@@ -70,9 +72,8 @@
                             <h1>SGT </h1>
                             <p>Sistema de gestion de turnos </p>
                         </div>
-
                         <h2>Ingresar</h2>
-                        <form id="form-login" method="post" th:action="@{/login}" onsubmit="return false;">
+                        <form id="form-login" method="post" th:action="@{/login}" >
                             <div class="form-element form-stack">
                                 <label for="email" class="form-label">Email</label>
                                 <input id="email" type="email" name="email">
@@ -81,16 +82,19 @@
                                 <label for="password-login" class="form-label">Contraseña</label>
                                 <input id="password-login" type="password" name="password">
                             </div>
-                            <div class="form-element form-submit">
-<!--                                <button id="logIn" class="login" type="submit" name="login" >Ingresar</button>
-                                <button id="goRight" class="login off" name="signup">Registro</button>-->
-                            </div>
-                        </form> 
-
-                        <p>
+                            
+                            <div class="form-element form-submit" >
+                               <button id="logIn" class="login"  type="submit" name="login" >Ingresar</button> 
+                               <button id="goRight" class="login off" style="width: fit-content; " type="button" name="signup" onsubmit="return false;">Registro</button>
+                            </div>  
+                            
+                         </form>  
+                        
+                        
+                        <!-- <p>
                         <a th:href="@{/login}"><button id="logIn"class="login" name="login" >Ingresar</button></a>
                         <button id="goRight" class="login off" name="signup">Registro</button>
-                        </p>
+                        </p> -->
                     </div>
                 </div>
             </div>

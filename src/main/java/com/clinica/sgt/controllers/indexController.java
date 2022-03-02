@@ -2,6 +2,7 @@ package com.clinica.sgt.controllers;
 
 
 
+import com.clinica.sgt.entidades.Genero;
 import com.clinica.sgt.servicios.PacienteServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,4 +37,7 @@ public class indexController {
 	// }
         
 //   }
+
+
+
 }

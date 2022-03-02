@@ -14,6 +14,7 @@ import com.clinica.sgt.servicios.TurnoServicio;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +29,9 @@ public class pacienteController {
 
     @Autowired
     TurnoServicio turnoServicio;
+
+	@Autowired
+	BCryptPasswordEncoder bCrypt;
 
 	@Autowired
 	PacienteServicio pacienteServicio;
@@ -70,13 +74,13 @@ public class pacienteController {
     }
 
 	@PostMapping("/registro") 	
-	public String registro(@RequestParam @Nullable String historiaClinica, @RequestParam String email, @RequestParam String nombreCompleto,
-			@RequestParam String password, @RequestParam String dni, @RequestParam String telefono,
+	public String registro(@RequestParam String email, @RequestParam String nombreCompleto, @RequestParam String dni, 
+			@RequestParam String telefono,
 			@RequestParam Genero genero, ModelMap modelo) {
 
 		try {
 
-			pacienteServicio.crearPaciente(historiaClinica, dni, email, password, nombreCompleto, telefono, genero, true, UserType.PACIENTE);;
+			pacienteServicio.crearPaciente("", dni, email, bCrypt.encode(dni), nombreCompleto, telefono, genero, true, UserType.PACIENTE);;
 			return "exito.html";
 
 		} catch (Exception e) {
