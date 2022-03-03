@@ -73,6 +73,14 @@ public class PersonalServicio{
        return null;
     }
 
+    public Personal buscarPersonalPorUsername(String username){
+        Personal existePersonal = personalRepositorio.findByUsername(username);
+        if(existePersonal !=null){
+            return existePersonal;
+        }
+        return null;
+     }
+
     //***********************BAJA*****************
     @Transactional
     public void bajaPersonal(String id, UserType userType) {

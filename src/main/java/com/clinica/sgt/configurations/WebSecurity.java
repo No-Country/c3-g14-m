@@ -42,8 +42,13 @@ public class WebSecurity extends WebSecurityConfigurerAdapter{
         // Restricciones al acceso dependiendo el rol del usuario
         http
         .authorizeRequests()
-        .antMatchers("/admin/**").hasAnyRole("ADMIN")
-        .antMatchers("/index").permitAll(); //REVISAR SI NO FUNCIONA hasRole probar con hasAuthority
+        .antMatchers("/admin/**").hasRole("ADMIN")
+        .antMatchers("/paciente/**").hasRole("PACIENTE")
+        .antMatchers("/profesional/**").hasRole("PROFESIONAL")
+        .antMatchers("/logout").hasAnyRole("ADMIN", "PROFESIONAL", "PACIENTE")
+        .antMatchers("/paciente/registro").permitAll()
+        .antMatchers("/index").permitAll()
+        .antMatchers("/login").permitAll(); //REVISAR SI NO FUNCIONA hasRole probar con hasAuthority
         //LUEGO AGREGAR LOS PROXIMOS ENDPOINTS
 
         http.formLogin()
@@ -54,7 +59,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter{
         .and()
         .csrf().disable();
 
-        http.logout().logoutUrl("/logout");
+        http.logout().logoutUrl("/logout").logoutSuccessUrl("/");
         
 
     }

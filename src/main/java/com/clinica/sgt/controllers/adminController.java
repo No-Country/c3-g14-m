@@ -2,15 +2,19 @@ package com.clinica.sgt.controllers;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.clinica.sgt.entidades.Genero;
+import com.clinica.sgt.entidades.Personal;
 import com.clinica.sgt.entidades.Turno;
 import com.clinica.sgt.entidades.UserType;
 import com.clinica.sgt.servicios.PersonalServicio;
 import com.clinica.sgt.servicios.TurnoServicio;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -55,6 +59,7 @@ public class adminController {
 	@GetMapping("/inicio")
 	public String inicio(ModelMap model) {
 
+		
 		return "inicioAdmin.html";
 
 	}
@@ -102,7 +107,7 @@ public class adminController {
 		}
 	}
 
-	@PostMapping("/modificar-alta-turno")
+	@PostMapping("/modificar-alta-turno/{id}")
 	public String modificarAltaTurno(ModelMap modelo,@PathVariable String id, @RequestParam boolean alta ){
 		try{
 			turnoServicio.modificarAlta(id, alta);

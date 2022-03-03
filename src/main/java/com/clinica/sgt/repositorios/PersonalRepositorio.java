@@ -20,8 +20,8 @@ public interface PersonalRepositorio extends JpaRepository<Personal,String>{
     @Query("SELECT p FROM Personal p ORDER BY p.nombre ASC")
     public List<Personal> mostrarTodoPersonal();
     
-    @Query("SELECT p FROM Personal p WHERE p.nombre = :nombre")
-    public List<Personal> findByUsername(@Param("nombre")String nombre);
+    @Query("SELECT p FROM Personal p WHERE p.mail = :nombre")
+    public Personal findByUsername(@Param("nombre")String nombre);
     
     @Query("SELECT p FROM Personal p WHERE p.id = :id")
     public Personal buscarPorID(@Param("id")String id);
