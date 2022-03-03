@@ -86,10 +86,46 @@ and open the template in the editor.
 
     <section id="hero">
       
-            
+            <div class="container">
+             <div class="row">
+              <h2>Listado de turnos</h2>
+           <div class="card-body">
 
-              
-         
+                <table class="table table-dark table-striped">
+                  <thead>
+                    <tr>
+                      <th>Fecha</th>
+                      <th>Hora</th>
+                      <th>Paciente</th>
+
+                      <th>Administracion</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    <tr th:each="turno : ${turnos}" >
+                      <td th:text="${turno.dia}" th:if="${turno.alta}"></td>
+                      <td th:text="${turno.hora}" th:if="${turno.alta}"></td>
+                      <td th:text="${turno.paciente.nombre}" th:if="${turno.alta}"><a th:href="@{/profesional/info-paciente/__${dni}__}" class="btn btn-outline-info" role="button">Detalles</a></td>
+
+                      <td>
+
+                        <a class="mx-2" th:href="@{/admin/mod-turno/__${id}__}" th:if="${turno.alta}" class="btn btn-outline-warning" role="button">Modificar</a>
+                        <a class="mx-2" th:href="@{/admin/modificar-alta-turno/__${id}__}" th:if="${turno.alta}" class="btn btn-outline-danger" role="button">Baja</a>
+
+                      </td>
+                    </tr>
+                  
+                  <!-- <p th:if="${turnos.isEmpty}">No tiene turnos agendados</p>  -->
+                </tbody>
+                </table>
+
+
+              </div>
+            </div>
+                </div>
+
+
     </section> 
  </header> 
   

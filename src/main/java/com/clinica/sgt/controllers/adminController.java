@@ -2,6 +2,7 @@ package com.clinica.sgt.controllers;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.clinica.sgt.entidades.Genero;
@@ -58,25 +59,17 @@ public class adminController {
 	@GetMapping("/inicio")
 	public String inicio(ModelMap model) {
 
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		UserDetails userDetails = null;
-		if (principal instanceof UserDetails) {
-  			userDetails = (UserDetails) principal;
-		}
-
-		 Personal p1 = personalServicio.buscarPersonalPorUsername(userDetails.getUsername());
-		 List<Turno> turnos = turnoServicio.buscarTurnosProfesional(p1.getDni());
-		 model.put("turnos", turnos);
+		
 		return "inicioAdmin.html";
 
 	}
 
-	// @GetMapping("/turnos/{dni}") 
-	// public String listarTurnos(ModelMap modelo, @PathVariable String dni){
-	// 	List<Turno> turnos = turnoServicio.buscarTurnosProfesional(dni);
-	// 	modelo.put("turnos", turnos);
-	// 	return "turnos.html";
-	// }
+	@GetMapping("/turnos/{dni}") 
+	public String listarTurnos(ModelMap modelo, @PathVariable String dni){
+		List<Turno> turnos = turnoServicio.buscarTurnosProfesional(dni);
+		modelo.put("turnos", turnos);
+		return "turnos.html";
+	}
 
 	@GetMapping("/form-turno") //Formulario para nuevo turno
 	public String formTurno(){
