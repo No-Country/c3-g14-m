@@ -840,7 +840,7 @@ section {
 /*--------------------------------------------------------------
 # Appointments
 --------------------------------------------------------------*/
-.appointment .php-email-form {
+.appointment .turno-form {
   width: 100%;
 }
 .appointment .php-email-form .form-group {

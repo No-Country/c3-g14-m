@@ -73,7 +73,7 @@ public class adminController {
 
 	@GetMapping("/form-turno") //Formulario para nuevo turno
 	public String formTurno(){
-		return "form-turno.html";
+		return "form-turno-admin.html";
 	}
 	
 	@PostMapping("/agregar-turno")

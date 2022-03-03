@@ -45,7 +45,7 @@ public class pacienteController {
 
 	@GetMapping("/form-turno") //Formulario para nuevo turno
 	public String formTurno(){
-		return "form-turno.html";
+		return "form-turno-paciente.html";
 	}
 	
 	@PostMapping("/agregar-turno/{dni}") //El dni del paciente se ingresa sin pedirselo, se utiliza sus datos de registro
