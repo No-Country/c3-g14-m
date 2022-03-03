@@ -84,7 +84,7 @@ and open the template in the editor.
 
 
 
-<!--    <section id="hero">
+      <section id="hero">
       <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
 
 
@@ -107,14 +107,13 @@ and open the template in the editor.
                   </thead>
                   <tbody>
                      En esta linea declaro un Iterator que recorre la lista libros pero solo si el atributo alta es TRUE 
-                    <tr th:each="p,iterator : ${libros}" th:if="${p.alta} == TRUE">
+                      <tr th:each="p,iterator : ${libros}" th:if="${p.alta} == TRUE">
                       <td th:text="${iterator.index+1}">1</td>
                       <td th:text="${p.titulo}">14/02/2021</td>
                       <td th:text="${p.autor} == null ? 'sin registro' : ${p.autor.nombre} ">09:00</td>
                       <td th:text="${p.editorial} == null ? 'sin registro' : ${p.editorial.nombre} ">Doctor Ali</td>
 
                       <td>
-
                         <a class="mx-2" th:href="@{/libros/registroLibro}+'?id='+${p.id}"><i class="fa fa-edit"></i></a>
                         <a class="mx-2" th:href="@{/libros/borrar}+'?id='+${p.id}"><i class="fa fa-trash-alt"></i></a>
                       </td>
@@ -126,13 +125,11 @@ and open the template in the editor.
                 <a href="#about" class="btn-get-started scrollto"<span class="d-none d-md-inline">Solicitar</span> turnos</a>
               </div>
             </div>
-
-
-       </div>
         </div>
-    </section> -->
+        </div>
+       </section> 
 
-  </main><!-- End #main -->
+       </main>
 
   <!-- ======= Footer ======= -->
   <footer id="footer">

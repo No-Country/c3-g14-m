@@ -70,13 +70,13 @@ public class pacienteController {
     }
 
 	@PostMapping("/registro") 	
-	public String registro(@RequestParam @Nullable String historiaClinica, @RequestParam String email, @RequestParam String nombreCompleto,
-			@RequestParam String password, @RequestParam String dni, @RequestParam String telefono,
+	public String registro(@RequestParam String email, @RequestParam String nombreCompleto,
+			 @RequestParam String dni, @RequestParam String telefono,
 			@RequestParam Genero genero, ModelMap modelo) {
 
 		try {
 
-			pacienteServicio.crearPaciente(historiaClinica, dni, email, password, nombreCompleto, telefono, genero, true, UserType.PACIENTE);;
+			pacienteServicio.crearPaciente("", dni, email, dni, nombreCompleto, telefono, genero, true, UserType.PACIENTE);;
 			return "exito.html";
 
 		} catch (Exception e) {
