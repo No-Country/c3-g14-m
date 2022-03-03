@@ -76,8 +76,8 @@ and open the template in the editor.
     </div>
   </header> 
   
+  <main id="main">
 
-      <main id="main">
       <section id="hero">
       <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
 
@@ -94,6 +94,7 @@ and open the template in the editor.
                       <th>Administracion</th>
                     </tr>
                   </thead>
+
                   <tbody> 
                       <tr th:each="turno : ${turnos}">
                       <td th:text="${turno.dia}" th:if="${turno.alta}"></td>
@@ -112,13 +113,11 @@ and open the template in the editor.
                 <a href="#about" class="btn-get-started scrollto"<span class="d-none d-md-inline">Solicitar</span> turnos</a>
               </div>
             </div>
-
-
-       </div>
         </div>
 </section> 
 
-  </main><!-- End #main -->
+
+       </main>
 
   <!-- ======= Footer ======= -->
   <footer id="footer">
