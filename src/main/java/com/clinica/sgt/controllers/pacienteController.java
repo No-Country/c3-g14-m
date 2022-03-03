@@ -74,13 +74,14 @@ public class pacienteController {
     }
 
 	@PostMapping("/registro") 	
+
 	public String registro(@RequestParam String email, @RequestParam String nombreCompleto, @RequestParam String dni, 
-			@RequestParam String telefono,
-			@RequestParam Genero genero, ModelMap modelo) {
+			@RequestParam String telefono, @RequestParam Genero genero, ModelMap modelo) {
 
 		try {
 
 			pacienteServicio.crearPaciente("", dni, email, bCrypt.encode(dni), nombreCompleto, telefono, genero, true, UserType.PACIENTE);;
+
 			return "exito.html";
 
 		} catch (Exception e) {
