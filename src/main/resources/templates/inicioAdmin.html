@@ -30,6 +30,9 @@ and open the template in the editor.
   <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
   <!-- los CSS  -->
   <link href="../assets/css/style.css" rel="stylesheet">
 
@@ -88,37 +91,38 @@ and open the template in the editor.
               <h2>Listado de turnos</h2>
            <div class="card-body">
 
-<!--                <table class="table table-dark table-striped">
+                <!-- <table class="table table-dark table-striped">
                   <thead>
                     <tr>
-                      <th>Nм/th>
                       <th>Fecha</th>
                       <th>Hora</th>
-                      <th>Doctor</th>
+                      <th>Paciente</th>
 
                       <th>Administracion</th>
                     </tr>
                   </thead>
                   <tbody>
-                     En esta linea declaro un Iterator que recorre la lista libros pero solo si el atributo alta es TRUE 
-                    <tr th:each="p,iterator : ${libros}" th:if="${p.alta} == TRUE">
-                      <td th:text="${iterator.index+1}">1</td>
-                      <td th:text="${p.titulo}">14/02/2021</td>
-                      <td th:text="${p.autor} == null ? 'sin registro' : ${p.autor.nombre} ">09:00</td>
-                      <td th:text="${p.editorial} == null ? 'sin registro' : ${p.editorial.nombre} ">Doctor Ali</td>
+
+                    <tr th:each="turno : ${turnos}" >
+                      <td th:text="${turno.dia}" th:if="${turno.alta}"></td>
+                      <td th:text="${turno.hora}" th:if="${turno.alta}"></td>
+                      <td th:text="${turno.paciente.nombre}" th:if="${turno.alta}"></td>
 
                       <td>
 
-                        <a class="mx-2" th:href="@{/libros/registroLibro}+'?id='+${p.id}"><i class="fa fa-edit"></i></a>
-                        <a class="mx-2" th:href="@{/libros/borrar}+'?id='+${p.id}"><i class="fa fa-trash-alt"></i></a>
+                        <a class="mx-2" th:href="@{/admin/mod-turno/__${id}__}" th:if="${turno.alta}" class="btn btn-outline-warning">Modificar</a>
+                        <a class="mx-2" th:href="@{/admin/modificar-alta-turno/__${id}__}" th:if="${turno.alta}" class="btn btn-outline-danger">Baja</a>
+
                       </td>
                     </tr>
-                  </tbody>
-                  <p th:if="${libros.isEmpty}">No ha solicitado ningun turno </p>
-                </table>-->
+                  
+                  <p th:if="${turnos.isEmpty}">No tiene turnos agendados</p> 
+                </table> -->
 
-<!--                <a href="#about" class="btn-get-started scrollto"<span class="d-none d-md-inline">Solicitar</span> turnos</a>
--->              </div>
+
+              </tbody>
+               <a href="#about" class="btn-get-started scrollto"<span class="d-none d-md-inline">Solicitar</span> turnos</a>
+              </div>
             </div>
                 </div>
 
@@ -185,6 +189,9 @@ and open the template in the editor.
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>
 
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
         
     </body>
 </html>

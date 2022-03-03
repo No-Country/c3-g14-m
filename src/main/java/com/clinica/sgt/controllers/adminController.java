@@ -5,12 +5,15 @@ import java.time.LocalTime;
 import java.util.List;
 
 import com.clinica.sgt.entidades.Genero;
+import com.clinica.sgt.entidades.Personal;
 import com.clinica.sgt.entidades.Turno;
 import com.clinica.sgt.entidades.UserType;
 import com.clinica.sgt.servicios.PersonalServicio;
 import com.clinica.sgt.servicios.TurnoServicio;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -55,16 +58,25 @@ public class adminController {
 	@GetMapping("/inicio")
 	public String inicio(ModelMap model) {
 
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UserDetails userDetails = null;
+		if (principal instanceof UserDetails) {
+  			userDetails = (UserDetails) principal;
+		}
+
+		 Personal p1 = personalServicio.buscarPersonalPorUsername(userDetails.getUsername());
+		 List<Turno> turnos = turnoServicio.buscarTurnosProfesional(p1.getDni());
+		 model.put("turnos", turnos);
 		return "inicioAdmin.html";
 
 	}
 
-	@GetMapping("/turnos/{dni}") 
-	public String listarTurnos(ModelMap modelo, @PathVariable String dni){
-		List<Turno> turnos = turnoServicio.buscarTurnosProfesional(dni);
-		modelo.put("turnos", turnos);
-		return "turnos.html";
-	}
+	// @GetMapping("/turnos/{dni}") 
+	// public String listarTurnos(ModelMap modelo, @PathVariable String dni){
+	// 	List<Turno> turnos = turnoServicio.buscarTurnosProfesional(dni);
+	// 	modelo.put("turnos", turnos);
+	// 	return "turnos.html";
+	// }
 
 	@GetMapping("/form-turno") //Formulario para nuevo turno
 	public String formTurno(){
@@ -102,7 +114,7 @@ public class adminController {
 		}
 	}
 
-	@PostMapping("/modificar-alta-turno")
+	@PostMapping("/modificar-alta-turno/{id}")
 	public String modificarAltaTurno(ModelMap modelo,@PathVariable String id, @RequestParam boolean alta ){
 		try{
 			turnoServicio.modificarAlta(id, alta);
