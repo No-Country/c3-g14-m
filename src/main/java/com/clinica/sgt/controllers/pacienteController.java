@@ -1,4 +1,3 @@
-
 package com.clinica.sgt.controllers;
 
 import java.time.LocalDate;
@@ -30,68 +29,72 @@ public class pacienteController {
     @Autowired
     TurnoServicio turnoServicio;
 
-	@Autowired
-	BCryptPasswordEncoder bCrypt;
+    @Autowired
+    BCryptPasswordEncoder bCrypt;
 
-	@Autowired
-	PacienteServicio pacienteServicio;
+    @Autowired
+    PacienteServicio pacienteServicio;
 
-    @GetMapping("/turnos/{dni}") 
-	public String listarTurnos(ModelMap modelo, @PathVariable String dni){
-		List<Turno> turnos = turnoServicio.buscarTurnosPaciente(dni);
-		modelo.put("turnos", turnos);
-		return "turnos.html";
-	}
+    @GetMapping("/inicio")
+    public String inicio(ModelMap model) {
 
-	@GetMapping("/form-turno") //Formulario para nuevo turno
-	public String formTurno(){
-		return "form-turno.html";
-	}
-	
-	@PostMapping("/agregar-turno/{dni}") //El dni del paciente se ingresa sin pedirselo, se utiliza sus datos de registro
-	public String agregarTurno(ModelMap modelo, @RequestParam LocalDate dia, @RequestParam LocalTime hora, @PathVariable String dni, @RequestParam Personal profesional) { 
+        return "inicioPaciente.html";
+    }
+
+    @GetMapping("/turnos/{dni}")
+    public String listarTurnos(ModelMap modelo, @PathVariable String dni) {
+        List<Turno> turnos = turnoServicio.buscarTurnosPaciente(dni);
+        modelo.put("turnos", turnos);
+        return "turnos.html";
+    }
+
+    @GetMapping("/form-turno") //Formulario para nuevo turno
+    public String formTurno() {
+        return "form-turno.html";
+    }
+
+    @PostMapping("/agregar-turno/{dni}") //El dni del paciente se ingresa sin pedirselo, se utiliza sus datos de registro
+    public String agregarTurno(ModelMap modelo, @RequestParam LocalDate dia, @RequestParam LocalTime hora, @PathVariable String dni, @RequestParam Personal profesional) {
         //Revisar si el parametro ingresado para profesional es entidad o String
-		try{
-			turnoServicio.agregarTurno(dia, hora, dni, profesional.getDni());
-			return "exito.html";
-		}catch(Exception e){
-			e.getMessage();
-            modelo.put("error", e.getMessage());
-			return "error.html";
-		}
-	}
-
-    @PostMapping("/alta-turno/{id}") //id del turno, funcion para dar de baja o alta
-    public String altaTurno(ModelMap modelo, @PathVariable String id, @RequestParam boolean alta){
-        try{
-            turnoServicio.modificarAlta(id, alta);
+        try {
+            turnoServicio.agregarTurno(dia, hora, dni, profesional.getDni());
             return "exito.html";
-        }catch(Exception e){
+        } catch (Exception e) {
             e.getMessage();
             modelo.put("error", e.getMessage());
             return "error.html";
         }
     }
 
-	@PostMapping("/registro") 	
-	public String registro(@RequestParam String email, @RequestParam String nombreCompleto, @RequestParam String dni, 
-			@RequestParam String telefono,
-			@RequestParam Genero genero, ModelMap modelo) {
+    @PostMapping("/alta-turno/{id}") //id del turno, funcion para dar de baja o alta
+    public String altaTurno(ModelMap modelo, @PathVariable String id, @RequestParam boolean alta) {
+        try {
+            turnoServicio.modificarAlta(id, alta);
+            return "exito.html";
+        } catch (Exception e) {
+            e.getMessage();
+            modelo.put("error", e.getMessage());
+            return "error.html";
+        }
+    }
 
-		try {
+    @PostMapping("/registro")
+    public String registro(@RequestParam String email, @RequestParam String nombreCompleto, @RequestParam String dni,
+            @RequestParam String telefono,
+            @RequestParam Genero genero, ModelMap modelo) {
 
-			pacienteServicio.crearPaciente("", dni, email, bCrypt.encode(dni), nombreCompleto, telefono, genero, true, UserType.PACIENTE);;
-			return "exito.html";
+        try {
 
-		} catch (Exception e) {
+            pacienteServicio.crearPaciente("", dni, email, bCrypt.encode(dni), nombreCompleto, telefono, genero, true, UserType.PACIENTE);
+            return "exito.html";
 
-			e.getMessage();
-           modelo.put("error", e.getMessage());
+        } catch (Exception e) {
 
-			return "error.html";
-		}
+            e.getMessage();
+            modelo.put("error", e.getMessage());
 
-	}
+            return "error.html";
+        }
+
+    }
 }
-
-

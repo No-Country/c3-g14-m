@@ -19,100 +19,129 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
 @Controller
 @RequestMapping("/admin")
 public class adminController {
 
+    @Autowired
+    TurnoServicio turnoServicio;
 
-	@Autowired
-	TurnoServicio turnoServicio;
+    @Autowired
+    PersonalServicio personalServicio;
 
-	@Autowired
-	PersonalServicio personalServicio;
+    @GetMapping("/inicio")
+    public String inicio(ModelMap model) {
 
+        return "inicioAdmin.html";
+    }
 
-	@PostMapping("/registro") 	
-	public String registro(@RequestParam LocalTime inicioLaboral, @RequestParam LocalTime finLaboral, @RequestParam String email, @RequestParam String nombreCompleto,
-			@RequestParam String password, @RequestParam String dni, @RequestParam String telefono,
-			@RequestParam Genero genero, @RequestParam UserType userType, ModelMap modelo) {
+    @PostMapping("/registro")
+    public String registro(@RequestParam LocalTime inicioLaboral,
+            @RequestParam LocalTime finLaboral,
+            @RequestParam String email,
+            @RequestParam String nombreCompleto,
+            @RequestParam String password,
+            @RequestParam String dni,
+            @RequestParam String telefono,
+            @RequestParam Genero genero,
+            @RequestParam UserType userType, ModelMap modelo
+    ) {
 
-		try {
+        try {
 
-			personalServicio.crearPersonal(inicioLaboral, finLaboral, dni, email, password, nombreCompleto, telefono, genero, true, userType);
-			return "exito.html";
+            personalServicio.crearPersonal(inicioLaboral, finLaboral, dni, email, password, nombreCompleto, telefono, genero, true, userType);
+            return "exito.html";
 
-		} catch (Exception e) {
+        } catch (Exception e) {
 
-			e.getMessage();
-           modelo.put("error", e.getMessage());
+            e.getMessage();
+            modelo.put("error", e.getMessage());
 
-			return "error.html";
-		}
+            return "error.html";
+        }
 
-	}
+    }
 
-	@GetMapping("/inicio")
-	public String inicio(ModelMap model) {
+//    @GetMapping("/inicio")
+//    public String inicio(ModelMap model
+//    ) {
+//
+//        return "inicioAdmin.html";
+//
+//    }
 
-		return "inicioAdmin.html";
+    @GetMapping("/turnos/{dni}")
+    public String listarTurnos(ModelMap modelo,
+            @PathVariable String dni
+    ) {
+        List<Turno> turnos = turnoServicio.buscarTurnosProfesional(dni);
+        modelo.put("turnos", turnos);
+        return "turnos.html";
+    }
 
-	}
+    @GetMapping("/form-turno") //Formulario para nuevo turno
+    public String formTurno() {
+        return "form-turno.html";
+    }
 
-	@GetMapping("/turnos/{dni}") 
-	public String listarTurnos(ModelMap modelo, @PathVariable String dni){
-		List<Turno> turnos = turnoServicio.buscarTurnosProfesional(dni);
-		modelo.put("turnos", turnos);
-		return "turnos.html";
-	}
+    @PostMapping("/agregar-turno")
+    public String agregarTurno(ModelMap modelo,
+            @RequestParam LocalDate dia,
+            @RequestParam LocalTime hora,
+            @RequestParam String dniPaciente,
+            @RequestParam String dniProfesional
+    ) {
+        try {
+            turnoServicio.agregarTurno(dia, hora, dniPaciente, dniProfesional);
+            return "exito.html";
+        } catch (Exception e) {
+            e.getMessage();
+            modelo.put("error", e.getMessage());
+            return "error.html";
+        }
+    }
 
-	@GetMapping("/form-turno") //Formulario para nuevo turno
-	public String formTurno(){
-		return "form-turno.html";
-	}
-	
-	@PostMapping("/agregar-turno")
-	public String agregarTurno(ModelMap modelo, @RequestParam LocalDate dia, @RequestParam LocalTime hora, @RequestParam String dniPaciente, @RequestParam String dniProfesional) {
-		try{
-			turnoServicio.agregarTurno(dia, hora, dniPaciente, dniProfesional);
-			return "exito.html";
-		}catch(Exception e){
-			e.getMessage();
-           modelo.put("error", e.getMessage());
-			return "error.html";
-		}
-	}
+    //Modificar turno
+    @GetMapping("/mod-turno/{id}") //id del turno
+    public String modTurno(ModelMap modelo,
+            @PathVariable String id
+    ) {
+        modelo.put("turno", turnoServicio.buscarPorID(id));
+        return "form-turno.html";
+    }
 
-	//Modificar turno
-	@GetMapping("/mod-turno/{id}") //id del turno
-	public String modTurno(ModelMap modelo, @PathVariable String id){
-		modelo.put("turno", turnoServicio.buscarPorID(id));
-		return "form-turno.html";
-	}
+    @PostMapping("/modificar-turno")
+    public String modificarTurno(ModelMap modelo,
+            @PathVariable String id,
+            @RequestParam LocalDate dia,
+            @RequestParam LocalTime hora,
+            @RequestParam String dniPaciente,
+            @RequestParam String dniProfesional,
+            @RequestParam boolean alta
+    ) {
+        try {
+            turnoServicio.modificarTurno(dia, hora, dniPaciente, dniProfesional, alta, id);
+            return "exito.html";
+        } catch (Exception e) {
+            e.getMessage();
+            modelo.put("error", e.getMessage());
+            return "error.html";
+        }
+    }
 
-	@PostMapping("/modificar-turno")
-	public String modificarTurno(ModelMap modelo,@PathVariable String id, @RequestParam LocalDate dia, @RequestParam LocalTime hora, @RequestParam String dniPaciente, @RequestParam String dniProfesional, @RequestParam boolean alta ){
-		try{
-			turnoServicio.modificarTurno(dia, hora, dniPaciente, dniProfesional, alta, id);
-			return "exito.html";
-		}catch(Exception e){
-			e.getMessage();
-           modelo.put("error", e.getMessage());
-			return "error.html";
-		}
-	}
+    @PostMapping("/modificar-alta-turno")
+    public String modificarAltaTurno(ModelMap modelo,
+            @PathVariable String id,
+            @RequestParam boolean alta
+    ) {
+        try {
+            turnoServicio.modificarAlta(id, alta);
+            return "exito.html";
+        } catch (Exception e) {
+            e.getMessage();
+            modelo.put("error", e.getMessage());
+            return "error.html";
+        }
+    }
 
-	@PostMapping("/modificar-alta-turno")
-	public String modificarAltaTurno(ModelMap modelo,@PathVariable String id, @RequestParam boolean alta ){
-		try{
-			turnoServicio.modificarAlta(id, alta);
-			return "exito.html";
-		}catch(Exception e){
-			e.getMessage();
-           modelo.put("error", e.getMessage());
-			return "error.html";
-		}
-	}
-	
 }
-
