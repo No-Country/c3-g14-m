@@ -3,6 +3,7 @@ package com.clinica.sgt.controllers;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.clinica.sgt.entidades.Genero;
@@ -47,11 +48,11 @@ public class pacienteController {
 		if (principal instanceof UserDetails) {
   			userDetails = (UserDetails) principal;
 		}
-		 Paciente p1 = pacienteServicio.(userDetails.getUsername());
+		 Paciente p1 = pacienteServicio.buscarPacientePorUsername(userDetails.getUsername());
 		 List<Turno> turnos = new ArrayList<>();
-		 turnos = turnoServicio.buscarTurnosProfesional(p1.getDni());
+		 turnos = turnoServicio.buscarTurnosPaciente(p1.getDni());
 		 model.put("turnos", turnos);
-		return "inicioAdmin.html";
+		return "inicioPaciente.html";
 
 	}
 
