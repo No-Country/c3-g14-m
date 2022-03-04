@@ -48,10 +48,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         // Restricciones al acceso dependiendo el rol del usuario
         http
-
-//                .authorizeRequests()
-//                .antMatchers("/css/*", "/js/*", "/img/*",
-//                        "/**").permitAll()
+            .authorizeRequests()
+            .antMatchers("/css/*", "/js/*", "/img/*", "/**").permitAll();
 //                .and().
 //                formLogin()
 //                .loginPage("/login")
@@ -80,7 +78,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 //                .csrf().disable();
 //
 //        http.logout().logoutUrl("/logout");
-        .authorizeRequests()
+        http.authorizeRequests()
         .antMatchers("/admin/**").hasRole("ADMIN")
         .antMatchers("/paciente/**").hasRole("PACIENTE")
         .antMatchers("/profesional/**").hasRole("PROFESIONAL")
