@@ -6,6 +6,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 import com.clinica.sgt.entidades.Genero;
+import com.clinica.sgt.entidades.Paciente;
 import com.clinica.sgt.entidades.Personal;
 import com.clinica.sgt.entidades.Turno;
 import com.clinica.sgt.entidades.UserType;
@@ -14,6 +15,8 @@ import com.clinica.sgt.servicios.TurnoServicio;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -35,6 +38,22 @@ public class pacienteController {
 
 	@Autowired
 	PacienteServicio pacienteServicio;
+
+	@GetMapping("/inicio")
+	public String inicio(ModelMap model) {
+
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UserDetails userDetails = null;
+		if (principal instanceof UserDetails) {
+  			userDetails = (UserDetails) principal;
+		}
+		 Paciente p1 = pacienteServicio.(userDetails.getUsername());
+		 List<Turno> turnos = new ArrayList<>();
+		 turnos = turnoServicio.buscarTurnosProfesional(p1.getDni());
+		 model.put("turnos", turnos);
+		return "inicioAdmin.html";
+
+	}
 
     @GetMapping("/turnos/{dni}") 
 	public String listarTurnos(ModelMap modelo, @PathVariable String dni){
