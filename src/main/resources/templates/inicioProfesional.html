@@ -76,7 +76,7 @@ and open the template in the editor.
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav>  
 
-      <a th:href="@{/logout}" class="appointment-btn scrollto">Cerrar sesion</span> </a>
+      <a th:href="@{/logout}" class="appointment-btn scrollto">Cerrar sesion</a>
 
     </div>
  
@@ -108,12 +108,6 @@ and open the template in the editor.
                       <td th:text="${turno.hora}" th:if="${turno.alta}"></td>
                       <td th:text="${turno.paciente.nombre}" th:if="${turno.alta}"><a th:href="@{/profesional/info-paciente/__${dni}__}" class="btn btn-outline-info" role="button">Detalles</a></td>
 
-                      <td>
-
-                        <a class="mx-2" th:href="@{/admin/mod-turno/__${id}__}" th:if="${turno.alta}" class="btn btn-outline-warning" role="button">Modificar</a>
-                        <a class="mx-2" th:href="@{/admin/modificar-alta-turno/__${id}__}" th:if="${turno.alta}" class="btn btn-outline-danger" role="button">Baja</a>
-
-                      </td>
                     </tr>
                   
                   <!-- <p th:if="${turnos.isEmpty}">No tiene turnos agendados</p>  -->
