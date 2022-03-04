@@ -109,6 +109,7 @@ public class pacienteController {
         } catch (Exception e) {
 
             e.getMessage();
+            e.printStackTrace();
             modelo.put("error", e.getMessage());
 
             return "error.html";

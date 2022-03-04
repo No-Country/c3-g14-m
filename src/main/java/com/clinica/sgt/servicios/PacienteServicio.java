@@ -23,7 +23,7 @@ public class PacienteServicio{
         Paciente p = new Paciente();
         p = null;
         p = pacienteRepositorio.buscarPorDNI(dni);
-        if(p.getDni() == dni){
+        if(p != null && p.getDni() == dni){
             throw new Exception("El DNI ya existe en la base de datos");
         }else if(dni.isEmpty() || dni == null){
             throw new Exception("Debe ingresar datos validos para el DNI");
@@ -34,7 +34,7 @@ public class PacienteServicio{
         }
         
         p = pacienteRepositorio.findByUsername(nombre); //el username es igual al mail
-        if (p.getMail() == mail) {
+        if (p != null && p.getMail() == mail) {
             throw new Exception("Ya existe un usuario con ese mail");
         }else if(mail.isEmpty() || mail == null){
             throw new Exception("Debe ingresar datos validos para el mail");
