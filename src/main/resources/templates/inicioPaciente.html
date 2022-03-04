@@ -55,8 +55,8 @@ and open the template in the editor.
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Inicio</a></li>
-          <li><a class="nav-link scrollto" href="#about">Turnos</a></li>
+          <li><a class="nav-link scrollto active" href="/paciente/inicio">Inicio</a></li>
+          <li><a class="nav-link scrollto" href="/paciente/form-turno">Turnos</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contacto</a></li>
 
           <li class="dropdown"><a href="#"><span>Perfil</span> <i class="bi bi-chevron-down"></i></a>
@@ -78,43 +78,7 @@ and open the template in the editor.
   
   <main id="main">
 
-      <section id="hero">
-      <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
-
-            <div class="container">
-              <h2>Listado de turnos</h2>
-              <div class="card-body">
-
-                <table class="table table-dark table-striped">
-                  <thead>
-                    <tr>
-                      <th>Fecha</th>
-                      <th>Hora</th>
-                      <th>Doctor</th>
-                      <th>Administracion</th>
-                    </tr>
-                  </thead>
-
-                  <tbody> 
-                      <tr th:each="turno : ${turnos}">
-                      <td th:text="${turno.dia}" th:if="${turno.alta}"></td>
-                      <td th:text="${turno.hora}" th:if="${turno.alta}"></td>
-                      <td th:text="${turno.profesional.nombre}" th:if="${turno.alta}"></td>
-
-                      <td>
-                        
-                        <a class="mx-2" th:href="@{/paciente/alta-turno/__${turno.id}__}"></a>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-
-                <a href="#about" class="btn-get-started scrollto">Solicitar turnos</a>
-              </div>
-            </div>
-        </div>
-</section> 
-
+     
 
        </main>
 
