@@ -48,22 +48,23 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         // Restricciones al acceso dependiendo el rol del usuario
         http
-                .authorizeRequests()
-                .antMatchers("/css/*", "/js/*", "/img/*",
-                        "/**").permitAll()
-                .and().
-                formLogin()
-                .loginPage("/login")
-                .loginProcessingUrl("/logincheck")
-                .usernameParameter("username")
-                .passwordParameter("password")
-                .defaultSuccessUrl("/inicio")
-                .permitAll()
-                .and().logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/login?logout")             
-                .permitAll().
-                and().csrf().disable();
+
+//                .authorizeRequests()
+//                .antMatchers("/css/*", "/js/*", "/img/*",
+//                        "/**").permitAll()
+//                .and().
+//                formLogin()
+//                .loginPage("/login")
+//                .loginProcessingUrl("/logincheck")
+//                .usernameParameter("username")
+//                .passwordParameter("password")
+//                .defaultSuccessUrl("/inicio")
+//                .permitAll()
+//                .and().logout()
+//                .logoutUrl("/logout")
+//                .logoutSuccessUrl("/login?logout")             
+//                .permitAll().
+//                and().csrf().disable();
 //                .authorizeRequests()
 //                .antMatchers("/admin/**").hasAnyRole("ADMIN")
 //                .antMatchers("/paciente/**").hasAnyRole("PACIENTE")
@@ -79,6 +80,27 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 //                .csrf().disable();
 //
 //        http.logout().logoutUrl("/logout");
+        .authorizeRequests()
+        .antMatchers("/admin/**").hasRole("ADMIN")
+        .antMatchers("/paciente/**").hasRole("PACIENTE")
+        .antMatchers("/profesional/**").hasRole("PROFESIONAL")
+        .antMatchers("/logout").hasAnyRole("ADMIN", "PROFESIONAL", "PACIENTE")
+        .antMatchers("/paciente/registro").permitAll()
+        .antMatchers("/index").permitAll()
+        .antMatchers("/login").permitAll(); //REVISAR SI NO FUNCIONA hasRole probar con hasAuthority
+        //LUEGO AGREGAR LOS PROXIMOS ENDPOINTS
+
+        http.formLogin()
+        .usernameParameter("email")
+        .passwordParameter("password")
+        .loginPage("/login")
+        .defaultSuccessUrl("/admin/inicio") //Luego cambiarlo, revisar rol y enviar a inicio correspondiente
+        .and()
+        .csrf().disable();
+
+        http.logout().logoutUrl("/logout").logoutSuccessUrl("/");
+        
+
 
     }
 

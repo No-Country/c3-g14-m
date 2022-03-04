@@ -66,6 +66,7 @@ public class pacienteController {
         }
     }
 
+
     @PostMapping("/alta-turno/{id}") //id del turno, funcion para dar de baja o alta
     public String altaTurno(ModelMap modelo, @PathVariable String id, @RequestParam boolean alta) {
         try {
@@ -82,6 +83,7 @@ public class pacienteController {
     public String registro(@RequestParam String email, @RequestParam String nombreCompleto, @RequestParam String dni,
             @RequestParam String telefono,
             @RequestParam Genero genero, ModelMap modelo) {
+
 
         try {
 

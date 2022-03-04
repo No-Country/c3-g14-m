@@ -6,7 +6,7 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>Inicio Admin</title>
+        <title>Inicio Paciente</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
@@ -64,8 +64,6 @@ and open the template in the editor.
               <li><a href="#">Editar perfil</a></li>
               <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
-
-
             </ul>
           </li>
 
@@ -73,23 +71,16 @@ and open the template in the editor.
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav>  
 
-      <a href="login.html" class="appointment-btn scrollto">Cerrar <span class="d-none d-md-inline"> sesion</span> </a>
+      <a th href="@{/logout}" class="appointment-btn scrollto">Cerrar sesion</span></a>
 
     </div>
   </header> 
   
-
   <main id="main">
 
-
-
-
-<!--    <section id="hero">
+      <section id="hero">
       <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
 
-
-
-        <
             <div class="container">
               <h2>Listado de turnos</h2>
               <div class="card-body">
@@ -97,42 +88,36 @@ and open the template in the editor.
                 <table class="table table-dark table-striped">
                   <thead>
                     <tr>
-                      <th>Nм/th>
                       <th>Fecha</th>
                       <th>Hora</th>
                       <th>Doctor</th>
-
                       <th>Administracion</th>
                     </tr>
                   </thead>
-                  <tbody>
-                     En esta linea declaro un Iterator que recorre la lista libros pero solo si el atributo alta es TRUE 
-                    <tr th:each="p,iterator : ${libros}" th:if="${p.alta} == TRUE">
-                      <td th:text="${iterator.index+1}">1</td>
-                      <td th:text="${p.titulo}">14/02/2021</td>
-                      <td th:text="${p.autor} == null ? 'sin registro' : ${p.autor.nombre} ">09:00</td>
-                      <td th:text="${p.editorial} == null ? 'sin registro' : ${p.editorial.nombre} ">Doctor Ali</td>
+
+                  <tbody> 
+                      <tr th:each="turno : ${turnos}">
+                      <td th:text="${turno.dia}" th:if="${turno.alta}"></td>
+                      <td th:text="${turno.hora}" == null ? 'sin registro' : th:if="${turno.alta}"></td>
+                      <td th:text="${turno.profesional.nombre}" == null ? 'sin registro' : th:if="${turno.alta}"></td>
 
                       <td>
-
-                        <a class="mx-2" th:href="@{/libros/registroLibro}+'?id='+${p.id}"><i class="fa fa-edit"></i></a>
-                        <a class="mx-2" th:href="@{/libros/borrar}+'?id='+${p.id}"><i class="fa fa-trash-alt"></i></a>
+                        <a class="mx-2" th:href="@{/turnos/registroTurnos}+'?id='+${p.id}"><i class="fa fa-edit"></i></a>
+                        <a class="mx-2" th:href="@{/turnos/borrar}+'?id='+${p.id}"><i class="fa fa-trash-alt"></i></a>
                       </td>
                     </tr>
                   </tbody>
-                  <p th:if="${libros.isEmpty}">No ha solicitado ningun turno </p>
+                        <p th:if="${libros.isEmpty}">No ha solicitado ningun turno </p>
                 </table>
 
                 <a href="#about" class="btn-get-started scrollto"<span class="d-none d-md-inline">Solicitar</span> turnos</a>
               </div>
             </div>
-
-
-       </div>
         </div>
-    </section> -->
+</section> 
 
-  </main><!-- End #main -->
+
+       </main>
 
   <!-- ======= Footer ======= -->
   <footer id="footer">
