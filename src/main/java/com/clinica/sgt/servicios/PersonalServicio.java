@@ -7,6 +7,7 @@ import com.clinica.sgt.repositorios.PersonalRepositorio;
 import java.time.LocalTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,10 +28,12 @@ public class PersonalServicio{
         personal.setFinLaboral(finLaboral);
         personal.setDni(dni);
         personal.setMail(mail);
-        personal.setPassword(password);
+        String encriptar = new BCryptPasswordEncoder().encode(password);
+        personal.setPassword(encriptar);
         personal.setNombre(nombre);
         personal.setTelefono(telefono);
         personal.setGenero(genero);
+        personal.setUserType(userType);
         
         personalRepositorio.save(personal);
     }
@@ -46,7 +49,8 @@ public class PersonalServicio{
         personal.setNombre(nombre);
         personal.setDni(dni);
         personal.setMail(mail);
-        personal.setPassword(password);
+        String encriptar = new BCryptPasswordEncoder().encode(password);
+        personal.setPassword(encriptar);
         personal.setTelefono(telefono);
         personal.setGenero(genero);
         personal.setAlta(true);

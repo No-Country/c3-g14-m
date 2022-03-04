@@ -6,6 +6,7 @@ import com.clinica.sgt.entidades.UserType;
 import com.clinica.sgt.repositorios.PacienteRepositorio;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -51,7 +52,8 @@ public class PacienteServicio{
         paciente.setHistoriaClinica(historiaClinica);
         paciente.setDni(dni);
         paciente.setMail(mail);
-        paciente.setPassword(password);
+        String encriptar = new BCryptPasswordEncoder().encode(password);
+        paciente.setPassword(encriptar);
         paciente.setNombre(nombre);
         paciente.setTelefono(telefono);
         paciente.setGenero(genero);
@@ -64,16 +66,17 @@ public class PacienteServicio{
     //******************UPDATE***********************
     @Transactional
     public void modificarPaciente(String id,String dni, String mail, String password,
-            String nombre, String telefono, Genero genero, Boolean alta) {
+            String nombre, String telefono, Genero genero, Boolean alta, UserType userType) {
         Paciente paciente = pacienteRepositorio.buscarPorID(id);
         
         paciente.setNombre(nombre);
         paciente.setDni(dni);
         paciente.setMail(mail);
-        paciente.setPassword(password);
+        String encriptar = new BCryptPasswordEncoder().encode(password);
+        paciente.setPassword(encriptar);
         paciente.setTelefono(telefono);
         paciente.setGenero(genero);
-        paciente.setUserType(UserType.PACIENTE);
+        paciente.setUserType(userType);
         paciente.setAlta(true);
         
         pacienteRepositorio.save(paciente);
