@@ -17,16 +17,36 @@ public class PacienteServicio{
     PacienteRepositorio pacienteRepositorio;
 
     public void validar( String dni, String mail,
-    String password, String nombre, String telefono, Genero genero,
-    Boolean alta, UserType userType){
+    String password, String nombre) throws Exception{
         
+        Paciente p = new Paciente();
+        p = pacienteRepositorio.buscarPorDNI(dni);
+        if(p !=  null){
+            throw new Exception("El DNI ya existe en la base de datos");
+        }else if(dni.isEmpty() || dni == null){
+            throw new Exception("Debe ingresar datos validos para el DNI");
+        }
+
+        if(password.isEmpty() || password == null){
+            throw new Exception("Debe ingresar datos validos para la contrasena, no puede estar vacia");
+        }
+        
+        p = pacienteRepositorio.findByUsername(nombre); //el username es igual al mail
+        if (p != null) {
+            throw new Exception("Ya existe un usuario con ese mail");
+        }else if(mail.isEmpty() || mail == null){
+            throw new Exception("Debe ingresar datos validos para el mail");
+        }
+   
     }
     
     //****************************CREACION******************
     @Transactional
     public void crearPaciente(String historiaClinica, String dni, String mail,
             String password, String nombre, String telefono, Genero genero,
-            Boolean alta, UserType userType) {
+            Boolean alta, UserType userType) throws Exception {
+
+        validar(dni, mail, password, nombre);
 
         Paciente paciente = new Paciente();
         paciente.setHistoriaClinica(historiaClinica);
@@ -79,6 +99,14 @@ public class PacienteServicio{
        }
        return null;
     }
+
+    public Paciente buscarPacientePorUsername(String username){
+        Paciente existePaciente = pacienteRepositorio.findByUsername(username);
+        if(existePaciente !=null){
+            return existePaciente;
+        }
+        return null;
+     }
 
     //***********************BAJA*****************
     @Transactional

@@ -71,7 +71,7 @@ and open the template in the editor.
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav>  
 
-      <a th href="@{/logout}" class="appointment-btn scrollto">Cerrar sesion</span></a>
+      <a th th:href="@{/logout}" class="appointment-btn scrollto">Cerrar sesion</a>
 
     </div>
   </header> 
@@ -98,19 +98,18 @@ and open the template in the editor.
                   <tbody> 
                       <tr th:each="turno : ${turnos}">
                       <td th:text="${turno.dia}" th:if="${turno.alta}"></td>
-                      <td th:text="${turno.hora}" == null ? 'sin registro' : th:if="${turno.alta}"></td>
-                      <td th:text="${turno.profesional.nombre}" == null ? 'sin registro' : th:if="${turno.alta}"></td>
+                      <td th:text="${turno.hora}" th:if="${turno.alta}"></td>
+                      <td th:text="${turno.profesional.nombre}" th:if="${turno.alta}"></td>
 
                       <td>
-                        <a class="mx-2" th:href="@{/turnos/registroTurnos}+'?id='+${p.id}"><i class="fa fa-edit"></i></a>
-                        <a class="mx-2" th:href="@{/turnos/borrar}+'?id='+${p.id}"><i class="fa fa-trash-alt"></i></a>
+                        
+                        <a class="mx-2" th:href="@{/paciente/alta-turno/__${turno.id}__}"></a>
                       </td>
                     </tr>
                   </tbody>
-                        <p th:if="${libros.isEmpty}">No ha solicitado ningun turno </p>
                 </table>
 
-                <a href="#about" class="btn-get-started scrollto"<span class="d-none d-md-inline">Solicitar</span> turnos</a>
+                <a href="#about" class="btn-get-started scrollto">Solicitar turnos</a>
               </div>
             </div>
         </div>
