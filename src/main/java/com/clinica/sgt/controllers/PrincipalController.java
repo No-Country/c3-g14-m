@@ -14,21 +14,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class PrincipalController {
-    @RequestMapping({"/","login"})
+    @RequestMapping("/")
 	  public String inicio() {
-	    return "redirect: /";
+	    return "redirect:/";
 	  }
 
 	 @RequestMapping("/admin")
-	  public String privado() {
-	    return "redirect: /admin/inicio";
+	  public String admin() {
+	    return "redirect:/admin/inicio";
 	  }
-	 @RequestMapping("/paciente")
-	  public String loginpub() {
-	    return "redirect: /paciente/inicio";
+	 @RequestMapping({"/paciente","login"})
+	  public String paciente() {
+	    return "redirect:/paciente/inicio";
 	  }
 	 @RequestMapping("/profesional")
-	  public String admin() {
+	  public String profesional() {
 	    return "redirect: /profesional/inicio";
 	  }
 //	 @RequestMapping("/login")
