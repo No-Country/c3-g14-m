@@ -14,7 +14,6 @@ import com.clinica.sgt.servicios.PacienteServicio;
 import com.clinica.sgt.servicios.TurnoServicio;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.Nullable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
