@@ -79,6 +79,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 //
 //        http.logout().logoutUrl("/logout");
         http.authorizeRequests()
+        
         .antMatchers("/admin/**").hasRole("ADMIN")
         .antMatchers("/paciente/**").hasRole("PACIENTE")
         .antMatchers("/profesional/**").hasRole("PROFESIONAL")
