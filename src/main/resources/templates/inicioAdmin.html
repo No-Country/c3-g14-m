@@ -6,7 +6,7 @@ and open the template in the editor.
 -->
 <html lang="es-AR" xmlns:th="https://www.thymeleaf.org">
     <head>
-        <title>Inicio Profesional</title>
+        <title>Inicio Admin</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Inicio</title>
@@ -21,7 +21,7 @@ and open the template in the editor.
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
         <!-- animaciones CSS  -->
-        <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+        <link href="../assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
         <link href="../assets/vendor/animate.css/animate.min.css" rel="stylesheet">
         <link href="../assets/vendor/aos/aos.css" rel="stylesheet">
         <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -125,7 +125,7 @@ and open the template in the editor.
                                                             <div  class="buscar-top">
                                                                 <div class="col-lg-4 col-md-4 buscar-newsletter">
 
-                                                                    <form action="" method="post">
+                                                                    <form th:action="@{/admin/turnos/__${dni}__}" method="get">
                                                                         <input type="number" name="dni" placeholder="xxxxxxxx"><input type="submit" value="Buscar"> 
                                                                     </form>
                                                                     <p>Escriba solo números sin espacios y sin puntos.
@@ -186,7 +186,26 @@ and open the template in the editor.
 
                                                     <div class="tab-pane" id="tab-3">
                                                         <h3>Lista de profesionales</h3>
-                                                        
+                                                        <table class="table table-dark table-striped">
+                                                            <thead>
+                                                              <tr>
+                                                                <th>Nombre y Apellido</th>
+                                                                <th>Inicio horario laboral</th>
+                                                                <th>Fin horario laboral</th>
+                                                              </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                          
+                                                              <tr th:each="profesional : ${profesionales}">
+                                                                <td th:text="${profesional.nombre}" ></td>
+                                                                <td th:text="${profesional.inicioLaboral}" ></td>
+                                                                <td th:text="${profesional.finLaboral}" ></td>
+                                                          
+                                                              </tr>
+                                                          
+                                                          
+                                                            </tbody>
+                                                          </table>
                                                     </div>
                                                     
                                                 </div>
