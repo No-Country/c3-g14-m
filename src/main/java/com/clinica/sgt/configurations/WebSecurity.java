@@ -49,7 +49,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         // Restricciones al acceso dependiendo el rol del usuario
         http
             .authorizeRequests()
-            .antMatchers("/css/*", "/js/*", "/img/*", "/**").permitAll();
+            .antMatchers("/css/**", "/js/**", "/img/**").permitAll();
 //                .and().
 //                formLogin()
 //                .loginPage("/login")
