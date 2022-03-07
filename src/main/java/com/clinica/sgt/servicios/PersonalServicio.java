@@ -5,6 +5,7 @@ import com.clinica.sgt.entidades.Personal;
 import com.clinica.sgt.entidades.UserType;
 import com.clinica.sgt.repositorios.PersonalRepositorio;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -31,6 +32,7 @@ public class PersonalServicio{
         String encriptar = new BCryptPasswordEncoder().encode(password);
         personal.setPassword(encriptar);
         personal.setNombre(nombre);
+        personal.setAlta(alta);
         personal.setTelefono(telefono);
         personal.setGenero(genero);
         personal.setUserType(userType);
@@ -83,6 +85,12 @@ public class PersonalServicio{
             return existePersonal;
         }
         return null;
+     }
+
+     public ArrayList<Personal> listarPersonal(){
+         ArrayList<Personal> listado = personalRepositorio.mostrarPersonalActivo();
+
+         return listado;
      }
 
     //***********************BAJA*****************

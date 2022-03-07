@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 import com.clinica.sgt.entidades.Genero;
+import com.clinica.sgt.entidades.Personal;
 import com.clinica.sgt.entidades.Turno;
 import com.clinica.sgt.entidades.UserType;
 import com.clinica.sgt.servicios.PersonalServicio;
@@ -62,6 +63,9 @@ public class adminController {
 	@GetMapping("/inicio")
 	public String inicio(ModelMap model) {
 
+		List<Personal> profesionales = personalServicio.listarPersonal();
+
+		model.put("profesionales", profesionales);
 		
 		return "inicioAdmin.html";
 
@@ -69,9 +73,14 @@ public class adminController {
 
 	@GetMapping("/turnos/{dni}") 
 	public String listarTurnos(ModelMap modelo, @PathVariable String dni){
-		List<Turno> turnos = turnoServicio.buscarTurnosProfesional(dni);
-		modelo.put("turnos", turnos);
-		return "turnos.html";
+		try {
+			List<Turno> turnos = turnoServicio.buscarTurnosProfesional(dni);
+			//modelo.put("turnos", turnos);
+			return "turnos.html";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "redirect:/admin/inicio";
+		}
 	}
 
 	@GetMapping("/form-turno") //Formulario para nuevo turno
