@@ -84,7 +84,11 @@ public class adminController {
 	}
 
 	@GetMapping("/form-turno") //Formulario para nuevo turno
-	public String formTurno(){
+	public String formTurno(ModelMap modelo){
+		List<Personal> profesionales = personalServicio.listarPersonal();
+
+		modelo.put("profesionales", profesionales);
+		
 		return "form-turno-admin.html";
 	}
 	
