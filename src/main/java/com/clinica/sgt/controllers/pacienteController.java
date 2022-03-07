@@ -42,15 +42,15 @@ public class pacienteController {
 	@GetMapping("/inicio")
 	public String inicio(ModelMap model) {
 
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		UserDetails userDetails = null;
-		if (principal instanceof UserDetails) {
-  			userDetails = (UserDetails) principal;
-		}
-		 Paciente p1 = pacienteServicio.buscarPacientePorUsername(userDetails.getUsername());
-		 List<Turno> turnos = new ArrayList<>();
-		 turnos = turnoServicio.buscarTurnosPaciente(p1.getDni());
-		 model.put("turnos", turnos);
+//		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//		UserDetails userDetails = null;
+//		if (principal instanceof UserDetails) {
+//  			userDetails = (UserDetails) principal;
+//		}
+//		 Paciente p1 = pacienteServicio.buscarPacientePorUsername(userDetails.getUsername());
+//		 List<Turno> turnos = new ArrayList<>();
+//		 turnos = turnoServicio.buscarTurnosPaciente(p1.getDni());
+//		 model.put("turnos", turnos);
 		return "inicioPaciente.html";
 
 	}
