@@ -14,7 +14,6 @@ import com.clinica.sgt.servicios.PacienteServicio;
 import com.clinica.sgt.servicios.TurnoServicio;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.Nullable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -43,15 +42,15 @@ public class pacienteController {
 	@GetMapping("/inicio")
 	public String inicio(ModelMap model) {
 
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		UserDetails userDetails = null;
-		if (principal instanceof UserDetails) {
-  			userDetails = (UserDetails) principal;
-		}
-		 Paciente p1 = pacienteServicio.buscarPacientePorUsername(userDetails.getUsername());
-		 List<Turno> turnos = new ArrayList<>();
-		 turnos = turnoServicio.buscarTurnosPaciente(p1.getDni());
-		 model.put("turnos", turnos);
+//		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//		UserDetails userDetails = null;
+//		if (principal instanceof UserDetails) {
+//  			userDetails = (UserDetails) principal;
+//		}
+//		 Paciente p1 = pacienteServicio.buscarPacientePorUsername(userDetails.getUsername());
+//		 List<Turno> turnos = new ArrayList<>();
+//		 turnos = turnoServicio.buscarTurnosPaciente(p1.getDni());
+//		 model.put("turnos", turnos);
 		return "inicioPaciente.html";
 
 	}
