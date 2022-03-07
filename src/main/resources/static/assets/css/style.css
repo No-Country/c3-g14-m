@@ -840,20 +840,20 @@ section {
 /*--------------------------------------------------------------
 # Appointments
 --------------------------------------------------------------*/
-.appointment .php-email-form {
+.appointment .turno-form {
   width: 100%;
 }
-.appointment .php-email-form .form-group {
+.appointment .turno-form .form-group {
   padding-bottom: 8px;
 }
-.appointment .php-email-form .validate {
+.appointment .turno-form .validate {
   display: none;
   color: red;
   margin: 0 0 15px 0;
   font-weight: 400;
   font-size: 13px;
 }
-.appointment .php-email-form .error-message {
+.appointment .turno-form .error-message {
   display: none;
   color: #fff;
   background: #ed3c0d;
@@ -861,10 +861,10 @@ section {
   padding: 15px;
   font-weight: 600;
 }
-.appointment .php-email-form .error-message br + br {
+.appointment .turno-form .error-message br + br {
   margin-top: 25px;
 }
-.appointment .php-email-form .sent-message {
+.appointment .turno-form .sent-message {
   display: none;
   color: #fff;
   background: #18d26e;
@@ -872,13 +872,13 @@ section {
   padding: 15px;
   font-weight: 600;
 }
-.appointment .php-email-form .loading {
+.appointment .turno-form .loading {
   display: none;
   background: #fff;
   text-align: center;
   padding: 15px;
 }
-.appointment .php-email-form .loading:before {
+.appointment .turno-form .loading:before {
   content: "";
   display: inline-block;
   border-radius: 50%;
@@ -890,22 +890,22 @@ section {
   -webkit-animation: animate-loading 1s linear infinite;
   animation: animate-loading 1s linear infinite;
 }
-.appointment .php-email-form input, .appointment .php-email-form textarea, .appointment .php-email-form select {
+.appointment .turno-form input, .appointment .turno-form textarea, .appointment .turno-form select {
   border-radius: 0;
   box-shadow: none;
   font-size: 14px;
   padding: 10px !important;
 }
-.appointment .php-email-form input:focus, .appointment .php-email-form textarea:focus, .appointment .php-email-form select:focus {
+.appointment .turno-form input:focus, .appointment .turno-form textarea:focus, .appointment .turno-form select:focus {
   border-color: #3fbbc0;
 }
-.appointment .php-email-form input, .appointment .php-email-form select {
+.appointment .turno-form input, .appointment .turno-form select {
   height: 44px;
 }
-.appointment .php-email-form textarea {
+.appointment .turno-form textarea {
   padding: 10px 12px;
 }
-.appointment .php-email-form button[type=submit] {
+.appointment .turno-form button[type=submit] {
   background: #3fbbc0;
   border: 0;
   padding: 10px 35px;
@@ -913,7 +913,7 @@ section {
   transition: 0.4s;
   border-radius: 50px;
 }
-.appointment .php-email-form button[type=submit]:hover {
+.appointment .turno-form button[type=submit]:hover {
   background: #52c2c6;
 }
 
