@@ -11,6 +11,7 @@ import com.clinica.sgt.servicios.PersonalServicio;
 import com.clinica.sgt.servicios.TurnoServicio;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,21 +32,27 @@ public class adminController {
 	@Autowired
 	PersonalServicio personalServicio;
 
+	@Autowired
+	BCryptPasswordEncoder bCrypt;
+
 
 	@PostMapping("/registro") 	
 	public String registro(@RequestParam LocalTime inicioLaboral, @RequestParam LocalTime finLaboral, @RequestParam String email, @RequestParam String nombreCompleto,
-			@RequestParam String password, @RequestParam String dni, @RequestParam String telefono,
-			@RequestParam Genero genero, @RequestParam UserType userType, ModelMap modelo) {
+			@RequestParam String dni, @RequestParam String telefono,
+			@RequestParam Genero genero, ModelMap modelo) {
 
 		try {
+			
+			System.out.println(inicioLaboral);
+			System.out.println(finLaboral);
 
-			personalServicio.crearPersonal(inicioLaboral, finLaboral, dni, email, password, nombreCompleto, telefono, genero, true, userType);
+			personalServicio.crearPersonal(inicioLaboral, finLaboral, dni, email, bCrypt.encode(dni), nombreCompleto, telefono, genero, true, UserType.PROFESIONAL);
 			return "exito.html";
 
 		} catch (Exception e) {
 
-			e.getMessage();
-           modelo.put("error", e.getMessage());
+			e.printStackTrace();
+            modelo.put("error", e.getMessage());
 
 			return "error.html";
 		}
