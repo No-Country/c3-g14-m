@@ -31,7 +31,7 @@
         <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
         <!-- los CSS  -->
-        <link href="../assets/css/style.css" rel="stylesheet">
+        <link href="../assets/css/style.css" rel="stylesheet"> 
     </head>
     <body>
 
@@ -93,10 +93,11 @@
                     <p>Verifique sus datos de usuario y contacto en caso de ser necesario modifíquelo en la sección de perfiles. </p>
                 </div>
 
-                <form action="" method="post" role="form" class="turno-form" data-aos="fade-up" data-aos-delay="100">
+                <form th:action="@{/admin/agregar-turno}" method="post" role="form" class="turno-form" data-aos="fade-up" data-aos-delay="100">
+                    <p style="color:#FF0000" th:if="${error != null}" th:text="${error}"></p>
                     <div class="row">
                         <div class="col-md-4 form-group">
-                            <input type="text"  name="nombreCompleto" class="form-control" id="name" placeholder="Nombre y Apellido"  required>
+                            <input type="text"  name="nombre" class="form-control" id="name" placeholder="Nombre y Apellido"  required>
                         </div>
                         <div class="col-md-4 form-group mt-3 mt-md-0">
                             <input type="email" class="form-control" name="email" id="email" placeholder="Email"  required>
@@ -107,31 +108,57 @@
                     </div>
                     <div class="row">
                         <div class="col-md-4 form-group mt-3">
-                            <input type="num" name="dni" class="form-control datepicker" id="date" placeholder="DNI"  required>
+                            <input type="num" name="dniPaciente" class="form-control datepicker" id="date" placeholder="DNI"  required>
                         </div>
+
+                    <div class="col-md-4 form-group mt-3">
+                            
+                        <select class="form-select" type="text" name="genero" >
+                            <option selected>Genero</option>
+                            <option value="MASCULINO">Masculino</option>
+                            <option value="FEMENINO">Femenino</option>
+                            <option value="OTRO">Otro</option>
+                         </select>
+                    </div>
                         <div class="col-md-4 form-group mt-3">
-                            <select th:field="*{profesionales}" name="personal" id="doctor" class="form-select">
+                            <select name="dniProfesional" class="form-select">
                                 <option value="">Seleccione Doctor</option>
-                                <option th:each="profesional : ${profesionales}" th:value="${profesional}" th:text="${profesional.nombre}"></option>
+                                <option th:each="profesional : ${profesionales}" th:value="${profesional.dni}" type="text"
+                                th:utext="${profesional.nombre}"></option>
+                                
                             </select>
-                        </div>
-                        
-                        
-                        <div class="col-md-4 form-group mt-3">
-                            <label for="doctor">Horario de trabajo: </label>
-                            <label for="doctor"></label>
-                        </div>
-                        
-                        <div class="col-md-4 form-group mt-3">
-                             <input type="date" name="dia" class="form-control datepicker" id="date" placeholder="Fecha"  value="2022-04-28" min="2022-03-01" max="2022-12-31"required>
                         </div>
 
                         <div class="col-md-4 form-group mt-3">
                             <select name="hora" id="doctor" class="form-select">
-                                <option value="">Horario</option>
-                                <option ></option>
+                                    <option value="">Horario</option>
+                                    <option value="08:00">08:00</option>
+                                    <option value="08:30">08:30</option>
+                                    <option value="09:00">09:00</option>
+                                    <option value="09:30">09:30</option>
+                                    <option value="10:00">10:00</option>
+                                    <option value="10:30">10:30</option>
+                                    <option value="11:00">11:00</option>
+                                    <option value="11:30">11:30</option>
+                                    <option value="12:00">12:00</option>
+                                    <option value="12:30">12:30</option>
+                                    <option value="13:00">13:00</option>
+                                    <option value="13:30">13:30</option>
+                                    <option value="14:00">14:00</option>
+                                    <option value="14:30">14:30</option>
+                                    <option value="15:00">15:00</option>
+                                    <option value="15:30">15:30</option>
+                                    <option value="16:00">16:00</option>
+                                    <option value="16:30">16:30</option>
+                                
                             </select>
                         </div>
+
+                        <div class="col-md-4 form-group mt-3">
+                             <input type="date" name="dia" class="form-control datepicker" id="date" placeholder="Fecha"  min="2022-03-01" max="2022-12-31"required>
+                        </div>
+
+                        
                     </div>
 
                     
@@ -202,7 +229,6 @@
         <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
         <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
-        <script src="../assets/vendor/php-email-form/validate.js"></script>
 
         <!-- Template Main JS File -->
         <script src="../assets/js/main.js"></script>

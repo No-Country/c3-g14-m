@@ -2,12 +2,14 @@ package com.clinica.sgt.controllers;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import com.clinica.sgt.entidades.Genero;
 import com.clinica.sgt.entidades.Personal;
 import com.clinica.sgt.entidades.Turno;
 import com.clinica.sgt.entidades.UserType;
+import com.clinica.sgt.servicios.PacienteServicio;
 import com.clinica.sgt.servicios.PersonalServicio;
 import com.clinica.sgt.servicios.TurnoServicio;
 
@@ -29,6 +31,9 @@ public class adminController {
 
 	@Autowired
 	TurnoServicio turnoServicio;
+
+	@Autowired
+	PacienteServicio pacienteServicio;
 
 	@Autowired
 	PersonalServicio personalServicio;
@@ -93,14 +98,32 @@ public class adminController {
 	}
 	
 	@PostMapping("/agregar-turno")
-	public String agregarTurno(ModelMap modelo, @RequestParam LocalDate dia, @RequestParam LocalTime hora, @RequestParam String dniPaciente, @RequestParam String dniProfesional) {
+	public String agregarTurno(ModelMap modelo, @RequestParam String dia, @RequestParam LocalTime hora, @RequestParam String dniPaciente, @RequestParam String dniProfesional,
+	@RequestParam String email, @RequestParam String nombre, @RequestParam String telefono, @RequestParam Genero genero) {
 		try{
-			turnoServicio.agregarTurno(dia, hora, dniPaciente, dniProfesional);
+			try {
+				pacienteServicio.crearPaciente("", dniPaciente, email, bCrypt.encode(dniPaciente), nombre, telefono, genero, true, UserType.PACIENTE);
+			} catch (Exception e) {
+				modelo.put("dniPaciente", dniPaciente);
+				modelo.put("email", email);
+				modelo.put("nombre", nombre);
+				modelo.put("telefono", telefono);
+				modelo.put("error", e.getMessage());
+				throw new Exception("No se ha podido registrar al usuario, revisar que no exista en la base de datos. Igual se intenta crear el turno");	
+			}
+			DateTimeFormatter DATEFORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    		LocalDate ld = LocalDate.parse(dia, DATEFORMATTER);
+			turnoServicio.agregarTurno(ld, hora, dniPaciente, dniProfesional);
 			return "exito.html";
 		}catch(Exception e){
 			e.getMessage();
-           modelo.put("error", e.getMessage());
-			return "error.html";
+			modelo.put("dia", dia);
+			modelo.put("dni", dniPaciente);
+			modelo.put("email", email);
+			modelo.put("nombre", nombre);
+			modelo.put("telefono", telefono);
+            modelo.put("error", e.getMessage());
+			return "form-turno-admin.html";
 		}
 	}
 
