@@ -23,7 +23,7 @@ public class PrincipalController {
 	  public String admin() {
 	    return "redirect:/admin/inicio";
 	  }
-	 @RequestMapping({"/paciente","login"})
+	 @RequestMapping("/paciente")
 	  public String paciente() {
 	    return "redirect:/paciente/inicio";
 	  }
