@@ -55,12 +55,11 @@ and open the template in the editor.
             <div class="container d-flex align-items-center">
 
 
-                <h1 class="logo me-auto"><a href="index.html">SGT</a></h1> 
+                <h1 class="logo me-auto"><a href="/admin/inicio">SGT</a></h1> 
 
                 <nav id="navbar" class="navbar order-last order-lg-0">
                     <ul>
                         <li><a class="nav-link scrollto active" href="/admin/inicio">Inicio</a></li>
-                        <li><a class="nav-link scrollto" href="#contact">Contacto</a></li>
 
                         
                             <i class="bi bi-list mobile-nav-toggle"></i>
@@ -121,7 +120,7 @@ and open the template in the editor.
                                                             <div  class="buscar-top">
                                                                 <div class="col-lg-4 col-md-4 buscar-newsletter">
 
-                                                                    <form th:action="@{/admin/turnos/__${dni}__}" method="post">
+                                                                    <form th:action="@{/admin/turnos}" method="get" >
                                                                         <input type="number" name="dni" placeholder="xxxxxxxx"><input type="submit" value="Buscar"> 
                                                                     </form>
                                                                     <p>Escriba solo números sin espacios y sin puntos.
