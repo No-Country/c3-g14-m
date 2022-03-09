@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import com.clinica.sgt.entidades.Genero;
+import com.clinica.sgt.entidades.Paciente;
 import com.clinica.sgt.entidades.Personal;
 import com.clinica.sgt.entidades.UserType;
 import com.clinica.sgt.servicios.PacienteServicio;
@@ -97,7 +98,12 @@ public class adminController {
 	@RequestParam String email, @RequestParam String nombre, @RequestParam String telefono, @RequestParam Genero genero) {
 		try{
 			try {
-				pacienteServicio.crearPaciente("", dniPaciente, email, dniPaciente, nombre, telefono, genero, true, UserType.PACIENTE);
+				Paciente p = pacienteServicio.buscarPacientePorDNI(dniPaciente);
+				if (p != null) {
+					throw new Exception();
+				}else{
+					pacienteServicio.crearPaciente("", dniPaciente, email, dniPaciente, nombre, telefono, genero, true, UserType.PACIENTE);
+				}
 			} catch (Exception e) {
 				modelo.put("dniPaciente", dniPaciente);
 				modelo.put("email", email);
@@ -110,14 +116,15 @@ public class adminController {
     		LocalDate ld = LocalDate.parse(dia, DATEFORMATTER);
 			turnoServicio.agregarTurno(ld, hora, dniPaciente, dniProfesional);
 			return "exito.html";
-		}catch(Exception e){
-			e.getMessage();
+		}catch(Exception ex){
+			ex.getMessage();
 			modelo.put("dia", dia);
 			modelo.put("dni", dniPaciente);
 			modelo.put("email", email);
 			modelo.put("nombre", nombre);
 			modelo.put("telefono", telefono);
-            modelo.put("error", e.getMessage());
+            modelo.put("error", ex.getMessage());
+			
 			return "form-turno-admin.html";
 		}
 	}
