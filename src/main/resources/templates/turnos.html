@@ -5,23 +5,24 @@
     To change this template file, choose Tools | Templates
     and open the template in the editor.
     -->
-
     <head>
-        <title>Turnos</title>
+        <title>Inicio Paciente</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Inicio</title>
         <meta content="" name="description">
         <meta content="" name="keywords">
 
         <!-- Favicons -->
-        <link href="../assets/img/favicon.png" rel="icon">
+          <link href="../assets/img/logoD-removebg (1).png" rel="icon">
+
         <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
         <!-- animaciones CSS  -->
-        <link href="../assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+        <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
         <link href="../assets/vendor/animate.css/animate.min.css" rel="stylesheet">
         <link href="../assets/vendor/aos/aos.css" rel="stylesheet">
         <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -32,6 +33,7 @@
 
         <!-- los CSS  -->
         <link href="../assets/css/style.css" rel="stylesheet">
+
     </head>
     <body>
 
@@ -45,83 +47,67 @@
             </div>
         </div>
 
-        <!-- ======= Header ======= -->
+         <!-- ======= Header ======= -->
         <header id="header" class="fixed-top">
             <div class="container d-flex align-items-center">
-
-
                 <h1 class="logo me-auto"><a href="index.html">SGT</a></h1> 
-
                 <nav id="navbar" class="navbar order-last order-lg-0">
                     <ul>
-                        <li><a class="nav-link scrollto " href="/admin/inicio">Inicio</a></li>
-                        <li><a class="nav-link scrollto active" href="/admin/form-turno">Turno Nuevo</a></li>
-                        <li><a class="nav-link scrollto" href="#contact">Contacto</a></li>
-
-                        <li class="dropdown"><a href="#"><span>Perfil</span> <i class="bi bi-chevron-down"></i></a>
-                            <ul>
-                                <li><a href="#">Editar perfil</a></li>
-                                <li><a href="#">Cambiar Contraseña</a></li>
-
-                            </ul>
-                            <i class="bi bi-list mobile-nav-toggle"></i>
-                    </ul>
+                        <li><a class="nav-link scrollto " href="/paciente/inicio">Inicio</a></li>
+                        <i class="bi bi-list mobile-nav-toggle"></i>
                 </nav>  
-
-                <a href="" class="appointment-btn scrollto">Cerrar <span class="d-none d-md-inline"> sesion</span> </a>
-
+                <a th th:href="@{/logout}" class="appointment-btn scrollto">Cerrar sesion</a>
             </div>
-            
         </header> 
-        
-        
-        
         <main id="main">
-<!--            aca tuve que hacer unos saltos de linea pero despues lo acomodo con css-->
+            <!--            aca tuve que hacer unos saltos de linea pero despues lo acomodo con css-->
+            <br>
+            <br>
             <br>
             <br>
             <br>
             <br>
             
+            <div class="section-title">
+                <h2>Listado de turnos</h2>
+                <div class="conteiner">
+                    <div>
+             <table class="table table-dark table-striped">
+              <thead>
+                <tr>
+                  <th>Fecha</th>
+                  <th>Hora</th>
+                  <th>Paciente</th>
+                  <th>Profesional</th>
+            
+                  <th>Administracion</th>
+                </tr>
+              </thead>
+              <tbody>
+            
+                <tr th:each="turno : ${turnos}">
+                  <td th:text="${turno.dia}" th:if="${turno.alta}"></td>
+                  <td th:text="${turno.hora}" th:if="${turno.alta}"></td>
+                  <td th:text="${turno.paciente.nombre}" th:if="${turno.alta}"></td>
+                  <td th:text="${turno.profesional.nombre}" th:if="${turno.alta}"></td>
+            
+                  <td>
+            
+                    <a class="mx-2" th:href="@{/admin/mod-turno/__${id}__}" th:if="${turno.alta}" class="btn btn-outline-warning"
+                      role="button">Modificar</a>
+                    <a class="mx-2" th:href="@{/admin/modificar-alta-turno/__${id}__}" th:if="${turno.alta}"
+                      class="btn btn-outline-danger" role="button">Baja</a>
+            
+                  </td>
+                </tr>
+            
+            
+              </tbody>
+            </table>
+        </div>
+        </div>
+        </div>
 
-<!-- <table class="table table-dark table-striped">
-  <thead>
-    <tr>
-      <th>Fecha</th>
-      <th>Hora</th>
-      <th>Paciente</th>
-      <th>Profesional</th>
-
-      <th>Administracion</th>
-    </tr>
-  </thead>
-  <tbody>
-
-    <tr th:each="turno : ${turnos}">
-      <td th:text="${turno.dia}" th:if="${turno.alta}"></td>
-      <td th:text="${turno.hora}" th:if="${turno.alta}"></td>
-      <td th:text="${turno.paciente.nombre}" th:if="${turno.alta}"></td>
-      <td th:text="${turno.profesional.nombre}" th:if="${turno.alta}"></td>
-
-      <td>
-
-        <a class="mx-2" th:href="@{/admin/mod-turno/__${id}__}" th:if="${turno.alta}" class="btn btn-outline-warning"
-          role="button">Modificar</a>
-        <a class="mx-2" th:href="@{/admin/modificar-alta-turno/__${id}__}" th:if="${turno.alta}"
-          class="btn btn-outline-danger" role="button">Baja</a>
-
-      </td>
-    </tr>
-
-
-  </tbody>
-</table> -->
-
-
-
-
-
-        
         </main><!-- End #main -->
 
         <!-- ======= Footer ======= -->
@@ -177,25 +163,5 @@
 
         <!-- Template Main JS File -->
         <script src="../assets/js/main.js"></script>
-
-
-
-
     </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -14,7 +14,7 @@
         <meta content="" name="keywords">
 
         <!-- Favicons -->
-        <link href="../assets/img/favicon.png" rel="icon">
+        <link href="../assets/img/logoD-removebg (1).png" rel="icon">
         <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
         <!-- Google Fonts -->
@@ -34,7 +34,6 @@
         <link href="../assets/css/style.css" rel="stylesheet"> 
     </head>
     <body>
-
         <!-- ======= Top Bar ======= -->
         <div id="topbar" class="d-flex align-items-center fixed-top">
             <div class="container d-flex align-items-center justify-content-center justify-content-md-between">
@@ -44,7 +43,6 @@
                 </div>
             </div>
         </div>
-
         <!-- ======= Header ======= -->
         <header id="header" class="fixed-top">
             <div class="container d-flex align-items-center">
@@ -58,79 +56,64 @@
                         <li><a class="nav-link scrollto active" href="/admin/form-turno">Turno Nuevo</a></li>
                         <li><a class="nav-link scrollto" href="#contact">Contacto</a></li>
 
-                        <li class="dropdown"><a href="#"><span>Perfil</span> <i class="bi bi-chevron-down"></i></a>
-                            <ul>
-                                <li><a href="#">Editar perfil</a></li>
-                                <li><a href="#">Cambiar Contraseña</a></li>
-
-                            </ul>
-                            <i class="bi bi-list mobile-nav-toggle"></i>
                     </ul>
+                     <i class="bi bi-list mobile-nav-toggle"></i>
                 </nav>  
-
                 <a th:href="@{/logout}" class="appointment-btn scrollto">Cerrar <span class="d-none d-md-inline"> sesion</span> </a>
-
             </div>
-            
         </header> 
-        
-        
-        
         <main id="main">
-<!--            aca tuve que hacer unos saltos de linea pero despues lo acomodo con css-->
+            !--            aca tuve que hacer unos saltos de linea pero despues lo acomodo con css-->
             <br>
             <br>
             <br>
             <br>
-            
+            <section id="appointment" class="appointment section-bg">
+                <div class="container" data-aos="fade-up">
 
-
-        <section id="appointment" class="appointment section-bg">
-            <div class="container" data-aos="fade-up">
-
-                <div class="section-title">
-                    <h2>Solicitar turno</h2>
-                    <p>Verifique sus datos de usuario y contacto en caso de ser necesario modifíquelo en la sección de perfiles. </p>
-                </div>
-
-                <form th:action="@{/admin/agregar-turno}" method="post" role="form" class="turno-form" data-aos="fade-up" data-aos-delay="100">
-                    <p style="color:#FF0000" th:if="${error != null}" th:text="${error}"></p>
-                    <div class="row">
-                        <div class="col-md-4 form-group">
-                            <input type="text"  name="nombre" class="form-control" id="name" placeholder="Nombre y Apellido"  required>
-                        </div>
-                        <div class="col-md-4 form-group mt-3 mt-md-0">
-                            <input type="email" class="form-control" name="email" id="email" placeholder="Email"  required>
-                        </div>
-                        <div class="col-md-4 form-group mt-3 mt-md-0">
-                            <input type="tel" class="form-control" name="telefono" id="phone" placeholder="Telefono"  required>
-                        </div>
+                    <div class="section-title">
+                        <h2>Solicitar turno</h2>
+                        <p>Verifique sus datos de usuario y contacto en caso de ser necesario modifíquelo en la sección de perfiles. </p>
                     </div>
-                    <div class="row">
-                        <div class="col-md-4 form-group mt-3">
-                            <input type="num" name="dniPaciente" class="form-control datepicker" id="date" placeholder="DNI"  required>
-                        </div>
 
-                    <div class="col-md-4 form-group mt-3">
-                            
-                        <select class="form-select" type="text" name="genero" >
-                            <option selected>Genero</option>
-                            <option value="MASCULINO">Masculino</option>
-                            <option value="FEMENINO">Femenino</option>
-                            <option value="OTRO">Otro</option>
-                         </select>
-                    </div>
-                        <div class="col-md-4 form-group mt-3">
-                            <select name="dniProfesional" class="form-select">
-                                <option value="">Seleccione Doctor</option>
-                                <option th:each="profesional : ${profesionales}" th:value="${profesional.dni}" type="text"
-                                th:utext="${profesional.nombre}"></option>
-                                
-                            </select>
+                    <form th:action="@{/admin/agregar-turno}" method="post" role="form" class="turno-form" data-aos="fade-up" data-aos-delay="100">
+                        <p style="color:#FF0000" th:if="${error != null}" th:text="${error}"></p>
+                        <div class="row">
+                            <div class="col-md-4 form-group">
+                                <input type="text"  name="nombre" class="form-control" id="name" placeholder="Nombre y Apellido"  required>
+                            </div>
+                            <div class="col-md-4 form-group mt-3 mt-md-0">
+                                <input type="email" class="form-control" name="email" id="email" placeholder="Email"  required>
+                            </div>
+                            <div class="col-md-4 form-group mt-3 mt-md-0">
+                                <input type="tel" class="form-control" name="telefono" id="phone" placeholder="Telefono"  required>
+                            </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-4 form-group mt-3">
+                                <input type="num" name="dniPaciente" class="form-control datepicker" id="date" placeholder="DNI"  required>
+                            </div>
 
-                        <div class="col-md-4 form-group mt-3">
-                            <select name="hora" id="doctor" class="form-select">
+                            <div class="col-md-4 form-group mt-3">
+
+                                <select class="form-select" type="text" name="genero" >
+                                    <option selected>Genero</option>
+                                    <option value="MASCULINO">Masculino</option>
+                                    <option value="FEMENINO">Femenino</option>
+                                    <option value="OTRO">Otro</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 form-group mt-3">
+                                <select name="dniProfesional" class="form-select">
+                                    <option value="">Seleccione Doctor</option>
+                                    <option th:each="profesional : ${profesionales}" th:value="${profesional.dni}" type="text"
+                                            th:utext="${profesional.nombre}"></option>
+
+                                </select>
+                            </div>
+
+                            <div class="col-md-4 form-group mt-3">
+                                <select name="hora" id="doctor" class="form-select">
                                     <option value="">Horario</option>
                                     <option value="08:00">08:00</option>
                                     <option value="08:30">08:30</option>
@@ -150,34 +133,24 @@
                                     <option value="15:30">15:30</option>
                                     <option value="16:00">16:00</option>
                                     <option value="16:30">16:30</option>
-                                
-                            </select>
+
+                                </select>
+                            </div>
+                            <div class="col-md-4 form-group mt-3">
+                                <input type="date" name="dia" class="form-control datepicker" id="date" placeholder="Fecha"  min="2022-03-01" max="2022-12-31"required>
+                            </div>
                         </div>
-
-                        <div class="col-md-4 form-group mt-3">
-                             <input type="date" name="dia" class="form-control datepicker" id="date" placeholder="Fecha"  min="2022-03-01" max="2022-12-31"required>
+                        <div class="my-3">
+                            <div class="loading">Loading</div>
+                            <div class="error-message"></div>
+                            <div class="sent-message">Your appointment request has been sent successfully. Thank you!</div>
                         </div>
+                        <div class="text-center"><button type="submit">Solicitar</button></div>
+                    </form>
 
-                        
-                    </div>
+                </div>
+            </section><!-- End Appointment Section -->
 
-                    
-                    <div class="my-3">
-                        <div class="loading">Loading</div>
-                        <div class="error-message"></div>
-                        <div class="sent-message">Your appointment request has been sent successfully. Thank you!</div>
-                    </div>
-                    <div class="text-center"><button type="submit">Solicitar</button></div>
-                </form>
-
-            </div>
-        </section><!-- End Appointment Section -->
-
-
-
-
-
-        
         </main><!-- End #main -->
 
         <!-- ======= Footer ======= -->
@@ -232,9 +205,6 @@
 
         <!-- Template Main JS File -->
         <script src="../assets/js/main.js"></script>
-
-
-
 
     </body>
 </html>
