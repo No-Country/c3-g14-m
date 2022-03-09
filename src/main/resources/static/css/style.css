@@ -270,4 +270,5 @@ button:focus.off.login, button:active.off.login, button:hover.off.login{
   .signup-info, .login-info {
     display: none;
   }
+
 }
