@@ -54,12 +54,20 @@
                     <ul>
                         <li><a class="nav-link scrollto " href="/admin/inicio">Inicio</a></li>
                         <li><a class="nav-link scrollto active" href="/admin/form-turno">Turno Nuevo</a></li>
-                        <li><a class="nav-link scrollto" href="#contact">Contacto</a></li>
 
+                        <!-- <li class="dropdown"><a href="#"><span>Perfil</span> <i class="bi bi-chevron-down"></i></a>
+                            <ul>
+                                <li><a href="#">Editar perfil</a></li>
+                                <li><a href="#">Cambiar Contraseña</a></li>
+
+                            </ul> -->
+                            <i class="bi bi-list mobile-nav-toggle"></i>
                     </ul>
                     <i class="bi bi-list mobile-nav-toggle"></i>
                 </nav>  
-                <a th:href="@{/logout}" class="appointment-btn scrollto">Cerrar <span class="d-none d-md-inline"> sesion</span> </a>
+
+                <a th:href="@{/logout}" class="appointment-btn scrollto">Cerrar sesion</span> </a>
+
             </div>
         </header> 
         <main id="main">

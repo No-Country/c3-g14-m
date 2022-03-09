@@ -6,6 +6,7 @@
 package com.clinica.sgt.repositorios;
 
 import com.clinica.sgt.entidades.Personal;
+import com.clinica.sgt.entidades.Usuario;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,6 @@ public interface PersonalRepositorio extends JpaRepository<Personal,String>{
     @Query("SELECT p FROM Personal p WHERE p.id = :id")
     public Personal buscarPorID(@Param("id")String id);
 
-    @Query("SELECT p FROM Personal p WHERE p.dni = :dni")
-    public Personal buscarPorDNI(@Param("dni")String dni);
+    @Query("SELECT p FROM Usuario p WHERE p.dni = :dni")
+    public Usuario buscarPorDNI(@Param("dni")String dni);
 }

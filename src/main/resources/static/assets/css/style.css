@@ -17,6 +17,13 @@ a:hover {
 h1, h2, h3, h4, h5, h6 {
   font-family: "Roboto", sans-serif;
 }
+
+.centerBack {
+  padding-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} 
 /*
 --------------------------------------------------------------
 # Preloader

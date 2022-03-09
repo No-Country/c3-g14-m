@@ -16,7 +16,7 @@ public class indexController {
 	@Autowired
 	PacienteServicio pacienteServicio;
 
-	@GetMapping({"/","/login"})
+	@GetMapping("/login")
     public String index(ModelMap model) {      
         try {
 			return "index.html";
