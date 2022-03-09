@@ -7,14 +7,12 @@ import java.util.List;
 
 import com.clinica.sgt.entidades.Genero;
 import com.clinica.sgt.entidades.Personal;
-import com.clinica.sgt.entidades.Turno;
 import com.clinica.sgt.entidades.UserType;
 import com.clinica.sgt.servicios.PacienteServicio;
 import com.clinica.sgt.servicios.PersonalServicio;
 import com.clinica.sgt.servicios.TurnoServicio;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,9 +36,6 @@ public class adminController {
 	@Autowired
 	PersonalServicio personalServicio;
 
-	@Autowired
-	BCryptPasswordEncoder bCrypt;
-
 
 	@PostMapping("/registro") 	
 	public String registro(@RequestParam LocalTime inicioLaboral, @RequestParam LocalTime finLaboral, @RequestParam String email, @RequestParam String nombreCompleto,
@@ -52,7 +47,7 @@ public class adminController {
 			System.out.println(inicioLaboral);
 			System.out.println(finLaboral);
 
-			personalServicio.crearPersonal(inicioLaboral, finLaboral, dni, email, bCrypt.encode(dni), nombreCompleto, telefono, genero, true, UserType.PROFESIONAL);
+			personalServicio.crearPersonal(inicioLaboral, finLaboral, dni, email, dni, nombreCompleto, telefono, genero, true, UserType.PROFESIONAL);
 			return "exito.html";
 
 		} catch (Exception e) {
@@ -79,7 +74,7 @@ public class adminController {
 	@GetMapping("/turnos/{dni}") 
 	public String listarTurnos(ModelMap modelo, @PathVariable String dni){
 		try {
-			List<Turno> turnos = turnoServicio.buscarTurnosProfesional(dni);
+			//List<Turno> turnos = turnoServicio.buscarTurnosProfesional(dni);
 			//modelo.put("turnos", turnos);
 			return "turnos.html";
 		} catch (Exception e) {
@@ -102,7 +97,7 @@ public class adminController {
 	@RequestParam String email, @RequestParam String nombre, @RequestParam String telefono, @RequestParam Genero genero) {
 		try{
 			try {
-				pacienteServicio.crearPaciente("", dniPaciente, email, bCrypt.encode(dniPaciente), nombre, telefono, genero, true, UserType.PACIENTE);
+				pacienteServicio.crearPaciente("", dniPaciente, email, dniPaciente, nombre, telefono, genero, true, UserType.PACIENTE);
 			} catch (Exception e) {
 				modelo.put("dniPaciente", dniPaciente);
 				modelo.put("email", email);
