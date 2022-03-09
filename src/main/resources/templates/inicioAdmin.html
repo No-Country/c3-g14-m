@@ -120,7 +120,7 @@ and open the template in the editor.
                                                             <div  class="buscar-top">
                                                                 <div class="col-lg-4 col-md-4 buscar-newsletter">
 
-                                                                    <form th:action="@{/admin/turnos/__${dni}__}" method="post">
+                                                                    <form th:action="@{/admin/turnos}" method="get" >
                                                                         <input type="number" name="dni" placeholder="xxxxxxxx"><input type="submit" value="Buscar"> 
                                                                     </form>
                                                                     <p>Escriba solo números sin espacios y sin puntos.

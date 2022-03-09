@@ -5,6 +5,7 @@ import java.time.LocalTime;
 
 import com.clinica.sgt.entidades.Personal;
 import com.clinica.sgt.entidades.Turno;
+import com.clinica.sgt.entidades.Usuario;
 import com.clinica.sgt.repositorios.PersonalRepositorio;
 import com.clinica.sgt.repositorios.TurnoRepositorio;
 
@@ -62,11 +63,11 @@ public class TurnoServicio {
             throw new Exception("Feriado o dia no laboral");
         }
 
-        Personal profesional = personalRepo.buscarPorDNI(dniProfesional);
+        Personal profesional = (Personal) personalRepo.buscarPorDNI(dniProfesional);
 
-        if(hora.isBefore(profesional.getInicioLaboral()) || hora.isAfter(profesional.getFinLaboral())){
-            throw new Exception("El turno no esta en el horario laboral del profesional");
-        }
+        // if(hora.isBefore(profesional.getInicioLaboral()) || hora.isAfter(profesional.getFinLaboral())){
+        //     throw new Exception("El turno no esta en el horario laboral del profesional");
+        // }
         
               
 
@@ -86,7 +87,7 @@ public class TurnoServicio {
         turno.setDia(dia);
         turno.setHora(hora);
         turno.setPaciente(pacienteServicio.buscarPacientePorDNI(dniPaciente));
-        turno.setPersonal(personalRepo.buscarPorDNI(dniProfesional));
+        turno.setPersonal((Personal)personalRepo.buscarPorDNI(dniProfesional));
         turno.setAlta(true);
 
         turnoRepo.save(turno);
@@ -107,7 +108,7 @@ public class TurnoServicio {
         turno.setDia(dia);
         turno.setHora(hora);
         turno.setPaciente(pacienteServicio.buscarPacientePorDNI(dniPaciente));
-        turno.setPersonal(personalRepo.buscarPorDNI(dniProfesional));
+        turno.setPersonal((Personal)personalRepo.buscarPorDNI(dniProfesional));
         turno.setAlta(true);
 
         turnoRepo.save(turno);
@@ -143,7 +144,24 @@ public class TurnoServicio {
         return turnoRepo.buscarTurnoPaciente(dni);
     }
     public List<Turno> buscarTurnosProfesional(String dni){
-        String id = personalRepo.buscarPorDNI(dni).getId();
+        Usuario p = personalRepo.buscarPorDNI(dni);
+        String id = p.getId();
         return turnoRepo.buscarTurnoProfesional(id);
+        
+    }
+    public List<Turno> buscarTurnos(String dni){
+        Usuario p = personalRepo.buscarPorDNI(dni);
+        String id = p.getId();
+        System.out.println(id);
+        System.out.println(turnoRepo.buscarTurnoProfesional(id)+"profesional");
+        System.out.println(turnoRepo.buscarTurnoPaciente(id)+"paciente");
+        if (turnoRepo.buscarTurnoProfesional(id) != null && !turnoRepo.buscarTurnoProfesional(id).isEmpty()) {
+            return turnoRepo.buscarTurnoProfesional(id);
+        }else{
+            return turnoRepo.buscarTurnoPaciente(id);
+        }
+
+        // return turnoRepo.buscarTurnoPaciente(id);
+        
     }
 }

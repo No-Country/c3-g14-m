@@ -3,11 +3,13 @@ package com.clinica.sgt.controllers;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.clinica.sgt.entidades.Genero;
 import com.clinica.sgt.entidades.Paciente;
 import com.clinica.sgt.entidades.Personal;
+import com.clinica.sgt.entidades.Turno;
 import com.clinica.sgt.entidades.UserType;
 import com.clinica.sgt.servicios.PacienteServicio;
 import com.clinica.sgt.servicios.PersonalServicio;
@@ -72,15 +74,18 @@ public class adminController {
 
 	}
 
-	@GetMapping("/turnos/{dni}") 
-	public String listarTurnos(ModelMap modelo, @PathVariable String dni){
+	
+	@GetMapping("/turnos") 
+	public String listarTurnos(ModelMap modelo, String dni){
 		try {
-			//List<Turno> turnos = turnoServicio.buscarTurnosProfesional(dni);
-			//modelo.put("turnos", turnos);
+			List<Turno> turnos = new ArrayList<>();
+			turnos = turnoServicio.buscarTurnos(dni);
+			System.out.println(turnos+"ultimo");
+			modelo.put("turnos", turnos);
 			return "turnos.html";
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "redirect:/admin/inicio";
+			return "error.html";
 		}
 	}
 

@@ -64,7 +64,7 @@ public class PersonalServicio{
     
     //************************BUSQUEDA O CONSULTA*******************
     public Personal buscarPersonalPorDNI(String dni){
-       Personal existePersonal = personalRepositorio.buscarPorDNI(dni);
+       Personal existePersonal = (Personal) personalRepositorio.buscarPorDNI(dni);
        if(existePersonal !=null){
            return existePersonal;
        }
