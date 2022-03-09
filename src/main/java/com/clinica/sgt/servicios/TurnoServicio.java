@@ -141,7 +141,9 @@ public class TurnoServicio {
 
 
     public List<Turno> buscarTurnosPaciente(String dni){
-        return turnoRepo.buscarTurnoPaciente(dni);
+        Usuario p = pacienteServicio.buscarPacientePorDNI(dni);
+        String id = p.getId();
+        return turnoRepo.buscarTurnoPaciente(id);
     }
     public List<Turno> buscarTurnosProfesional(String dni){
         Usuario p = personalRepo.buscarPorDNI(dni);

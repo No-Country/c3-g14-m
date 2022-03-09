@@ -35,76 +35,7 @@ and open the template in the editor.
 
     </head>
     <body>
-        
-         <!-- ======= Top Bar ======= -->
-  <div id="topbar" class="d-flex align-items-center fixed-top">
-    <div class="container d-flex align-items-center justify-content-center justify-content-md-between">
-
-      <div class="d-flex align-items-center">
-        <i class="bi bi-phone"></i> Telefono +54 9 261 000 0000
-      </div>
-    </div>
-  </div>
-
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top">
-    <div class="container d-flex align-items-center">
-
-
-       <h1 class="logo me-auto"><a href="/paciente/inicio">SGT</a></h1> 
-
-      <nav id="navbar" class="navbar order-last order-lg-0">
-        <ul>
-          <li><a class="nav-link scrollto active" href="/paciente/inicio">Inicio</a></li>
-          <li><a class="nav-link scrollto" href="/paciente/form-turno">Turnos</a></li>
-
-          <!-- <li class="dropdown"><a href="#"><span>Perfil</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="#">Editar perfil</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-            </ul>
-          </li> -->
-
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav>  
-
-      <a th th:href="@{/logout}" class="appointment-btn scrollto">Cerrar sesion</a>
-
-    </div>
-  </header> 
-  
-  <main id="main">
-
-     
-
-       </main>
-
-  <!-- ======= Footer ======= -->
-  <footer id="footer">
-    <div class="footer-top">
-      <div class="container">
-        <div class="row">
-
-          <div class="col-lg-3 col-md-6">
-            <div class="footer-info">
-              <h3>SGT</h3>
-              <p>
-                A108 Adam Street <br>
-                NY 535022, USA<br><br>
-                <strong>Phone:</strong> +54 9261 000 0000<br>
-                <strong>Email:</strong> info@example.com<br>
-              </p>
-              <div class="social-links mt-3">
-                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-              </div>
-            </div>
-          </div>
+      </main>
 
         <!-- ======= Top Bar ======= -->
         <div id="topbar" class="d-flex align-items-center fixed-top">
@@ -196,7 +127,29 @@ and open the template in the editor.
 
                                 <div class="tab-pane active show" id="tab-1">
                                     <h3>Lista de Turnos </h3>
-                                    <a type="submit" class="btn btn-info btn-lg" href="/paciente/turnos/{__${dni}__}"> <i class="bi bi-calendar-date-fill"></i> Lista de Turnos</a>
+                                    <table class="table table-dark table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Fecha</th>
+                                                <th>Hora</th>
+                                                <th>Paciente</th>
+            
+                                                <!-- <th>Administracion</th> -->
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+            
+                                            <tr th:each="turno : ${turnos}">
+                                                <td th:text="${turno.dia}" th:if="${turno.alta}"></td>
+                                                <td th:text="${turno.hora}" th:if="${turno.alta}"></td>
+                                                <td th:text="${turno.personal.nombre}" th:if="${turno.alta}"></td>
+            
+                                            </tr>
+            
+                                            <!-- <p th:if="${turnos.isEmpty}">No tiene turnos agendados</p>  -->
+                                        </tbody>
+                                    </table>
+                                
                                 </div>
                                 <div class="tab-pane" id="tab-4">
                                     <h3><i class="bi bi-calendar-date-fill"></i> Nuevo turno</h3>
