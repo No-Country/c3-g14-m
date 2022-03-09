@@ -9,12 +9,12 @@ and open the template in the editor.
         <title>Inicio Admin</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
+        <title>Inicio</title>
         <meta content="" name="description">
         <meta content="" name="keywords">
 
         <!-- Favicons -->
-        <link href="../assets/img/logoD-removebg (1).png" rel="icon">
+        <link href="../assets/img/favicon.png" rel="icon">
         <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
         <!-- Google Fonts -->
@@ -55,99 +55,61 @@ and open the template in the editor.
             <div class="container d-flex align-items-center">
 
 
-<<<<<<< HEAD
                 <h1 class="logo me-auto"><a href="/admin/inicio">SGT</a></h1> 
-=======
-                <a href="index.html" class="logo me-auto"> <img src="../assets/img/logoD-removebg (1).png" alt="logo">SGT</a>
->>>>>>> origin/devDaniel
 
                 <nav id="navbar" class="navbar order-last order-lg-0">
                     <ul>
                         <li><a class="nav-link scrollto active" href="/admin/inicio">Inicio</a></li>
 
-                    </ul>
-                    <i class="bi bi-list mobile-nav-toggle"></i>
-                </nav>  
+                        
+                            <i class="bi bi-list mobile-nav-toggle"></i>
+                            </nav>  
 
-                <a th:href="@{/logout}" class="appointment-btn scrollto">Cerrar sesion</span> </a>
+                            <a th:href="@{/logout}" class="appointment-btn scrollto">Cerrar sesion</span> </a>
 
-            </div>
+                            </div>
 
-        </header> 
+                            </header> 
 
-        <main id="main">
+                            <main id="main">
 
-            <!-- ======= Departments Section ======= -->
-            <section id="departments" class="departments">
-                <div class="container" data-aos="fade-up">
+                                <!-- ======= Departments Section ======= -->
+                                <section id="departments" class="departments">
+                                    <div class="container" data-aos="fade-up">
 
-                    <div class="section-title">
-                        <h2>Administrar</h2>
-                    </div>
-
-                    <div class="row" data-aos="fade-up" data-aos-delay="100">
-                        <div class="col-lg-4 mb-5 mb-lg-0">
-                            <ul class="nav nav-tabs flex-column">
-                                <li class="nav-item">
-                                    <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#tab-1">
-                                        <h4><i class="bi bi-search"></i> Buscar turno Por DNI</h4>
-                                    </a>
-                                </li>
-                                <li class="nav-item mt-2">
-                                    <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-2">
-                                        <h4><i class="bi bi-person-plus-fill"></i> Agregar profesional</h4>
-                                    </a>
-                                </li>
-                                <li class="nav-item mt-2">
-                                    <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-3">
-                                        <h4><i class="bi bi-person-lines-fill"></i> Lista de profesionales </h4>
-
-                                    </a>
-                                </li>
-                                <li class="nav-item mt-2">
-                                    <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-4">
-                                        <h4><i class="bi bi-calendar-date-fill"></i> Nuevo turno</h4>
-
-                                    </a>
-                                </li>
-
-
-                            </ul>
-
-                        </div>
-                        <div class="col-lg-8">
-                            <div class="tab-content">
-
-                                <div class="tab-pane active show" id="tab-1">
-                                    <h3>Buscar turno por DNI</h3>
-
-                                    <div id="buscar">
-                                        <div  class="buscar-top">
-                                            <div class="col-lg-4 col-md-4 buscar-newsletter">
-
-                                                <form th:action="@{/admin/turnos/__${dni}__}" method="post">
-                                                    <input type="number" name="dni" placeholder="xxxxxxxx"><input type="submit" value="Buscar"> 
-                                                </form>
-                                                <p>Escriba solo números sin espacios y sin puntos.
-                                                    <img src="../assets/img/dni.png" alt="dni-paciente" class="img-fluid">
-
-                                            </div>
+                                        <div class="section-title">
+                                            <h2>Administrar</h2>
                                         </div>
-                                    </div>
-                                </div>
 
-
-                                <div class="tab-pane" id="tab-2">
-                                    <h3><i class="bi bi-plus-square-fill"></i> Agregar profesional</h3>
-                                    <p class="fst-italic">Ingrese los datos del nuevo profesional.</p>
-
-                                    <form th:action="@{/admin/registro}" method="post" >
-                                        <div class="form-row">
-                                            <div class="form-group col-md-6">
-                                                <label for="inputEmail4">Email</label>
-                                                <input class="form-control" type="email" id="inputEmail4" name="email" placeholder="Email">
+                                        <div class="row" data-aos="fade-up" data-aos-delay="100">
+                                            <div class="col-lg-4 mb-5 mb-lg-0">
+                                                <ul class="nav nav-tabs flex-column">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#tab-1">
+                                                            <h4><i class="bi bi-search"></i> Buscar turno Por DNI</h4>
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item mt-2">
+                                                        <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-2">
+                                                            <h4><i class="bi bi-person-plus-fill"></i> Agregar profesional</h4>
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item mt-2">
+                                                        <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-3">
+                                                            <h4><i class="bi bi-person-lines-fill"></i> Lista de profesionales </h4>
+                                                       
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item mt-2">
+                                                        <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-4">
+                                                            <h4><i class="bi bi-calendar-date-fill"></i> Nuevo turno</h4>
+                                                       
+                                                        </a>
+                                                    </li>
+                                                    
+                                              
+                                                </ul>
                                             </div>
-<<<<<<< HEAD
                                             <div class="col-lg-8">
                                                 <div class="tab-content">
 
@@ -247,140 +209,71 @@ and open the template in the editor.
                                                     </div>
                                                     
                                                 </div>
-=======
-                                            <div class="form-group col-md-6">
-                                                <label for="NC">Nombre y Apellido</label>
-                                                <input class="form-control" type="text" id="NC" name="nombreCompleto" placeholder="Nombre y Apellido">
->>>>>>> origin/devDaniel
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="dni">DNI</label>
-                                                <input class="form-control" type="number" id="dni" name="dni" placeholder="DNI">
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="tel">Telefono</label>
-                                                <input class="form-control" type="number" id="tel" name="telefono" placeholder="Telefono">
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="dni">Genero</label>
-                                                <select class="form-select $form-select-grey " id="inputPassword4" type="text" name="genero">
-                                                    <option selected>Genero</option>
-                                                    <option value="MASCULINO">Masculino</option>
-                                                    <option value="FEMENINO">Femenino</option>
-                                                    <option value="OTRO">Otro</option>
-                                                </select>
                                             </div>
 
-                                            <div class="form-element col-md-6">
-                                                <label for="horaEntrada" class="form-label">Hora de ingreso</label>
-                                                <input class="form-control" id="horaEntrada" type="time" name="inicioLaboral" max="23:00:00" min="07:00:00" step="1800">
-                                            </div>
-                                            <div class="form-element col-md-6">
-                                                <label for="horaSalida" class="form-label">Hora de salida</label>
-                                                <input class="form-control" id="horaSalida" type="time" name="finLaboral" max="23:00:00" min="07:00:00" step="1800">
-                                            </div>
-                                            <br>
-                                            <button type="submit" class="btn btn-primary mb-2">Registrar</button>
                                         </div>
-                                    </form>                                                      
-                                </div>                                                
+                                </section><!-- End Departments Section -->
 
 
-                                <div class="tab-pane" id="tab-3">
-                                    <h3>Lista de profesionales</h3>
-                                    <table class="table table-dark table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>Nombre y Apellido</th>
-                                                <th>Inicio horario laboral</th>
-                                                <th>Fin horario laboral</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+                            </main><!-- End #main -->
 
-                                            <tr th:each="profesional : ${profesionales}">
-                                                <td th:text="${profesional.nombre}" ></td>
-                                                <td th:text="${profesional.inicioLaboral}" ></td>
-                                                <td th:text="${profesional.finLaboral}" ></td>
+                            <!-- ======= Footer ======= -->
+                            <footer id="footer">
+                                <div class="footer-top">
+                                    <div class="container">
+                                        <div class="row">
 
-                                            </tr>
+                                            <div class="col-lg-3 col-md-6">
+                                                <div class="footer-info">
+                                                    <h3>SGT</h3>
+                                                    <p>
+                                                        A108 Adam Street <br>
+                                                        NY 535022, USA<br><br>
+                                                        <strong>Phone:</strong> +54 9261 000 0000<br>
+                                                        <strong>Email:</strong> info@example.com<br>
+                                                    </p>
+                                                    <div class="social-links mt-3">
+                                                        <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                                                        <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                                                        <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                                                        <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                                                        <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-
-                                        </tbody>
-                                    </table>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="tab-pane" id="tab-4">
-                                    <h3><i class="bi bi-calendar-date-fill"></i> Nuevo turno</h3>
-                                    <a type="button" class="btn btn-info btn-lg" href="/admin/form-turno"> <i class="bi bi-calendar2-plus-fill"></i> Agregar turno</a>
 
+                                <div class="container">
+                                    <div class="copyright">
+                                        &copy; Copyright <strong><span>SGT</span></strong>. All Rights Reserved
+                                    </div>
+                                    <div class="credits">
+
+                                        Designed by <a href="https://github.com/No-Country/c3-g14-m">Grupo 14 NoCountry</a>
+                                    </div>
                                 </div>
+                            </footer><!-- End Footer -->
 
-                            </div>
-                        </div>
+                            <div id="preloader"></div>
+                            <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-                    </div>
-            </section><!-- End Departments Section -->
+                            <!-- Vendor JS Files -->
+                            <script src="../assets/vendor/purecounter/purecounter.js"></script>
+                            <script src="../assets/vendor/aos/aos.js"></script>
+                            <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+                            <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
+                            <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
+                            <script src="../assets/vendor/php-email-form/validate.js"></script>
 
-
-        </main><!-- End #main -->
-
-        <!-- ======= Footer ======= -->
-        <footer id="footer">
-            <div class="footer-top">
-                <div class="container">
-                    <div class="row">
-
-                        <div class="col-lg-3 col-md-6">
-                            <div class="footer-info">
-                                <h3>SGT</h3>
-                                <p>
-                                    A108 Adam Street <br>
-                                    NY 535022, USA<br><br>
-                                    <strong>Phone:</strong> +54 9261 000 0000<br>
-                                    <strong>Email:</strong> info@example.com<br>
-                                </p>
-                                <div class="social-links mt-3">
-                                    <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                                    <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                                    <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                                    <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                                    <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="container">
-                <div class="copyright">
-                    &copy; Copyright <strong><span>SGT</span></strong>. All Rights Reserved
-                </div>
-                <div class="credits">
-
-                    Designed by <a href="https://github.com/No-Country/c3-g14-m">Grupo 14 NoCountry</a>
-                </div>
-            </div>
-        </footer><!-- End Footer -->
-
-        <div id="preloader"></div>
-        <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-        <!-- Vendor JS Files -->
-        <script src="../assets/vendor/purecounter/purecounter.js"></script>
-        <script src="../assets/vendor/aos/aos.js"></script>
-        <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
-        <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
-        <script src="../assets/vendor/php-email-form/validate.js"></script>
-
-        <!-- Template Main JS File -->
-        <script src="../assets/js/main.js"></script>
+                            <!-- Template Main JS File -->
+                            <script src="../assets/js/main.js"></script>
 
 
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+                            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+                            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 
-    </body>
-</html>
+                            </body>
+                            </html>
