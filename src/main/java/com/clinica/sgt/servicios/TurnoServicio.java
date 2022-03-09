@@ -15,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 import de.jollyday.HolidayCalendar;
 import de.jollyday.HolidayManager;
 import de.jollyday.ManagerParameters;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -141,6 +143,7 @@ public class TurnoServicio {
         return turnoRepo.buscarTurnoPaciente(dni);
     }
     public List<Turno> buscarTurnosProfesional(String dni){
-        return turnoRepo.buscarTurnoProfesional(dni);
+        String id = personalRepo.buscarPorDNI(dni).getId();
+        return turnoRepo.buscarTurnoProfesional(id);
     }
 }
