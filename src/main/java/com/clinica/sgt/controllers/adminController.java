@@ -2,17 +2,17 @@ package com.clinica.sgt.controllers;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import com.clinica.sgt.entidades.Genero;
 import com.clinica.sgt.entidades.Personal;
-import com.clinica.sgt.entidades.Turno;
 import com.clinica.sgt.entidades.UserType;
+import com.clinica.sgt.servicios.PacienteServicio;
 import com.clinica.sgt.servicios.PersonalServicio;
 import com.clinica.sgt.servicios.TurnoServicio;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,10 +31,10 @@ public class adminController {
 	TurnoServicio turnoServicio;
 
 	@Autowired
-	PersonalServicio personalServicio;
+	PacienteServicio pacienteServicio;
 
 	@Autowired
-	BCryptPasswordEncoder bCrypt;
+	PersonalServicio personalServicio;
 
 
 	@PostMapping("/registro") 	
@@ -47,7 +47,7 @@ public class adminController {
 			System.out.println(inicioLaboral);
 			System.out.println(finLaboral);
 
-			personalServicio.crearPersonal(inicioLaboral, finLaboral, dni, email, bCrypt.encode(dni), nombreCompleto, telefono, genero, true, UserType.PROFESIONAL);
+			personalServicio.crearPersonal(inicioLaboral, finLaboral, dni, email, dni, nombreCompleto, telefono, genero, true, UserType.PROFESIONAL);
 			return "exito.html";
 
 		} catch (Exception e) {
@@ -74,7 +74,7 @@ public class adminController {
 	@GetMapping("/turnos/{dni}") 
 	public String listarTurnos(ModelMap modelo, @PathVariable String dni){
 		try {
-			List<Turno> turnos = turnoServicio.buscarTurnosProfesional(dni);
+			//List<Turno> turnos = turnoServicio.buscarTurnosProfesional(dni);
 			//modelo.put("turnos", turnos);
 			return "turnos.html";
 		} catch (Exception e) {
@@ -84,19 +84,41 @@ public class adminController {
 	}
 
 	@GetMapping("/form-turno") //Formulario para nuevo turno
-	public String formTurno(){
+	public String formTurno(ModelMap modelo){
+		List<Personal> profesionales = personalServicio.listarPersonal();
+
+		modelo.put("profesionales", profesionales);
+		
 		return "form-turno-admin.html";
 	}
 	
 	@PostMapping("/agregar-turno")
-	public String agregarTurno(ModelMap modelo, @RequestParam LocalDate dia, @RequestParam LocalTime hora, @RequestParam String dniPaciente, @RequestParam String dniProfesional) {
+	public String agregarTurno(ModelMap modelo, @RequestParam String dia, @RequestParam LocalTime hora, @RequestParam String dniPaciente, @RequestParam String dniProfesional,
+	@RequestParam String email, @RequestParam String nombre, @RequestParam String telefono, @RequestParam Genero genero) {
 		try{
-			turnoServicio.agregarTurno(dia, hora, dniPaciente, dniProfesional);
+			try {
+				pacienteServicio.crearPaciente("", dniPaciente, email, dniPaciente, nombre, telefono, genero, true, UserType.PACIENTE);
+			} catch (Exception e) {
+				modelo.put("dniPaciente", dniPaciente);
+				modelo.put("email", email);
+				modelo.put("nombre", nombre);
+				modelo.put("telefono", telefono);
+				modelo.put("error", e.getMessage());
+				throw new Exception("No se ha podido registrar al usuario, revisar que no exista en la base de datos. Igual se intenta crear el turno");	
+			}
+			DateTimeFormatter DATEFORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    		LocalDate ld = LocalDate.parse(dia, DATEFORMATTER);
+			turnoServicio.agregarTurno(ld, hora, dniPaciente, dniProfesional);
 			return "exito.html";
 		}catch(Exception e){
 			e.getMessage();
-           modelo.put("error", e.getMessage());
-			return "error.html";
+			modelo.put("dia", dia);
+			modelo.put("dni", dniPaciente);
+			modelo.put("email", email);
+			modelo.put("nombre", nombre);
+			modelo.put("telefono", telefono);
+            modelo.put("error", e.getMessage());
+			return "form-turno-admin.html";
 		}
 	}
 

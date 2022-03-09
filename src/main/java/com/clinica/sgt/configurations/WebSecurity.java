@@ -14,7 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+//@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurity extends WebSecurityConfigurerAdapter {
 
    
@@ -29,17 +29,17 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        return bCryptPasswordEncoder;   //Metodo para instanciar encoder
+        return new BCryptPasswordEncoder();   //Metodo para instanciar encoder
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder()); //Para mayor seguridad se encripta la password
         auth.inMemoryAuthentication()
                 .withUser("admin@mail.com")
                 .password(passwordEncoder().encode("1234"))
                 .roles("ADMIN");
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder()); //Para mayor seguridad se encripta la password
+        
     }
     
    
@@ -49,51 +49,25 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         // Restricciones al acceso dependiendo el rol del usuario
         http
             .authorizeRequests()
-            .antMatchers("/css/*", "/js/*", "/img/*", "/**").permitAll();
-//                .and().
-//                formLogin()
-//                .loginPage("/login")
-//                .loginProcessingUrl("/logincheck")
-//                .usernameParameter("username")
-//                .passwordParameter("password")
-//                .defaultSuccessUrl("/inicio")
-//                .permitAll()
-//                .and().logout()
-//                .logoutUrl("/logout")
-//                .logoutSuccessUrl("/login?logout")             
-//                .permitAll().
-//                and().csrf().disable();
-//                .authorizeRequests()
-//                .antMatchers("/admin/**").hasAnyRole("ADMIN")
-//                .antMatchers("/paciente/**").hasAnyRole("PACIENTE")
-//                .antMatchers("/index").permitAll(); //REVISAR SI NO FUNCIONA hasRole probar con hasAuthority
-        //LUEGO AGREGAR LOS PROXIMOS ENDPOINTS
-
-     //   http.formLogin()
-   //             .usernameParameter("email")
-  //              .passwordParameter("password")
- //               .loginPage("/login")
- //                .defaultSuccessUrl("/paciente/inicio"); //Luego cambiarlo, revisar rol y enviar a inicio correspondiente
-//                .and()
-//                .csrf().disable();
-//
-//        http.logout().logoutUrl("/logout");
+            .antMatchers("/css/**", "/js/**", "/img/**").permitAll();
         http.authorizeRequests()
-        
-        .antMatchers("/admin/**").hasRole("ADMIN")
-        .antMatchers("/paciente/**").hasRole("PACIENTE")
-        .antMatchers("/profesional/**").hasRole("PROFESIONAL")
-        .antMatchers("/logout").hasAnyRole("ADMIN", "PROFESIONAL", "PACIENTE")
         .antMatchers("/paciente/registro").permitAll()
         .antMatchers("/index").permitAll()
-        .antMatchers("/login").permitAll(); //REVISAR SI NO FUNCIONA hasRole probar con hasAuthority
+        .antMatchers("/logout").hasAnyRole("ADMIN", "PROFESIONAL", "PACIENTE")
+        .antMatchers("/admin/**").hasRole("ADMIN")
+        .antMatchers("/paciente/**").hasAuthority("PACIENTE")
+        .antMatchers("/profesional/**").hasAuthority("PROFESIONAL")
+        .anyRequest().authenticated();
+        
+         //REVISAR SI NO FUNCIONA hasRole probar con hasAuthority
         //LUEGO AGREGAR LOS PROXIMOS ENDPOINTS
 
         http.formLogin()
         .usernameParameter("email")
         .passwordParameter("password")
-        .loginPage("/login")
-        .defaultSuccessUrl("/admin/inicio") //Luego cambiarlo, revisar rol y enviar a inicio correspondiente
+        .loginPage("/login").permitAll()
+        //.failureUrl("/error")
+        .defaultSuccessUrl("/welcome") 
         .and()
         .csrf().disable();
 

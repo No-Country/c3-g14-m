@@ -30,6 +30,7 @@
                             <p>Sistema de gestion de turnos </p>
                         </div>
                         <h2>Registrarse</h2>
+                        <p style="color:#FF0000" th:if="${error != null}" th:text="${error}"></p>
                         <form id="form-signup" th:action="@{/paciente/registro}" method="post" >
                             <div class="form-element form-stack">
                                 <label for="email" class="form-label">Email</label>
@@ -73,6 +74,7 @@
                             <p>Sistema de gestion de turnos </p>
                         </div>
                         <h2>Ingresar</h2>
+                        <p style="color:#FF0000" th:if="${error != null}" th:text="${error}"></p>
                         <form id="form-login" method="post" th:action="@{/login}" >
                             <div class="form-element form-stack">
                                 <label for="email" class="form-label">Email</label>
