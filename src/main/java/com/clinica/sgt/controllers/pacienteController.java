@@ -107,7 +107,7 @@ public class pacienteController {
             e.printStackTrace();
             modelo.put("error", e.getMessage());
 
-            return "redirect:/";
+            return "error.html";
         }
 
     }
