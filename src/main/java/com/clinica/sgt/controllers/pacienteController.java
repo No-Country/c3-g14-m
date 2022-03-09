@@ -2,11 +2,9 @@ package com.clinica.sgt.controllers;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.clinica.sgt.entidades.Genero;
-import com.clinica.sgt.entidades.Paciente;
 import com.clinica.sgt.entidades.Personal;
 import com.clinica.sgt.entidades.Turno;
 import com.clinica.sgt.entidades.UserType;
@@ -14,9 +12,6 @@ import com.clinica.sgt.servicios.PacienteServicio;
 import com.clinica.sgt.servicios.TurnoServicio;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,9 +27,6 @@ public class pacienteController {
     @Autowired
     TurnoServicio turnoServicio;
 
-
-	@Autowired
-	BCryptPasswordEncoder bCrypt;
 
 	@Autowired
 	PacienteServicio pacienteServicio;
@@ -102,8 +94,8 @@ public class pacienteController {
 
         try {
 
-            pacienteServicio.crearPaciente("", dni, email, bCrypt.encode(dni), nombreCompleto, telefono, genero, true, UserType.PACIENTE);
-            return "exito.html";
+            pacienteServicio.crearPaciente("", dni, email, dni, nombreCompleto, telefono, genero, true, UserType.PACIENTE);
+            return "redirect:/";
 
         } catch (Exception e) {
 
@@ -111,7 +103,7 @@ public class pacienteController {
             e.printStackTrace();
             modelo.put("error", e.getMessage());
 
-            return "error.html";
+            return "redirect:/";
         }
 
     }

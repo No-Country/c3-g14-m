@@ -6,7 +6,7 @@ import com.clinica.sgt.entidades.UserType;
 import com.clinica.sgt.repositorios.PacienteRepositorio;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +15,9 @@ public class PacienteServicio{
     
     @Autowired
     PacienteRepositorio pacienteRepositorio;
+    
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     //****************************VALIDACION******************
     public void validar( String dni, String mail,
@@ -54,8 +57,9 @@ public class PacienteServicio{
         paciente.setHistoriaClinica(historiaClinica);
         paciente.setDni(dni);
         paciente.setMail(mail);
-        String encriptar = new BCryptPasswordEncoder().encode(password);
-        paciente.setPassword(encriptar);
+        String passCoded = passwordEncoder.encode(password);
+        // System.out.println(passCoded);
+        paciente.setPassword(passCoded);
         paciente.setNombre(nombre);
         paciente.setTelefono(telefono);
         paciente.setGenero(genero);
@@ -74,8 +78,7 @@ public class PacienteServicio{
         paciente.setNombre(nombre);
         paciente.setDni(dni);
         paciente.setMail(mail);
-        String encriptar = new BCryptPasswordEncoder().encode(password);
-        paciente.setPassword(encriptar);
+        paciente.setPassword(passwordEncoder.encode(password));
         paciente.setTelefono(telefono);
         paciente.setGenero(genero);
         paciente.setUserType(userType);
