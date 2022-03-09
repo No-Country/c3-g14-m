@@ -35,7 +35,7 @@ public class indexController {
 			System.out.println(auth);
 			if (auth.equalsIgnoreCase("[ROLE_ADMIN]")) {
 				return "redirect:/admin/inicio";
-			}else if(auth.equalsIgnoreCase("[ROLE_PROFESIONAL]")){
+			}else if(auth.equalsIgnoreCase("[ROLE_PROFESIONAL]")||auth.equalsIgnoreCase("[PROFESIONAL]")){
 				return "redirect:/profesional/inicio";
 			}else if(auth.equalsIgnoreCase("[PACIENTE]")||auth.equalsIgnoreCase("[ROLE_PACIENTE]")){
 				return "redirect:/paciente/inicio";
