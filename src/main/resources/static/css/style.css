@@ -22,7 +22,7 @@ body {
   left: 0;
   width: 50%;
   height: 100%;
-  background: #03A9F4;
+  background: #3fbbc0;
 }
 
 #back {
@@ -120,7 +120,7 @@ input {
   border-bottom: 1px solid #212121;
 }
 .right input:focus, .right input:active {
-  border-color: #03A9F4;
+  border-color: #3fbbc0;
 }
 .right input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 30px #f9f9f9 inset;
@@ -148,7 +148,7 @@ input {
 }
 
 .right .content h2 {
-  color: #03A9F4;
+  color: #3fbbc0;
 }
 
 .form-element {
@@ -226,7 +226,7 @@ button.signup, input[name="izq"] {
   background: #5fa26f;
 }
 button.login, input[name="izq"] {
-  background: #03A9F4;
+  background: #3fbbc0;
 }
 button.off{
   background: none;
@@ -253,7 +253,7 @@ button:focus.off, button:active.off, button:hover.off{
   box-shadow: none;
 }
 button:focus.off.signup, button:active.off.signup, button:hover.off.signup{
-  color: #03A9F4;
+  color: #3fbbc0;
   background: #212121;
 }
 button:focus.off.login, button:active.off.login, button:hover.off.login{
