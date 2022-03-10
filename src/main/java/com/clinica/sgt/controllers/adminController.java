@@ -41,14 +41,14 @@ public class adminController {
 
 
 	@PostMapping("/registro") 	
-	public String registro(@RequestParam LocalTime inicioLaboral, @RequestParam LocalTime finLaboral, @RequestParam String email, @RequestParam String nombreCompleto,
+	public String registro(@RequestParam String email, @RequestParam String nombreCompleto,
 			@RequestParam String dni, @RequestParam String telefono,
 			@RequestParam Genero genero, ModelMap modelo) {
 
 		try {
 			
-			System.out.println(inicioLaboral);
-			System.out.println(finLaboral);
+			LocalTime inicioLaboral = LocalTime.of(8, 00);
+			LocalTime finLaboral = LocalTime.of(16, 45);
 
 			personalServicio.crearPersonal(inicioLaboral, finLaboral, dni, email, dni, nombreCompleto, telefono, genero, true, UserType.PROFESIONAL);
 			return "exitoRegistro_1.html";
