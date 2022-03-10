@@ -41,17 +41,17 @@ public class adminController {
 
 
 	@PostMapping("/registro") 	
-	public String registro(@RequestParam LocalTime inicioLaboral, @RequestParam LocalTime finLaboral, @RequestParam String email, @RequestParam String nombreCompleto,
+	public String registro(@RequestParam String email, @RequestParam String nombreCompleto,
 			@RequestParam String dni, @RequestParam String telefono,
 			@RequestParam Genero genero, ModelMap modelo) {
 
 		try {
 			
-			System.out.println(inicioLaboral);
-			System.out.println(finLaboral);
+			LocalTime inicioLaboral = LocalTime.of(8, 00);
+			LocalTime finLaboral = LocalTime.of(16, 45);
 
 			personalServicio.crearPersonal(inicioLaboral, finLaboral, dni, email, dni, nombreCompleto, telefono, genero, true, UserType.PROFESIONAL);
-			return "exito.html";
+			return "exitoRegistro_1.html";
 
 		} catch (Exception e) {
 
@@ -112,7 +112,7 @@ public class adminController {
 			DateTimeFormatter DATEFORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     		LocalDate ld = LocalDate.parse(dia, DATEFORMATTER);
 			turnoServicio.agregarTurno(ld, hora, dniPaciente, dniProfesional);
-			return "exito.html";
+			return "exitoT.html";
 		}catch(Exception ex){
 			ex.getMessage();
 			modelo.put("dia", dia);
@@ -145,11 +145,23 @@ public class adminController {
 		}
 	}
 
-	@PostMapping("/modificar-alta-turno/{id}")
-	public String modificarAltaTurno(ModelMap modelo,@PathVariable String id, @RequestParam boolean alta ){
+	@GetMapping("/modificar-alta-turno")
+	public String modificarAltaTurno(ModelMap modelo, String id){
 		try{
-			turnoServicio.modificarAlta(id, alta);
-			return "exito.html";
+			turnoServicio.modificarAlta(id, false);
+			return "redirect:/admin/inicio";
+		}catch(Exception e){
+			e.getMessage();
+           modelo.put("error", e.getMessage());
+			return "error.html";
+		}
+	}
+
+	@GetMapping("/modificar-alta-profesional")
+	public String modificarAltaProfesional(ModelMap modelo, String id){
+		try{
+			personalServicio.bajaPersonal(id);
+			return "redirect:/welcome";
 		}catch(Exception e){
 			e.getMessage();
            modelo.put("error", e.getMessage());

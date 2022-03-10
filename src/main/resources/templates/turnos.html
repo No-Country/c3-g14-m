@@ -82,7 +82,7 @@
                             <th>Paciente</th>
                             <th>Profesional</th>
 
-                            <!-- <th>Administracion</th> -->
+                            <th>Administracion</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -93,16 +93,16 @@
                             <td th:text="${turno.paciente.nombre}" th:if="${turno.alta}"></td>
                             <td th:text="${turno.personal.nombre}" th:if="${turno.alta}"></td>
 
-                            <!--<td> 
+                            <td th:if="${turno.alta}" style="text-align: center;"> 
 
                             
 
-                                <a class="mx-2" th:href="@{/admin/mod-turno/__${id}__}" th:if="${turno.alta}"
-                                    class="btn btn-outline-warning" role="button">Modificar</a>
-                                <a class="mx-2" th:href="@{/admin/modificar-alta-turno/__${id}__}" th:if="${turno.alta}"
-                                    class="btn btn-outline-danger" role="button">Baja</a>
+                                <!-- <a class="mx-2" th:href="@{/admin/mod-turno/__${id}__}" th:if="${turno.alta}"
+                                    class="btn btn-outline-warning" role="button">Modificar</a> -->
+                                <a class="mx-2" th:href="@{/admin/modificar-alta-turno/(id=__${turno.id}__)}" th:if="${turno.alta}"
+                                    role="button" ><button type="button" class="btn btn-outline-danger">Baja</button></a>
 
-                            </td>-->
+                            </td>
                         </tr> 
 
 

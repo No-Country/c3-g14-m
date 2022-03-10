@@ -17,10 +17,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PersonalRepositorio extends JpaRepository<Personal,String>{
-     @Query("SELECT p FROM Personal p WHERE p.alta = 1 ORDER BY p.nombre ASC")
+     @Query("SELECT p FROM Usuario p WHERE p.alta = 1 AND user_type='PROFESIONAL' ORDER BY p.nombre ASC")
      public ArrayList<Personal> mostrarPersonalActivo();
     
-    @Query("SELECT p FROM Personal p ORDER BY p.nombre ASC")
+    @Query("SELECT p FROM Usuario p ORDER BY p.nombre ASC")
     public List<Personal> mostrarTodoPersonal();
     
     @Query("SELECT p FROM Personal p WHERE p.mail = :nombre AND p.alta = 1")
@@ -31,4 +31,10 @@ public interface PersonalRepositorio extends JpaRepository<Personal,String>{
 
     @Query("SELECT p FROM Usuario p WHERE p.dni = :dni and p.alta = 1")
     public Usuario buscarPorDNI(@Param("dni")String dni);
+    
+    @Query("SELECT inicioLaboral FROM Usuario p WHERE p.id = :id")
+    public Personal buscarHoraInicio(@Param("id")String id);
+    
+    @Query("SELECT finLaboral FROM Usuario p WHERE p.id = :id")
+    public Personal buscarHoraFin(@Param("id")String id);
 }

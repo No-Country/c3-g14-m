@@ -164,14 +164,14 @@ and open the template in the editor.
                                                                     </select>
                                                                 </div>
 
-                                                                <div class="form-element col-md-6">
+                                                                <!-- <div class="form-element col-md-6">
                                                                     <label for="horaEntrada" class="form-label">Hora de ingreso</label>
                                                                     <input class="form-control" id="horaEntrada" type="time" name="inicioLaboral" max="23:00:00" min="07:00:00" step="1800">
                                                                 </div>
                                                                 <div class="form-element col-md-6">
                                                                     <label for="horaSalida" class="form-label">Hora de salida</label>
                                                                     <input class="form-control" id="horaSalida" type="time" name="finLaboral" max="23:00:00" min="07:00:00" step="1800">
-                                                                </div>
+                                                                </div> -->
                                                                 <br>
                                                                 <button type="submit" class="btn btn-primary mb-2">Registrar</button>
                                                             </div>
@@ -187,14 +187,17 @@ and open the template in the editor.
                                                                 <th>Nombre y Apellido</th>
                                                                 <th>Inicio horario laboral</th>
                                                                 <th>Fin horario laboral</th>
+                                                                <th style="vertical-align: middle;">Administracion</th>
                                                               </tr>
                                                             </thead>
                                                             <tbody>
                                                           
                                                               <tr th:each="profesional : ${profesionales}">
-                                                                <td th:text="${profesional.nombre}" ></td>
-                                                                <td th:text="${profesional.inicioLaboral}" ></td>
-                                                                <td th:text="${profesional.finLaboral}" ></td>
+                                                                <td th:text="${profesional.nombre}" th:if="${profesional.alta}"></td>
+                                                                <td th:text="${profesional.inicioLaboral}" th:if="${profesional.alta}"></td>
+                                                                <td th:text="${profesional.finLaboral}" th:if="${profesional.alta}"></td>
+                                                                <td th:if="${profesional.alta}" style="text-align: center;"> <a class="mx-2" th:href="@{/admin/modificar-alta-profesional/(id=__${profesional.id}__)}" th:if="${profesional.alta}"
+                                                                    role="button" ><button type="button" class="btn btn-outline-danger">Baja</button></a></td>
                                                           
                                                               </tr>
                                                           

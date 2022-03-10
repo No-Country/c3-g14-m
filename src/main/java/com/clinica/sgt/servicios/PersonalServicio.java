@@ -92,23 +92,39 @@ public class PersonalServicio{
 
          return listado;
      }
+     
+      public Personal horaEntrada(String id){
+         Personal horaInicio = personalRepositorio.buscarHoraInicio(id);
+
+         return horaInicio;
+     }
+      
+      public Personal horaSalida(String id){
+         Personal horaSalida = personalRepositorio.buscarHoraInicio(id);
+
+         return horaSalida;
+     }
 
     //***********************BAJA*****************
     @Transactional
-    public void bajaPersonal(String id, UserType userType) {
-        Personal personal = personalRepositorio.buscarPorID(id);
-        switch (userType) {
-            case ADMIN:
-                if (personal != null) {
-                    personal.setAlta(false);
-                    personalRepositorio.save(personal);
-                }
-                System.out.println("No existe personal con el ID ingresado");
-                break;
-            default:
-                System.out.println("No tiene privilegios de Administrador");
-                break;
-        }
+    public void bajaPersonal(String id) {
+        Personal personal = personalRepositorio.getById(id);
+        personal.setAlta(false);
+        personalRepositorio.save(personal);
+        
+        
+        // switch (userType) {
+        //     case ADMIN:
+        //         if (personal != null) {
+        //             personal.setAlta(false);
+        //             personalRepositorio.save(personal);
+        //         }
+        //         System.out.println("No existe personal con el ID ingresado");
+        //         break;
+        //     default:
+        //         System.out.println("No tiene privilegios de Administrador");
+        //         break;
+        // }
 
     }
     

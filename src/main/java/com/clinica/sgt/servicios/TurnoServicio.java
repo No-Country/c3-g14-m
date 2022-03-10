@@ -17,7 +17,6 @@ import de.jollyday.HolidayCalendar;
 import de.jollyday.HolidayManager;
 import de.jollyday.ManagerParameters;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -63,7 +62,7 @@ public class TurnoServicio {
             throw new Exception("Feriado o dia no laboral");
         }
 
-        Personal profesional = (Personal) personalRepo.buscarPorDNI(dniProfesional);
+        // Personal profesional = (Personal) personalRepo.buscarPorDNI(dniProfesional);
 
         // if(hora.isBefore(profesional.getInicioLaboral()) || hora.isAfter(profesional.getFinLaboral())){
         //     throw new Exception("El turno no esta en el horario laboral del profesional");
@@ -119,7 +118,7 @@ public class TurnoServicio {
     @Transactional
     public void modificarAlta(String id, boolean alta){
 
-        Turno turno = turnoRepo.buscarPorID(id);
+        Turno turno = turnoRepo.getById(id);
 
         turno.setAlta(alta);
 
