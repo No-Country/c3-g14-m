@@ -69,7 +69,7 @@ public class pacienteController {
         //Revisar si el parametro ingresado para profesional es entidad o String
         try {
             turnoServicio.agregarTurno(dia, hora, dni, profesional.getDni());
-            return "exito.html";
+            return "exitoT.html";
         } catch (Exception e) {
             e.getMessage();
             modelo.put("error", e.getMessage());
@@ -99,7 +99,7 @@ public class pacienteController {
         try {
 
             pacienteServicio.crearPaciente("", dni, email, dni, nombreCompleto, telefono, genero, true, UserType.PACIENTE);
-            return "redirect:/";
+            return "exitoRegistro.html";
 
         } catch (Exception e) {
 
@@ -107,7 +107,7 @@ public class pacienteController {
             e.printStackTrace();
             modelo.put("error", e.getMessage());
 
-            return "redirect:/";
+            return "error.html";
         }
 
     }
