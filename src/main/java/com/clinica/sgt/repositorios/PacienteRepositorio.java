@@ -14,18 +14,18 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PacienteRepositorio extends JpaRepository<Paciente,String>{
-     @Query("SELECT p FROM Paciente p WHERE p.alta = 1 ORDER BY p.nombre ASC")
+     @Query("SELECT p FROM Usuario p WHERE p.alta = 1 AND p.userType = 'PACIENTE' ORDER BY p.nombre ASC")
      public List<Paciente> mostrarPacientesActivos();
     
-    @Query("SELECT p FROM Paciente p ORDER BY p.nombre ASC")
+    @Query("SELECT p FROM Usuario p WHERE p.userType = 'PACIENTE' ORDER BY p.nombre ASC")
     public List<Paciente> mostrarTodosPacientes();
     
-    @Query("SELECT p FROM Paciente p WHERE p.mail = :nombre")
+    @Query("SELECT p FROM Usuario p WHERE p.userType = 'PACIENTE' AND p.mail = :nombre")
     public Paciente findByUsername(@Param("nombre")String nombre);
 
-    @Query("SELECT p FROM Paciente p WHERE p.id = :id")
+    @Query("SELECT p FROM Usuario p WHERE p.userType = 'PACIENTE' AND p.id = :id")
     public Paciente buscarPorID(@Param("id")String id);
 
-    @Query("SELECT p FROM Paciente p WHERE p.dni = :dni")
+    @Query("SELECT p FROM Usuario p WHERE p.userType = 'PACIENTE' AND p.dni = :dni")
     public Paciente buscarPorDNI(@Param("dni")String dni);
 }
