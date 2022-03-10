@@ -153,11 +153,23 @@ public class adminController {
 		}
 	}
 
-	@PostMapping("/modificar-alta-turno/{id}")
-	public String modificarAltaTurno(ModelMap modelo,@PathVariable String id, @RequestParam boolean alta ){
+	@GetMapping("/modificar-alta-turno")
+	public String modificarAltaTurno(ModelMap modelo, String id){
 		try{
-			turnoServicio.modificarAlta(id, alta);
-			return "exito.html";
+			turnoServicio.modificarAlta(id, false);
+			return "redirect:/admin/inicio";
+		}catch(Exception e){
+			e.getMessage();
+           modelo.put("error", e.getMessage());
+			return "error.html";
+		}
+	}
+
+	@GetMapping("/modificar-alta-profesional")
+	public String modificarAltaProfesional(ModelMap modelo, String id){
+		try{
+			personalServicio.bajaPersonal(id);
+			return "redirect:/welcome";
 		}catch(Exception e){
 			e.getMessage();
            modelo.put("error", e.getMessage());

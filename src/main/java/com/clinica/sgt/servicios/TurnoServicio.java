@@ -118,7 +118,7 @@ public class TurnoServicio {
     @Transactional
     public void modificarAlta(String id, boolean alta){
 
-        Turno turno = turnoRepo.buscarPorID(id);
+        Turno turno = turnoRepo.getById(id);
 
         turno.setAlta(alta);
 

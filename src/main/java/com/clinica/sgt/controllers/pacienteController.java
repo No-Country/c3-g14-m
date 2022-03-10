@@ -99,11 +99,11 @@ public class pacienteController {
         }
     }
 
-    @PostMapping("/alta-turno/{id}") // id del turno, funcion para dar de baja o alta
-    public String altaTurno(ModelMap modelo, @PathVariable String id, @RequestParam boolean alta) {
+    @GetMapping("/alta-turno") // id del turno, funcion para dar de baja o alta
+    public String altaTurno(ModelMap modelo, String id) {
         try {
-            turnoServicio.modificarAlta(id, alta);
-            return "exito.html";
+            turnoServicio.modificarAlta(id, false);
+            return "redirect:/welcome";
         } catch (Exception e) {
             e.getMessage();
             modelo.put("error", e.getMessage());

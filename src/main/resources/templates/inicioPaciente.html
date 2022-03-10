@@ -134,7 +134,7 @@ and open the template in the editor.
                                                 <th>Hora</th>
                                                 <th>Paciente</th>
             
-                                                <!-- <th>Administracion</th> -->
+                                                <th>Administracion</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -143,6 +143,9 @@ and open the template in the editor.
                                                 <td th:text="${turno.dia}" th:if="${turno.alta}"></td>
                                                 <td th:text="${turno.hora}" th:if="${turno.alta}"></td>
                                                 <td th:text="${turno.personal.nombre}" th:if="${turno.alta}"></td>
+                                                <td th:if="${turno.alta}" style="text-align: center;"><a class="mx-2" th:href="@{/paciente/alta-turno/(id=__${turno.id}__)}" th:if="${turno.alta}"
+                                                    role="button" ><button type="button" class="btn btn-outline-danger">Baja</button></a>
+                                                </td>
             
                                             </tr>
             
