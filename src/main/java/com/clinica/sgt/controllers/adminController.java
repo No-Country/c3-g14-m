@@ -51,7 +51,7 @@ public class adminController {
 			System.out.println(finLaboral);
 
 			personalServicio.crearPersonal(inicioLaboral, finLaboral, dni, email, dni, nombreCompleto, telefono, genero, true, UserType.PROFESIONAL);
-			return "exito.html";
+			return "exitoRegistro_1.html";
 
 		} catch (Exception e) {
 
@@ -120,7 +120,7 @@ public class adminController {
 			DateTimeFormatter DATEFORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     		LocalDate ld = LocalDate.parse(dia, DATEFORMATTER);
 			turnoServicio.agregarTurno(ld, hora, dniPaciente, dniProfesional);
-			return "exito.html";
+			return "exitoT.html";
 		}catch(Exception ex){
 			ex.getMessage();
 			modelo.put("dia", dia);
