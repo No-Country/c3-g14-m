@@ -7,6 +7,7 @@
         <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,600' rel='stylesheet' type='text/css'><link rel="stylesheet" href="./css/style.css">
         <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        
 
     </head>
     <body>
@@ -30,6 +31,7 @@
                             <p>Sistema de gestion de turnos </p>
                         </div>
                         <h2>Registrarse</h2>
+                        <p style="color:#FF0000" th:if="${error != null}" th:text="${error}"></p>
                         <form id="form-signup" th:action="@{/paciente/registro}" method="post" >
                             <div class="form-element form-stack">
                                 <label for="email" class="form-label">Email</label>
@@ -59,11 +61,11 @@
                             <div class="form-element form-submit">
                                 <button id="signUp" class="signup" style="width: auto;" type="submit" name="signup">Registrar</button>
                                 <button id="goLeft" class="signup off" type="button" onsubmit="return false">Ingresar</button>
-                                <!-- <input type="button" class="signUp off" id="goLeft" name="izq" value="Ingresar" > -->
+                               
                             </div>
 
                         </form>
-                        <!-- <button id="goLeft" class="signup off" style="width: fit-content; " onsubmit="return false">Ingresar</button> -->
+                        
                     </div>
                 </div>
                 <div class="right">
@@ -73,6 +75,7 @@
                             <p>Sistema de gestion de turnos </p>
                         </div>
                         <h2>Ingresar</h2>
+                        <p style="color:#FF0000" th:if="${error != null}" th:text="${error}"></p>
                         <form id="form-login" method="post" th:action="@{/login}" >
                             <div class="form-element form-stack">
                                 <label for="email" class="form-label">Email</label>

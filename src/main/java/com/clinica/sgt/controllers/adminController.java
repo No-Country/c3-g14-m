@@ -2,11 +2,16 @@ package com.clinica.sgt.controllers;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.clinica.sgt.entidades.Genero;
+import com.clinica.sgt.entidades.Paciente;
+import com.clinica.sgt.entidades.Personal;
 import com.clinica.sgt.entidades.Turno;
 import com.clinica.sgt.entidades.UserType;
+import com.clinica.sgt.servicios.PacienteServicio;
 import com.clinica.sgt.servicios.PersonalServicio;
 import com.clinica.sgt.servicios.TurnoServicio;
 
@@ -29,23 +34,29 @@ public class adminController {
 	TurnoServicio turnoServicio;
 
 	@Autowired
+	PacienteServicio pacienteServicio;
+
+	@Autowired
 	PersonalServicio personalServicio;
 
 
 	@PostMapping("/registro") 	
 	public String registro(@RequestParam LocalTime inicioLaboral, @RequestParam LocalTime finLaboral, @RequestParam String email, @RequestParam String nombreCompleto,
-			@RequestParam String password, @RequestParam String dni, @RequestParam String telefono,
-			@RequestParam Genero genero, @RequestParam UserType userType, ModelMap modelo) {
+			@RequestParam String dni, @RequestParam String telefono,
+			@RequestParam Genero genero, ModelMap modelo) {
 
 		try {
+			
+			System.out.println(inicioLaboral);
+			System.out.println(finLaboral);
 
-			personalServicio.crearPersonal(inicioLaboral, finLaboral, dni, email, password, nombreCompleto, telefono, genero, true, userType);
+			personalServicio.crearPersonal(inicioLaboral, finLaboral, dni, email, dni, nombreCompleto, telefono, genero, true, UserType.PROFESIONAL);
 			return "exito.html";
 
 		} catch (Exception e) {
 
-			e.getMessage();
-           modelo.put("error", e.getMessage());
+			e.printStackTrace();
+            modelo.put("error", e.getMessage());
 
 			return "error.html";
 		}
@@ -55,32 +66,71 @@ public class adminController {
 	@GetMapping("/inicio")
 	public String inicio(ModelMap model) {
 
+		List<Personal> profesionales = personalServicio.listarPersonal();
+
+		model.put("profesionales", profesionales);
 		
 		return "inicioAdmin.html";
 
 	}
 
-	@GetMapping("/turnos/{dni}") 
-	public String listarTurnos(ModelMap modelo, @PathVariable String dni){
-		List<Turno> turnos = turnoServicio.buscarTurnosProfesional(dni);
-		modelo.put("turnos", turnos);
-		return "turnos.html";
+	
+	@GetMapping("/turnos") 
+	public String listarTurnos(ModelMap modelo, String dni){
+		try {
+			List<Turno> turnos = new ArrayList<>();
+			turnos = turnoServicio.buscarTurnos(dni);
+			System.out.println(turnos+"ultimo");
+			modelo.put("turnos", turnos);
+			return "turnos.html";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error.html";
+		}
 	}
 
 	@GetMapping("/form-turno") //Formulario para nuevo turno
-	public String formTurno(){
+	public String formTurno(ModelMap modelo){
+		List<Personal> profesionales = personalServicio.listarPersonal();
+
+		modelo.put("profesionales", profesionales);
+		
 		return "form-turno-admin.html";
 	}
 	
 	@PostMapping("/agregar-turno")
-	public String agregarTurno(ModelMap modelo, @RequestParam LocalDate dia, @RequestParam LocalTime hora, @RequestParam String dniPaciente, @RequestParam String dniProfesional) {
+	public String agregarTurno(ModelMap modelo, @RequestParam String dia, @RequestParam LocalTime hora, @RequestParam String dniPaciente, @RequestParam String dniProfesional,
+	@RequestParam String email, @RequestParam String nombre, @RequestParam String telefono, @RequestParam Genero genero) {
 		try{
-			turnoServicio.agregarTurno(dia, hora, dniPaciente, dniProfesional);
+			try {
+				Paciente p = pacienteServicio.buscarPacientePorDNI(dniPaciente);
+				if (p != null) {
+					throw new Exception();
+				}else{
+					pacienteServicio.crearPaciente("", dniPaciente, email, dniPaciente, nombre, telefono, genero, true, UserType.PACIENTE);
+				}
+			} catch (Exception e) {
+				modelo.put("dniPaciente", dniPaciente);
+				modelo.put("email", email);
+				modelo.put("nombre", nombre);
+				modelo.put("telefono", telefono);
+				modelo.put("error", e.getMessage());
+				throw new Exception("No se ha podido registrar al usuario, revisar que no exista en la base de datos. Igual se intenta crear el turno");	
+			}
+			DateTimeFormatter DATEFORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    		LocalDate ld = LocalDate.parse(dia, DATEFORMATTER);
+			turnoServicio.agregarTurno(ld, hora, dniPaciente, dniProfesional);
 			return "exito.html";
-		}catch(Exception e){
-			e.getMessage();
-           modelo.put("error", e.getMessage());
-			return "error.html";
+		}catch(Exception ex){
+			ex.getMessage();
+			modelo.put("dia", dia);
+			modelo.put("dni", dniPaciente);
+			modelo.put("email", email);
+			modelo.put("nombre", nombre);
+			modelo.put("telefono", telefono);
+            modelo.put("error", ex.getMessage());
+			
+			return "form-turno-admin.html";
 		}
 	}
 

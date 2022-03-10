@@ -14,10 +14,8 @@ import com.clinica.sgt.servicios.PacienteServicio;
 import com.clinica.sgt.servicios.TurnoServicio;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.Nullable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,9 +33,6 @@ public class pacienteController {
 
 
 	@Autowired
-	BCryptPasswordEncoder bCrypt;
-
-	@Autowired
 	PacienteServicio pacienteServicio;
 
 	@GetMapping("/inicio")
@@ -46,7 +41,7 @@ public class pacienteController {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		UserDetails userDetails = null;
 		if (principal instanceof UserDetails) {
-  			userDetails = (UserDetails) principal;
+ 			userDetails = (UserDetails) principal;
 		}
 		 Paciente p1 = pacienteServicio.buscarPacientePorUsername(userDetails.getUsername());
 		 List<Turno> turnos = new ArrayList<>();
@@ -103,8 +98,8 @@ public class pacienteController {
 
         try {
 
-            pacienteServicio.crearPaciente("", dni, email, bCrypt.encode(dni), nombreCompleto, telefono, genero, true, UserType.PACIENTE);
-            return "exito.html";
+            pacienteServicio.crearPaciente("", dni, email, dni, nombreCompleto, telefono, genero, true, UserType.PACIENTE);
+            return "redirect:/";
 
         } catch (Exception e) {
 

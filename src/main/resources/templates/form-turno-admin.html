@@ -14,7 +14,7 @@
         <meta content="" name="keywords">
 
         <!-- Favicons -->
-        <link href="../assets/img/favicon.png" rel="icon">
+        <link href="../assets/img/logoD-removebg (1).png" rel="icon">
         <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
         <!-- Google Fonts -->
@@ -31,10 +31,9 @@
         <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
         <!-- los CSS  -->
-        <link href="../assets/css/style.css" rel="stylesheet">
+        <link href="../assets/css/style.css" rel="stylesheet"> 
     </head>
     <body>
-
         <!-- ======= Top Bar ======= -->
         <div id="topbar" class="d-flex align-items-center fixed-top">
             <div class="container d-flex align-items-center justify-content-center justify-content-md-between">
@@ -44,116 +43,122 @@
                 </div>
             </div>
         </div>
-
         <!-- ======= Header ======= -->
         <header id="header" class="fixed-top">
             <div class="container d-flex align-items-center">
 
 
-                <h1 class="logo me-auto"><a href="index.html">SGT</a></h1> 
+                <a href="index.html" class="logo me-auto"> <img src="../assets/img/logoD-removebg (1).png" alt="logo">SGT</a> 
 
                 <nav id="navbar" class="navbar order-last order-lg-0">
                     <ul>
                         <li><a class="nav-link scrollto " href="/admin/inicio">Inicio</a></li>
-                        <li><a class="nav-link scrollto active" href="/admin/form-turno">Turnos</a></li>
-                        <li><a class="nav-link scrollto" href="#contact">Contacto</a></li>
+                        <li><a class="nav-link scrollto active" href="/admin/form-turno">Turno Nuevo</a></li>
 
-                        <li class="dropdown"><a href="#"><span>Perfil</span> <i class="bi bi-chevron-down"></i></a>
+                        <!-- <li class="dropdown"><a href="#"><span>Perfil</span> <i class="bi bi-chevron-down"></i></a>
                             <ul>
                                 <li><a href="#">Editar perfil</a></li>
                                 <li><a href="#">Cambiar Contraseña</a></li>
 
-                            </ul>
+                            </ul> -->
                             <i class="bi bi-list mobile-nav-toggle"></i>
                     </ul>
+                    <i class="bi bi-list mobile-nav-toggle"></i>
                 </nav>  
 
-                <a href="" class="appointment-btn scrollto">Cerrar <span class="d-none d-md-inline"> sesion</span> </a>
+                <a th:href="@{/logout}" class="appointment-btn scrollto">Cerrar sesion</span> </a>
 
             </div>
-            
         </header> 
-        
-        
-        
         <main id="main">
-<!--            aca tuve que hacer unos saltos de linea pero despues lo acomodo con css-->
+            <!--  aca tuve que hacer unos saltos de linea pero despues lo acomodo con css-->
             <br>
             <br>
             <br>
             <br>
-            
+            <section id="appointment" class="appointment section-bg">
+                <div class="container" data-aos="fade-up">
 
+                    <div class="section-title">
+                        <h2>Solicitar turno</h2>
+                        <p>Verifique sus datos de usuario y contacto en caso de ser necesario modifíquelo en la sección de perfiles. </p>
+                    </div>
 
-        <section id="appointment" class="appointment section-bg">
-            <div class="container" data-aos="fade-up">
+                    <form th:action="@{/admin/agregar-turno}" method="post" role="form" class="turno-form" data-aos="fade-up" data-aos-delay="100">
+                        <p style="color:#FF0000" th:if="${error != null}" th:text="${error}"></p>
+                        <div class="row">
+                            <div class="col-md-4 form-group">
+                                <input type="text"  name="nombre" class="form-control" id="name" placeholder="Nombre y Apellido"  required>
+                            </div>
+                            <div class="col-md-4 form-group mt-3 mt-md-0">
+                                <input type="email" class="form-control" name="email" id="email" placeholder="Email"  required>
+                            </div>
+                            <div class="col-md-4 form-group mt-3 mt-md-0">
+                                <input type="tel" class="form-control" name="telefono" id="phone" placeholder="Telefono"  required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 form-group mt-3">
+                                <input type="num" name="dniPaciente" class="form-control datepicker" id="date" placeholder="DNI"  required>
+                            </div>
 
-                <div class="section-title">
-                    <h2>Solicitar turno</h2>
-                    <p>Verifique sus datos de usuario y contacto en caso de ser necesario modifíquelo en la sección de perfiles. </p>
+                            <div class="col-md-4 form-group mt-3">
+
+                                <select class="form-select" type="text" name="genero" >
+                                    <option selected>Genero</option>
+                                    <option value="MASCULINO">Masculino</option>
+                                    <option value="FEMENINO">Femenino</option>
+                                    <option value="OTRO">Otro</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 form-group mt-3">
+                                <select name="dniProfesional" class="form-select">
+                                    <option value="">Seleccione Doctor</option>
+                                    <option th:each="profesional : ${profesionales}" th:value="${profesional.dni}" type="text"
+                                            th:utext="${profesional.nombre}"></option>
+
+                                </select>
+                            </div>
+
+                            <div class="col-md-4 form-group mt-3">
+                                <select name="hora" id="doctor" class="form-select">
+                                    <option value="">Horario</option>
+                                    <option value="08:00">08:00</option>
+                                    <option value="08:30">08:30</option>
+                                    <option value="09:00">09:00</option>
+                                    <option value="09:30">09:30</option>
+                                    <option value="10:00">10:00</option>
+                                    <option value="10:30">10:30</option>
+                                    <option value="11:00">11:00</option>
+                                    <option value="11:30">11:30</option>
+                                    <option value="12:00">12:00</option>
+                                    <option value="12:30">12:30</option>
+                                    <option value="13:00">13:00</option>
+                                    <option value="13:30">13:30</option>
+                                    <option value="14:00">14:00</option>
+                                    <option value="14:30">14:30</option>
+                                    <option value="15:00">15:00</option>
+                                    <option value="15:30">15:30</option>
+                                    <option value="16:00">16:00</option>
+                                    <option value="16:30">16:30</option>
+
+                                </select>
+                            </div>
+                            <div class="col-md-4 form-group mt-3">
+                                <input type="date" name="dia" class="form-control datepicker" id="date" placeholder="Fecha"  min="2022-03-01" max="2022-12-31"required>
+                            </div>
+                        </div>
+                        <div class="my-3">
+                            <div class="loading">Loading</div>
+                            <div class="error-message"></div>
+                            <div class="sent-message">Your appointment request has been sent successfully. Thank you!</div>
+                        </div>
+                        <div class="text-center"><button type="submit">Solicitar</button></div>
+                    </form>
+
                 </div>
+            </section><!-- End Appointment Section -->
 
-                <form action="" method="post" role="form" class="turno-form" data-aos="fade-up" data-aos-delay="100">
-                    <div class="row">
-                        <div class="col-md-4 form-group">
-                            <input type="text"  name="nombreCompleto" class="form-control" id="name" placeholder="NombreCompleto"  required>
-                        </div>
-                        <div class="col-md-4 form-group mt-3 mt-md-0">
-                            <input type="email" class="form-control" name="email" id="email" placeholder="Email"  required>
-                        </div>
-                        <div class="col-md-4 form-group mt-3 mt-md-0">
-                            <input type="tel" class="form-control" name="telefono" id="phone" placeholder="Telefono"  required>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4 form-group mt-3">
-                            <input type="num" name="dni" class="form-control datepicker" id="date" placeholder="DNI"  required>
-                        </div>
-                        <div class="col-md-4 form-group mt-3">
-                            <select name="personal" id="doctor" class="form-select">
-                                <option value="">Seleccione Doctor</option>
-                                <option value="Doctor 1">Dr. Ali</option>
-                                <option value="Doctor 2">Dr. House</option>
-                                <option value="Doctor 3">Dr. Strange</option>
-                                <option value="Doctor 3">Dr. Hibbert</option>
-                                <option value="Doctor 3">Dr. Nick</option>
-                            </select>
-                        </div>
-                        
-                        
-                        <div class="col-md-4 form-group mt-3">
-                            <select name="hora" id="doctor" class="form-select">
-                                <option value="">Horario</option>
-                                <option value="Doctor 1">Query hora1</option>
-                                <option value="Doctor 2">Query hora2</option>
-                                <option value="Doctor 3">Query hora3</option>
-                                <option value="Doctor 3">Query hora4</option>
-                                <option value="Doctor 3">Query hora5</option>
-                            </select>
-                        </div>
-                        
-                        <div class="col-md-4 form-group mt-3">
-                             <input type="date" name="dia" class="form-control datepicker" id="date" placeholder="Fecha"  value="2022-04-28" min="2022-03-01" max="2022-12-31"required>
-                        </div>
-                    </div>
-
-                    
-                    <div class="my-3">
-                        <div class="loading">Loading</div>
-                        <div class="error-message"></div>
-                        <div class="sent-message">Your appointment request has been sent successfully. Thank you!</div>
-                    </div>
-                    <div class="text-center"><button type="submit">Make an Appointment</button></div>
-                </form>
-
-            </div>
-        </section><!-- End Appointment Section -->
-
-
-
-
-
-        
         </main><!-- End #main -->
 
         <!-- ======= Footer ======= -->
@@ -205,13 +210,9 @@
         <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
         <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
-        <script src="../assets/vendor/php-email-form/validate.js"></script>
 
         <!-- Template Main JS File -->
         <script src="../assets/js/main.js"></script>
-
-
-
 
     </body>
 </html>

@@ -5,9 +5,10 @@ import com.clinica.sgt.entidades.Personal;
 import com.clinica.sgt.entidades.UserType;
 import com.clinica.sgt.repositorios.PersonalRepositorio;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +17,8 @@ public class PersonalServicio{
     
     @Autowired
     PersonalRepositorio personalRepositorio;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     
     //****************************CREACION******************
     @Transactional
@@ -28,9 +31,9 @@ public class PersonalServicio{
         personal.setFinLaboral(finLaboral);
         personal.setDni(dni);
         personal.setMail(mail);
-        String encriptar = new BCryptPasswordEncoder().encode(password);
-        personal.setPassword(encriptar);
+        personal.setPassword(passwordEncoder.encode(password));
         personal.setNombre(nombre);
+        personal.setAlta(alta);
         personal.setTelefono(telefono);
         personal.setGenero(genero);
         personal.setUserType(userType);
@@ -49,8 +52,7 @@ public class PersonalServicio{
         personal.setNombre(nombre);
         personal.setDni(dni);
         personal.setMail(mail);
-        String encriptar = new BCryptPasswordEncoder().encode(password);
-        personal.setPassword(encriptar);
+        personal.setPassword(passwordEncoder.encode(password));
         personal.setTelefono(telefono);
         personal.setGenero(genero);
         personal.setAlta(true);
@@ -62,7 +64,7 @@ public class PersonalServicio{
     
     //************************BUSQUEDA O CONSULTA*******************
     public Personal buscarPersonalPorDNI(String dni){
-       Personal existePersonal = personalRepositorio.buscarPorDNI(dni);
+       Personal existePersonal = (Personal) personalRepositorio.buscarPorDNI(dni);
        if(existePersonal !=null){
            return existePersonal;
        }
@@ -83,6 +85,12 @@ public class PersonalServicio{
             return existePersonal;
         }
         return null;
+     }
+
+     public ArrayList<Personal> listarPersonal(){
+         ArrayList<Personal> listado = personalRepositorio.mostrarPersonalActivo();
+
+         return listado;
      }
 
     //***********************BAJA*****************
@@ -122,5 +130,4 @@ public class PersonalServicio{
                 break;
         }
     }
-
 }

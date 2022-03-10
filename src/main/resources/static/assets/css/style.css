@@ -17,6 +17,13 @@ a:hover {
 h1, h2, h3, h4, h5, h6 {
   font-family: "Roboto", sans-serif;
 }
+
+.centerBack {
+  padding-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} 
 /*
 --------------------------------------------------------------
 # Preloader
@@ -920,8 +927,12 @@ section {
 /*--------------------------------------------------------------
 # Departments
 --------------------------------------------------------------*/
+.departments{
+   margin-top: 70px;
+    border: 0;
+}
 .departments .nav-tabs {
-  border: 0;
+    border: 0;
 }
 .departments .nav-link {
   border: 0;
@@ -955,9 +966,10 @@ section {
   animation: slide-down 0.5s ease-out;
 }
 .departments .tab-pane img {
-  float: left;
-  max-width: 300px;
+  float: left ;
+  max-width: 350px;
   padding: 0 15px 15px 0;
+  border-radius: 50px;
 }
 @media (max-width: 768px) {
   .departments .tab-pane img {
@@ -978,6 +990,39 @@ section {
 .departments .tab-pane p:last-child {
   margin-bottom: 0;
 }
+/*Buscar dni admin*/ 
+#buscar .buscar-top .buscar-newsletter form {
+  margin-top: 10px;
+  background: #fff;
+  padding: 6px 6px;
+  position: relative;
+  border: 1px solid #d5d5d5;
+  border-radius: 50px;
+}
+#buscar .buscar-top .buscar-newsletter form input[type=number] {
+  border: 0;
+  padding: 4px;
+  width: calc(100% - 85px);
+}
+#buscar .buscar-top .buscar-newsletter form input[type=submit] {
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  bottom: -1px;
+  border: 0;
+  background: none;
+  font-size: 16px;
+  padding: 0 20px;
+  background: #3fbbc0;
+  color: #fff;
+  transition: 0.3s;
+  border-radius: 0 50px 50px 0;
+}
+#buscar .buscar-top .buscar-newsletter form input[type=submit]:hover {
+  background: #65c9cd;
+
+}
+
 @-webkit-keyframes slide-down {
   0% {
     opacity: 0;

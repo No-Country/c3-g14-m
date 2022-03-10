@@ -46,7 +46,7 @@ public class profesionalController {
 		 List<Turno> turnos = new ArrayList<>();
 		 turnos = turnoServicio.buscarTurnosProfesional(p1.getDni());
 		 model.put("turnos", turnos);
-		return "inicioAdmin.html";
+		return "inicioProfesional.html";
 
 	}
 
