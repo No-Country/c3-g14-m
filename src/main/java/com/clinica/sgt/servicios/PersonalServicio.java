@@ -92,6 +92,18 @@ public class PersonalServicio{
 
          return listado;
      }
+     
+      public Personal horaEntrada(String id){
+         Personal horaInicio = personalRepositorio.buscarHoraInicio(id);
+
+         return horaInicio;
+     }
+      
+      public Personal horaSalida(String id){
+         Personal horaSalida = personalRepositorio.buscarHoraInicio(id);
+
+         return horaSalida;
+     }
 
     //***********************BAJA*****************
     @Transactional

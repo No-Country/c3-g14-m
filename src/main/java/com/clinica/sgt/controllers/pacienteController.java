@@ -11,6 +11,7 @@ import com.clinica.sgt.entidades.Personal;
 import com.clinica.sgt.entidades.Turno;
 import com.clinica.sgt.entidades.UserType;
 import com.clinica.sgt.servicios.PacienteServicio;
+import com.clinica.sgt.servicios.PersonalServicio;
 import com.clinica.sgt.servicios.TurnoServicio;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,9 @@ public class pacienteController {
 
 	@Autowired
 	PacienteServicio pacienteServicio;
+        
+        @Autowired
+        PersonalServicio personalServicio;
 
 	@GetMapping("/inicio")
 	public String inicio(ModelMap model) {
@@ -59,11 +63,14 @@ public class pacienteController {
 	}
 
 	@GetMapping("/form-turno") //Formulario para nuevo turno
-	public String formTurno(){
+	public String formTurno(ModelMap modelo){ //(@PathVariable String id)
+            modelo.put("listaProfesionales", personalServicio.listarPersonal());
+            //modelo.put("horaEntrada", personalServicio.horaEntrada(id));
+           // modelo.put("horaSalida", personalServicio.horaSalida(id));
 		return "form-turno-paciente.html";
 	}
 	
-	@PostMapping("/agregar-turno/{dni}") //El dni del paciente se ingresa sin pedirselo, se utiliza sus datos de registro
+	@PostMapping("") //El dni del paciente se ingresa sin pedirselo, se utiliza sus datos de registro
 	public String agregarTurno(ModelMap modelo, @RequestParam LocalDate dia, @RequestParam LocalTime hora, @PathVariable String dni, @RequestParam Personal profesional) { 
 
         //Revisar si el parametro ingresado para profesional es entidad o String
@@ -94,8 +101,8 @@ public class pacienteController {
     public String registro(@RequestParam String email, @RequestParam String nombreCompleto, @RequestParam String dni,
             @RequestParam String telefono,
             @RequestParam Genero genero, ModelMap modelo) {
-
-
+            
+           
         try {
 
             pacienteServicio.crearPaciente("", dni, email, dni, nombreCompleto, telefono, genero, true, UserType.PACIENTE);
@@ -104,7 +111,6 @@ public class pacienteController {
         } catch (Exception e) {
 
             e.getMessage();
-            e.printStackTrace();
             modelo.put("error", e.getMessage());
 
             return "error.html";
