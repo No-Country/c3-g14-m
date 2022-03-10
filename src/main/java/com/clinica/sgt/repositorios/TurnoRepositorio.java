@@ -6,7 +6,6 @@ import java.time.LocalTime;
 
 import com.clinica.sgt.entidades.Turno;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
