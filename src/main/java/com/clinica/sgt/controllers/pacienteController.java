@@ -2,6 +2,7 @@ package com.clinica.sgt.controllers;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,50 +33,64 @@ public class pacienteController {
     @Autowired
     TurnoServicio turnoServicio;
 
+    @Autowired
+    PacienteServicio pacienteServicio;
 
-	@Autowired
-	PacienteServicio pacienteServicio;
+    @Autowired
+    PersonalServicio personalServicio;
+
+    @GetMapping("/inicio")
+    public String inicio(ModelMap model) {
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails userDetails = null;
+        if (principal instanceof UserDetails) {
+            userDetails = (UserDetails) principal;
+        }
+        Paciente p1 = pacienteServicio.buscarPacientePorUsername(userDetails.getUsername());
+        List<Turno> turnos = new ArrayList<>();
+        turnos = turnoServicio.buscarTurnosPaciente(p1.getDni());
+        model.put("turnos", turnos);
+        return "inicioPaciente.html";
+
+    }
+
+    @GetMapping("/turnos/{dni}")
+    public String listarTurnos(ModelMap modelo, @PathVariable String dni) {
+        List<Turno> turnos = turnoServicio.buscarTurnosPaciente(dni);
+        modelo.put("turnos", turnos);
+        return "turnos.html";
+    }
+
+    @GetMapping("/form-turno") // Formulario para nuevo turno
+    public String formTurno(ModelMap modelo) { // (@PathVariable String id)
         
-        @Autowired
-        PersonalServicio personalServicio;
+        List<Personal> profesionales = personalServicio.listarPersonal();
+        modelo.put("listaProfesionales", profesionales);
 
-	@GetMapping("/inicio")
-	public String inicio(ModelMap model) {
+        // modelo.put("horaEntrada", personalServicio.horaEntrada(id));
+        // modelo.put("horaSalida", personalServicio.horaSalida(id));
 
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		UserDetails userDetails = null;
-		if (principal instanceof UserDetails) {
- 			userDetails = (UserDetails) principal;
-		}
-		 Paciente p1 = pacienteServicio.buscarPacientePorUsername(userDetails.getUsername());
-		 List<Turno> turnos = new ArrayList<>();
-		 turnos = turnoServicio.buscarTurnosPaciente(p1.getDni());
-		 model.put("turnos", turnos);
-		return "inicioPaciente.html";
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails userDetails = null;
+        if (principal instanceof UserDetails) {
+            userDetails = (UserDetails) principal;
+        }
+        Paciente paciente = pacienteServicio.buscarPacientePorUsername(userDetails.getUsername());
 
-	}
+        modelo.put("paciente", paciente);
+        return "form-turno-paciente.html";
+    }
 
-    @GetMapping("/turnos/{dni}") 
-	public String listarTurnos(ModelMap modelo, @PathVariable String dni){
-		List<Turno> turnos = turnoServicio.buscarTurnosPaciente(dni);
-		modelo.put("turnos", turnos);
-		return "turnos.html";
-	}
+    @PostMapping("/agregar-turno")
+    public String agregarTurno(ModelMap modelo, @RequestParam String dia, @RequestParam LocalTime hora,
+            @RequestParam String dni, @RequestParam String dniProfesional) {
 
-	@GetMapping("/form-turno") //Formulario para nuevo turno
-	public String formTurno(ModelMap modelo){ //(@PathVariable String id)
-            modelo.put("listaProfesionales", personalServicio.listarPersonal());
-            //modelo.put("horaEntrada", personalServicio.horaEntrada(id));
-           // modelo.put("horaSalida", personalServicio.horaSalida(id));
-		return "form-turno-paciente.html";
-	}
-	
-	@PostMapping("") //El dni del paciente se ingresa sin pedirselo, se utiliza sus datos de registro
-	public String agregarTurno(ModelMap modelo, @RequestParam LocalDate dia, @RequestParam LocalTime hora, @PathVariable String dni, @RequestParam Personal profesional) { 
-
-        //Revisar si el parametro ingresado para profesional es entidad o String
+        
         try {
-            turnoServicio.agregarTurno(dia, hora, dni, profesional.getDni());
+            DateTimeFormatter DATEFORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    		LocalDate ld = LocalDate.parse(dia, DATEFORMATTER);
+            turnoServicio.agregarTurno(ld, hora, dni, dniProfesional);
             return "exitoT.html";
         } catch (Exception e) {
             e.getMessage();
@@ -84,8 +99,7 @@ public class pacienteController {
         }
     }
 
-
-    @PostMapping("/alta-turno/{id}") //id del turno, funcion para dar de baja o alta
+    @PostMapping("/alta-turno/{id}") // id del turno, funcion para dar de baja o alta
     public String altaTurno(ModelMap modelo, @PathVariable String id, @RequestParam boolean alta) {
         try {
             turnoServicio.modificarAlta(id, alta);
@@ -101,11 +115,11 @@ public class pacienteController {
     public String registro(@RequestParam String email, @RequestParam String nombreCompleto, @RequestParam String dni,
             @RequestParam String telefono,
             @RequestParam Genero genero, ModelMap modelo) {
-            
-           
+
         try {
 
-            pacienteServicio.crearPaciente("", dni, email, dni, nombreCompleto, telefono, genero, true, UserType.PACIENTE);
+            pacienteServicio.crearPaciente("", dni, email, dni, nombreCompleto, telefono, genero, true,
+                    UserType.PACIENTE);
             return "exitoRegistro.html";
 
         } catch (Exception e) {
