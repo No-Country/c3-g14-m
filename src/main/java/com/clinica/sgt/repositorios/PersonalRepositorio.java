@@ -23,12 +23,12 @@ public interface PersonalRepositorio extends JpaRepository<Personal,String>{
     @Query("SELECT p FROM Personal p ORDER BY p.nombre ASC")
     public List<Personal> mostrarTodoPersonal();
     
-    @Query("SELECT p FROM Personal p WHERE p.mail = :nombre")
+    @Query("SELECT p FROM Personal p WHERE p.mail = :nombre AND p.alta = 1")
     public Personal findByUsername(@Param("nombre")String nombre);
     
-    @Query("SELECT p FROM Personal p WHERE p.id = :id")
+    @Query("SELECT p FROM Personal p WHERE p.id = :id AND p.alta = 1")
     public Personal buscarPorID(@Param("id")String id);
 
-    @Query("SELECT p FROM Usuario p WHERE p.dni = :dni")
+    @Query("SELECT p FROM Usuario p WHERE p.dni = :dni and p.alta = 1")
     public Usuario buscarPorDNI(@Param("dni")String dni);
 }

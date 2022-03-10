@@ -20,12 +20,12 @@ public interface PacienteRepositorio extends JpaRepository<Paciente,String>{
     @Query("SELECT p FROM Paciente p ORDER BY p.nombre ASC")
     public List<Paciente> mostrarTodosPacientes();
     
-    @Query("SELECT p FROM Paciente p WHERE p.mail = :nombre")
+    @Query("SELECT p FROM Paciente p WHERE p.mail = :nombre AND p.alta = 1")
     public Paciente findByUsername(@Param("nombre")String nombre);
 
-    @Query("SELECT p FROM Paciente p WHERE p.id = :id")
+    @Query("SELECT p FROM Paciente p WHERE p.id = :id AND p.alta = 1")
     public Paciente buscarPorID(@Param("id")String id);
 
-    @Query("SELECT p FROM Paciente p WHERE p.dni = :dni")
+    @Query("SELECT p FROM Paciente p WHERE p.dni = :dni AND p.alta = 1")
     public Paciente buscarPorDNI(@Param("dni")String dni);
 }

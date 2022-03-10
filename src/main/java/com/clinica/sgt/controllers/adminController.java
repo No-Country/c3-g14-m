@@ -102,21 +102,13 @@ public class adminController {
 	public String agregarTurno(ModelMap modelo, @RequestParam String dia, @RequestParam LocalTime hora, @RequestParam String dniPaciente, @RequestParam String dniProfesional,
 	@RequestParam String email, @RequestParam String nombre, @RequestParam String telefono, @RequestParam Genero genero) {
 		try{
-			try {
+			
 				Paciente p = pacienteServicio.buscarPacientePorDNI(dniPaciente);
-				if (p != null) {
-					throw new Exception();
-				}else{
+				if (p == null) {
 					pacienteServicio.crearPaciente("", dniPaciente, email, dniPaciente, nombre, telefono, genero, true, UserType.PACIENTE);
+					p = pacienteServicio.buscarPacientePorDNI(dniPaciente);
 				}
-			} catch (Exception e) {
-				modelo.put("dniPaciente", dniPaciente);
-				modelo.put("email", email);
-				modelo.put("nombre", nombre);
-				modelo.put("telefono", telefono);
-				modelo.put("error", e.getMessage());
-				throw new Exception("No se ha podido registrar al usuario, revisar que no exista en la base de datos. Igual se intenta crear el turno");	
-			}
+			
 			DateTimeFormatter DATEFORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     		LocalDate ld = LocalDate.parse(dia, DATEFORMATTER);
 			turnoServicio.agregarTurno(ld, hora, dniPaciente, dniProfesional);
