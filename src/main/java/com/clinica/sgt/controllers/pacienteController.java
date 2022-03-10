@@ -2,11 +2,9 @@ package com.clinica.sgt.controllers;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.clinica.sgt.entidades.Genero;
-import com.clinica.sgt.entidades.Paciente;
 import com.clinica.sgt.entidades.Personal;
 import com.clinica.sgt.entidades.Turno;
 import com.clinica.sgt.entidades.UserType;
@@ -107,7 +105,7 @@ public class pacienteController {
             e.printStackTrace();
             modelo.put("error", e.getMessage());
 
-            return "error.html";
+            return "redirect:/";
         }
 
     }
