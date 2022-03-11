@@ -16,10 +16,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TurnoRepositorio extends JpaRepository<Turno, String>{
     
-    @Query("SELECT t FROM Turno t WHERE t.paciente.id = :id")
+    @Query("SELECT t FROM Turno t WHERE t.paciente.id = :id ORDER BY t.dia ASC")
     public List<Turno> buscarTurnoPaciente(@Param("id") String id);
 
-    @Query("SELECT t FROM Turno t WHERE t.personal.id = :id")
+    @Query("SELECT t FROM Turno t WHERE t.personal.id = :id ORDER BY t.dia ASC")
     public List<Turno> buscarTurnoProfesional(@Param("id") String id);
 
     @Query("SELECT t FROM Turno t WHERE (t.hora = :hora) AND (t.dia = :dia) AND (t.personal.dni = :dniPersonal)")
